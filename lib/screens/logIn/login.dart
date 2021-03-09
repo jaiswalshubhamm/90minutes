@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/networkUtils/authAPI.dart';
-import 'package:nintyminutesflutter/screen/dashboard.dart';
-import 'package:nintyminutesflutter/screen/register.dart';
+import 'package:nintyminutesflutter/screens/dashboard.dart';
+import 'package:nintyminutesflutter/screens/signUp/register.dart';
+import 'package:nintyminutesflutter/services/authAPI.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -174,7 +174,7 @@ class _LoginState extends State<Login> {
     });
     var data = {'email': email, 'password': password};
 
-    var res = await Network().authData(data, '/login');
+    var res = await Auth().authData(data, '/login');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/networkUtils/authAPI.dart';
-import 'package:nintyminutesflutter/screen/login.dart';
+import 'package:nintyminutesflutter/screens/logIn/login.dart';
+import 'package:nintyminutesflutter/services/authAPI.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashBoard extends StatefulWidget {
@@ -63,7 +63,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   void logout() async {
-    var res = await Network().getData('/logout');
+    var res = await Auth().getData('/logout');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();

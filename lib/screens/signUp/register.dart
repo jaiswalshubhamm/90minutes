@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/networkUtils/authAPI.dart';
-import 'package:nintyminutesflutter/screen/dashboard.dart';
-import 'package:nintyminutesflutter/screen/login.dart';
+import 'package:nintyminutesflutter/screens/dashboard.dart';
+import 'package:nintyminutesflutter/screens/logIn/login.dart';
+import 'package:nintyminutesflutter/services/authAPI.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Register extends StatefulWidget {
@@ -240,7 +240,7 @@ class _RegisterState extends State<Register> {
       'lname': lname
     };
 
-    var res = await Network().authData(data, '/register');
+    var res = await Auth().authData(data, '/register');
     var body = json.decode(res.body);
     if (body['success']) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();

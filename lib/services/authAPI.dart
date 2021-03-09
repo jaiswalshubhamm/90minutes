@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Network {
+class Auth {
   final String _url = 'http://192.168.43.76:8000/api/v1';
   var token;
 
