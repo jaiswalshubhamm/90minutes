@@ -69,7 +69,7 @@ class _DashBoardState extends State<DashBoard> {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.remove('user');
       localStorage.remove('token');
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
     }
   }
 }

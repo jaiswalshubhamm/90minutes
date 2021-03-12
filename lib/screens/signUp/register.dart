@@ -1,259 +1,79 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/screens/dashboard.dart';
-import 'package:nintyminutesflutter/screens/logIn/login.dart';
-import 'package:nintyminutesflutter/services/authAPI.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nintyminutesflutter/config/palette.dart';
+import 'package:nintyminutesflutter/providers/authProvider.dart';
+import 'package:nintyminutesflutter/screens/home/home.dart';
+import 'package:provider/provider.dart';
 
-class Register extends StatefulWidget {
+import '../background.dart';
+import 'widgets.dart/formWidget.dart';
+
+class RegisterScreen extends StatefulWidget {
   @override
-  _RegisterState createState() => _RegisterState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _RegisterState extends State<Register> {
-  bool _isLoading = false;
-  final _formKey = GlobalKey<FormState>();
-  var email;
-  var password;
-  var fname;
-  var lname;
-  var phone;
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        color: Colors.teal,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+    Size size = MediaQuery.of(context).size;
+
+    var authData = Provider.of<AuthProvider>(context);
+    return (authData.isLoggedIn)
+        ? Home()
+        : Scaffold(
+            // body: Builder(
+            //   builder: (context) => RaisedButton(
+            //     child: Text('Show SnackBar'),
+            //     onPressed: () {
+            //       Scaffold.of(context).showSnackBar(SnackBar(
+            //         content: Text('Hi Im Snackbar'),
+            //       ));
+            //     },
+            //   ),
+            // ),
+            body: Background(
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Card(
-                      elevation: 4.0,
-                      color: Colors.white,
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              TextFormField(
-                                style: TextStyle(color: Color(0xFF000000)),
-                                cursorColor: Color(0xFF9b9b9b),
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.email,
-                                    color: Colors.grey,
-                                  ),
-                                  hintText: "Email",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9b9b9b),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                validator: (emailValue) {
-                                  if (emailValue.isEmpty) {
-                                    return 'Please enter email';
-                                  }
-                                  email = emailValue;
-                                  return null;
-                                },
-                              ),
-                              TextFormField(
-                                style: TextStyle(color: Color(0xFF000000)),
-                                cursorColor: Color(0xFF9b9b9b),
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.insert_emoticon,
-                                    color: Colors.grey,
-                                  ),
-                                  hintText: "First Name",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9b9b9b),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                validator: (firstname) {
-                                  if (firstname.isEmpty) {
-                                    return 'Please enter your first name';
-                                  }
-                                  fname = firstname;
-                                  return null;
-                                },
-                              ),
-                              TextFormField(
-                                style: TextStyle(color: Color(0xFF000000)),
-                                cursorColor: Color(0xFF9b9b9b),
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.insert_emoticon,
-                                    color: Colors.grey,
-                                  ),
-                                  hintText: "Last Name",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9b9b9b),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                validator: (lastname) {
-                                  if (lastname.isEmpty) {
-                                    return 'Please enter your last name';
-                                  }
-                                  lname = lastname;
-                                  return null;
-                                },
-                              ),
-                              TextFormField(
-                                style: TextStyle(color: Color(0xFF000000)),
-                                cursorColor: Color(0xFF9b9b9b),
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.phone,
-                                    color: Colors.grey,
-                                  ),
-                                  hintText: "Phone",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9b9b9b),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                validator: (phonenumber) {
-                                  if (phonenumber.isEmpty) {
-                                    return 'Please enter phone number';
-                                  }
-                                  phone = phonenumber;
-                                  return null;
-                                },
-                              ),
-                              TextFormField(
-                                style: TextStyle(color: Color(0xFF000000)),
-                                cursorColor: Color(0xFF9b9b9b),
-                                keyboardType: TextInputType.text,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.vpn_key,
-                                    color: Colors.grey,
-                                  ),
-                                  hintText: "Password",
-                                  hintStyle: TextStyle(
-                                      color: Color(0xFF9b9b9b),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                validator: (passwordValue) {
-                                  if (passwordValue.isEmpty) {
-                                    return 'Please enter some text';
-                                  }
-                                  password = passwordValue;
-                                  return null;
-                                },
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: FlatButton(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, bottom: 8, left: 10, right: 10),
-                                    child: Text(
-                                      _isLoading
-                                          ? 'Proccessing...'
-                                          : 'Register',
-                                      textDirection: TextDirection.ltr,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15.0,
-                                        decoration: TextDecoration.none,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ),
-                                  color: Colors.teal,
-                                  disabledColor: Colors.grey,
-                                  shape: new RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(20.0)),
-                                  onPressed: () {
-                                    if (_formKey.currentState.validate()) {
-                                      _register();
-                                    }
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: Text(
+                        "REGISTER",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Palette.primary,
+                          fontSize: 36,
                         ),
+                        textAlign: TextAlign.left,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                              builder: (context) => Login(),
-                            ),
-                          );
-                        },
+                    SizedBox(height: size.height * 0.03),
+                    FormWidgetSignup(),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 10,
+                      ),
+                      child: GestureDetector(
+                        onTap: () =>
+                            {Navigator.of(context).pushNamed('/login')},
                         child: Text(
-                          'Already Have an Account',
+                          "Already Have an Account? Sign In",
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.0,
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.normal,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal,
                           ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _register() async {
-    setState(() {
-      _isLoading = true;
-    });
-    var data = {
-      'email': email,
-      'password': password,
-      'phone': phone,
-      'fname': fname,
-      'lname': lname
-    };
-
-    var res = await Auth().authData(data, '/register');
-    var body = json.decode(res.body);
-    if (body['success']) {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', json.encode(body['token']));
-      localStorage.setString('user', json.encode(body['user']));
-      Navigator.push(
-        context,
-        new MaterialPageRoute(builder: (context) => DashBoard()),
-      );
-    }
-
-    setState(() {
-      _isLoading = false;
-    });
+            ),
+          );
   }
 }

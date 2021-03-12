@@ -1,79 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
+import 'package:nintyminutesflutter/providers/authProvider.dart';
+import 'package:provider/provider.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(canvasColor: Palette.menubg),
-      child: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            _buildDrawerHeader(context),
-            _buildPortfolioItem(context),
-            _buildDivider(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  UserAccountsDrawerHeader _buildDrawerHeader(BuildContext context) {
-    return UserAccountsDrawerHeader(
-      accountName: Text(
-        'Himdeve Fashion',
-        style: TextStyle(backgroundColor: Palette.primary),
-      ),
-      accountEmail: Text(
-        'info@himdeve.eu',
-        style: TextStyle(backgroundColor: Colors.black),
-      ),
-      currentAccountPicture: GestureDetector(
-        onTap: () => showDialog(
-          context: context,
-          child: AlertDialog(
-            title: Text('Himdeve Fashion'),
-            content: Text(
-                'To be a designer is a kind of art work. However, to proceed further, to develop a brand and to find a marketplace for the ideas, it is sometimes a struggle. But with a firm determination, love and passion, finally, at the end, a little wish may come true… And that wish is called the Himdeve. The brand designed to be successful.'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Close'),
-                onPressed: () => Navigator.of(context).pop(),
+    var authData = Provider.of<AuthProvider>(context);
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/dlogo.png"),
+                fit: BoxFit.contain,
               ),
-            ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  (authData.isLoggedIn)
+                      ? 'Welcome ${authData.name} !'
+                      : "Welcome Guest !",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.teal,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        child: CircleAvatar(
-          backgroundColor: Colors.black,
-        ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/');
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.feedback),
+            title: Text('Feedback'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/feedback');
+            },
+          ),
+          if (authData.isLoggedIn == false)
+            ListTile(
+              leading: Icon(Icons.login),
+              title: Text('SignIn'),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/login');
+              },
+            ),
+          Divider(),
+          if (authData.isLoggedIn)
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('SignOut'),
+              onTap: () {
+                authData.logout();
+                Navigator.of(context).pushNamed('/');
+              },
+            ),
+        ],
       ),
-    );
-  }
-
-  ListTile _buildPortfolioItem(BuildContext context) {
-    return ListTile(
-      title: Text(
-        'Portfolio',
-        style: TextStyle(color: Colors.white),
-      ),
-      leading: Icon(
-        Icons.work,
-        color: Colors.white,
-      ),
-      trailing: Icon(
-        Icons.arrow_right,
-        color: Colors.white,
-      ),
-      onTap: () {
-        Navigator.of(context).pop();
-      },
-    );
-  }
-
-  Divider _buildDivider() {
-    return Divider(
-      color: Colors.white,
     );
   }
 }

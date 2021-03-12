@@ -1,10 +1,9 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:nintyminutesflutter/config/palette.dart';
-import 'package:nintyminutesflutter/services/apiManager.dart';
+import 'package:nintyminutesflutter/screens/home/widgets/leagues.dart';
+import 'package:nintyminutesflutter/screens/home/widgets/matches.dart';
 import 'package:nintyminutesflutter/widgets/drawer.dart';
-
-import 'widgets/pageBody.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -46,18 +45,12 @@ class _HomeState extends State<Home> {
         drawer: Drawer(
           child: MenuDrawer(),
         ),
-        body: FutureBuilder(
-          future: SoccerApi().getAllMatches(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              print((snapshot.data).length);
-              return PageBody(snapshot.data);
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
+        body: TabBarView(
+          children: [
+            leagues(),
+            matches(),
+            matches(),
+          ],
         ),
       ),
     );
