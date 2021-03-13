@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nintyminutesflutter/providers/authProvider.dart';
 import '../home/home.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../background.dart';
 import 'widgets/formWidget.dart';
 
@@ -12,7 +11,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
- 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

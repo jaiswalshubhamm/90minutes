@@ -48,7 +48,7 @@ class _DashBoardState extends State<DashBoard> {
               child: RaisedButton(
                 elevation: 10,
                 onPressed: () {
-                  logout();
+                  // logout();
                 },
                 color: Colors.teal,
                 shape: RoundedRectangleBorder(
@@ -62,14 +62,14 @@ class _DashBoardState extends State<DashBoard> {
     );
   }
 
-  void logout() async {
-    var res = await Auth().getData('/logout');
-    var body = json.decode(res.body);
-    if (body['success']) {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.remove('user');
-      localStorage.remove('token');
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-    }
-  }
+  // void logout() async {
+  //   var res = await Auth().getData('/logout');
+  //   var body = json.decode(res.body);
+  //   if (body['success']) {
+  //     SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //     localStorage.remove('user');
+  //     localStorage.remove('token');
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  //   }
+  // }
 }

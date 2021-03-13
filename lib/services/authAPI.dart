@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Auth {
+class AuthService {
   final String _url = 'https://90minutes.greenappleinfotech.com/api/';
   var token;
 
@@ -24,16 +24,6 @@ class Auth {
     var fullUrl = _url + apiUrl;
     await _getToken();
     return await http.get(fullUrl, headers: _setHeaders());
-  }
-
-  checkIfLoggedIn() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    bool isAuth = false;
-    var token = localStorage.getString('token');
-    if (token != null) {
-      isAuth = true;
-    }
-    return isAuth;
   }
 
   _setHeaders() => {

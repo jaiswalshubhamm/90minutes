@@ -4,11 +4,7 @@ class Countries {
   Paging paging;
   List<Response> response;
 
-  Countries(
-      {this.get,
-      this.results,
-      this.paging,
-      this.response});
+  Countries({this.get, this.results, this.paging, this.response});
 
   Countries.fromJson(Map<String, dynamic> json) {
     get = json['get'];
@@ -60,10 +56,17 @@ class Response {
   String name;
   String code;
   String flag;
+  bool isExpanded;
 
-  Response({this.name, this.code, this.flag});
+  Response({
+    this.name,
+    this.code,
+    this.flag,
+    this.isExpanded = false,
+  });
 
   Response.fromJson(Map<String, dynamic> json) {
+    isExpanded = false;
     name = json['name'];
     code = json['code'];
     flag = json['flag'];

@@ -21,16 +21,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return (authData.isLoggedIn)
         ? Home()
         : Scaffold(
-            // body: Builder(
-            //   builder: (context) => RaisedButton(
-            //     child: Text('Show SnackBar'),
-            //     onPressed: () {
-            //       Scaffold.of(context).showSnackBar(SnackBar(
-            //         content: Text('Hi Im Snackbar'),
-            //       ));
-            //     },
-            //   ),
-            // ),
             body: Background(
               child: SingleChildScrollView(
                 child: Column(

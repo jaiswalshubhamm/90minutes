@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   bool _isLoggedIn = false;
@@ -17,12 +18,14 @@ class AuthProvider with ChangeNotifier {
     return _isLoggedIn;
   }
 
-  void logout() {
+  void logout() async {
     _isLoggedIn = false;
     _id = null;
     _name = null;
     _email = null;
     _token = null;
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('token');
     notifyListeners();
   }
 
@@ -38,6 +41,8 @@ class AuthProvider with ChangeNotifier {
         _name = "Raj";
         _email = "default@gmail.com";
         _token = responseData['success']['token'];
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('token', responseData['success']['token']);
       }
       notifyListeners();
     } catch (error) {
@@ -51,10 +56,12 @@ class AuthProvider with ChangeNotifier {
         'https://90minutes.greenappleinfotech.com/api/register?email=$email&password=$password&c_password=$cPassword&name=$name';
     try {
       final response = await http.post(url);
+      // final _responseData = json.decode(response.body);
       if (response.statusCode == 200) {
-        print("register success");
         _login(email, password);
       } else {
+        _isLoggedIn = false;
+        // return _responseData;
       }
     } catch (error) {
       print(error);

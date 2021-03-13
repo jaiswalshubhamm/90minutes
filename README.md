@@ -1,6 +1,6 @@
-# nintyminutesflutter
+# 90 Minutes
 
-A new Flutter project.
+A Live score soccer app
 
 ## Getting Started
 

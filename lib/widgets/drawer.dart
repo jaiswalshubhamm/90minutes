@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:nintyminutesflutter/providers/authProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MenuDrawer extends StatelessWidget {
+class MenuDrawer extends StatefulWidget {
+  @override
+  _MenuDrawerState createState() => _MenuDrawerState();
+}
+
+class _MenuDrawerState extends State<MenuDrawer> {
+  bool isAuth = false;
+  @override
+  void initState() {
+    _checkIfLoggedIn();
+    super.initState();
+  }
+
+  void _checkIfLoggedIn() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+    if (token != null) {
+      setState(() {
+        isAuth = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var authData = Provider.of<AuthProvider>(context);
@@ -21,7 +44,7 @@ class MenuDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  (authData.isLoggedIn)
+                  (authData.isLoggedIn || isAuth)
                       ? 'Welcome ${authData.name} !'
                       : "Welcome Guest !",
                   style: TextStyle(
@@ -47,7 +70,7 @@ class MenuDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/feedback');
             },
           ),
-          if (authData.isLoggedIn == false)
+          if (!(authData.isLoggedIn || isAuth))
             ListTile(
               leading: Icon(Icons.login),
               title: Text('SignIn'),
@@ -57,7 +80,7 @@ class MenuDrawer extends StatelessWidget {
               },
             ),
           Divider(),
-          if (authData.isLoggedIn)
+          if (authData.isLoggedIn || isAuth)
             ListTile(
               leading: Icon(Icons.logout),
               title: Text('SignOut'),
