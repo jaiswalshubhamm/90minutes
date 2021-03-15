@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nintyminutesflutter/providers/authProvider.dart';
 import 'package:nintyminutesflutter/providers/countriesDetailsProvider.dart';
+import 'package:nintyminutesflutter/providers/matchDetailsProvider.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/leagueDetailsProvider.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<LeaguesDetailsProvider>(
           create: (context) => LeaguesDetailsProvider(),
+        ),
+        ChangeNotifierProvider<MatchesDetailsProvider>(
+          create: (context) => MatchesDetailsProvider(),
         ),
       ],
       child: MaterialApp(

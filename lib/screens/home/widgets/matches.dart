@@ -23,40 +23,48 @@ class _MatchesState extends State<Matches> {
       return ListView.builder(
         padding: EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
-          return ListTile(
-            // leading: SvgPicture.network(
-            //   _countries[i].flag ??
-            //       'https:\/\/media.api-sports.io\/flags\/aw.svg',
-            //   height: 15,
-            //   width: 15,
-            //   placeholderBuilder: (BuildContext context) => Container(
-            //     child: const CircularProgressIndicator(),
-            //   ),
-            // ),
-            title: Text(
-              _matches[i].league.name,
+          return Card(
+            child: Column(
+              children: [
+                ListTile(
+                  // leading: Image.network(
+                  //   _matches[i].league.flag,
+                  //   height: 15,
+                  //   width: 15,
+                  // ),
+                  title: Text(
+                    _matches[i].league.name,
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            _matches[i].fixture.date.substring(11, 19),
+                          ),
+                          Text(
+                            'Africa/Abidjan',
+                          ),
+                        ],
+                      ),
+                      VerticalDivider(
+                        color: Colors.black,
+                        thickness: 1.0,
+                      ),
+                    ],
+                  ),
+                  title: Text('Title'),
+                  trailing: Text('trail'),
+                ),
+              ],
             ),
           );
         },
       );
-      // Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: ClipRRect(
-      //     borderRadius:
-      //         const BorderRadius.all(Radius.circular(25.0)),
-      //     child: SvgPicture.network(
-      //       item.flag ??
-      //           'https:\/\/media.api-sports.io\/flags\/aw.svg',
-      //       height: 15,
-      //       width: 15,
-      //       placeholderBuilder: (BuildContext context) =>
-      //           Container(
-      //         child: const CircularProgressIndicator(),
-      //       ),
-      //     ),
-      //   ),
-      // ),
-
     } else if (matchesData.matches.status == NetworkStatus.ERROR) {
       return Text("Error : ${matchesData.matches.message}");
     } else {

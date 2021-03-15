@@ -1,12 +1,12 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:nintyminutesflutter/config/palette.dart';
+import 'package:nintyminutesflutter/providers/matchDetailsProvider.dart';
 import 'package:nintyminutesflutter/screens/home/widgets/favorites.dart';
 import 'package:nintyminutesflutter/screens/home/widgets/leagues.dart';
 import 'package:nintyminutesflutter/screens/home/widgets/matches.dart';
 import 'package:nintyminutesflutter/widgets/drawer.dart';
-
-import 'widgets/datePickerWidget.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,6 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool isSwitched = false;
+  DateTime date = DateTime.now();
   TabController _tcontroller;
 
   @override
@@ -26,6 +27,37 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
   }
 
+  Future pickDate(BuildContext context) async {
+    final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: date ?? initialDate,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(primary: Palette.primary),
+          ),
+          child: child,
+        );
+      },
+    );
+    if (newDate == null) return;
+    String dateParam = getText(newDate);
+    print(dateParam);
+    Provider.of<MatchesDetailsProvider>(context, listen: false)
+        .setDate(dateParam);
+  }
+
+  String getText(DateTime date) {
+    String month = '${date.month}';
+    if (month.length < 2) {
+      month = '0$month';
+    }
+    return '${date.year}-$month-${date.day}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -34,7 +66,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         backgroundColor: Color(0xFFFAFAFA),
         appBar: AppBar(
           title: Text(
-            "90MINUTES",
+            "90 MINUTES",
             style: TextStyle(color: Palette.white),
           ),
           backgroundColor: Palette.primary,
@@ -52,7 +84,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 activeTrackColor: Colors.lightGreenAccent,
                 activeColor: Colors.green,
               ),
-            if (_tcontroller.index == 1) DatePickerWidget(),
+            if (_tcontroller.index == 1)
+              IconButton(
+                icon: Icon(Icons.today),
+                onPressed: () => pickDate(context),
+              ),
             if (_tcontroller.index == 2)
               IconButton(
                 icon: Icon(Icons.delete),

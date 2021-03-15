@@ -24,40 +24,30 @@ class _LeaguesState extends State<Leagues> {
       return ListView.builder(
         padding: EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
-          return ListTile(
-            // leading: SvgPicture.network(
-            //   _countries[i].flag ??
-            //       'https:\/\/media.api-sports.io\/flags\/aw.svg',
-            //   height: 15,
-            //   width: 15,
-            //   placeholderBuilder: (BuildContext context) => Container(
-            //     child: const CircularProgressIndicator(),
-            //   ),
-            // ),
-            title: Text(
-              _leagues[i].league.name,
+          return Card(
+            child: ListTile(
+              leading: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.network(
+                    _leagues[i].league.logo ??
+                        "https://media.api-sports.io/football/leagues/4.png",
+                    height: 25,
+                    width: 25,
+                  ),
+                  VerticalDivider(
+                    color: Colors.grey,
+                    thickness: 1.0,
+                  ),
+                ],
+              ),
+              title: Text(
+                _leagues[i].league.name,
+              ),
             ),
           );
         },
       );
-      // Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: ClipRRect(
-      //     borderRadius:
-      //         const BorderRadius.all(Radius.circular(25.0)),
-      //     child: SvgPicture.network(
-      //       item.flag ??
-      //           'https:\/\/media.api-sports.io\/flags\/aw.svg',
-      //       height: 15,
-      //       width: 15,
-      //       placeholderBuilder: (BuildContext context) =>
-      //           Container(
-      //         child: const CircularProgressIndicator(),
-      //       ),
-      //     ),
-      //   ),
-      // ),
-
     } else if (leaguesData.leagues.status == NetworkStatus.ERROR) {
       return Text("Error : ${leaguesData.leagues.message}");
     } else {
