@@ -1,20 +1,20 @@
 class ApiResponse<T> {
-  Status status;
+  NetworkStatus status;
 
   T data;
 
   String message;
 
-  ApiResponse.loading(this.message) : status = Status.LOADING;
+  ApiResponse.loading(this.message) : status = NetworkStatus.LOADING;
 
-  ApiResponse.completed(this.data) : status = Status.COMPLETED;
+  ApiResponse.completed(this.data) : status = NetworkStatus.COMPLETED;
 
-  ApiResponse.error(this.message) : status = Status.ERROR;
+  ApiResponse.error(this.message) : status = NetworkStatus.ERROR;
 
   @override
   String toString() {
-    return "Status : $status \n Message : $message \n Data : $data";
+    return "Network Status : $status \n Message : $message \n Data : $data";
   }
 }
 
-enum Status { LOADING, COMPLETED, ERROR }
+enum NetworkStatus { LOADING, COMPLETED, ERROR }

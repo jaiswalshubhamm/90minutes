@@ -6,7 +6,7 @@ class Countries {
 
   Countries({this.get, this.results, this.paging, this.response});
 
-  Countries.fromJson(Map<String, dynamic> json) {
+  Countries.fromJson(Map<String, dynamic> json) { 
     get = json['get'];
     results = json['results'];
     paging =

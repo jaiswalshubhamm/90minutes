@@ -1,6 +1,7 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:nintyminutesflutter/config/palette.dart';
+import 'package:nintyminutesflutter/screens/home/widgets/favorites.dart';
 import 'package:nintyminutesflutter/screens/home/widgets/leagues.dart';
 import 'package:nintyminutesflutter/screens/home/widgets/matches.dart';
 import 'package:nintyminutesflutter/widgets/drawer.dart';
@@ -52,30 +53,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 activeColor: Colors.green,
               ),
             if (_tcontroller.index == 1) DatePickerWidget(),
-            if (_tcontroller.index == 2) IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                // setState(() {
-                //   _volume += 10;
-                // });
-              },
-            ),
-            if (_tcontroller.index == 2) IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                // setState(() {
-                //   _volume += 10;
-                // });
-              },
-            ),
-            if (_tcontroller.index == 2) IconButton(
-              icon: Icon(Icons.notification_important),
-              onPressed: () {
-                // setState(() {
-                //   _volume += 10;
-                // });
-              },
-            ),
+            if (_tcontroller.index == 2)
+              IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  // setState(() {
+                  //   _volume += 10;
+                  // });
+                },
+              ),
+            if (_tcontroller.index == 2)
+              IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () {
+                  // setState(() {
+                  //   _volume += 10;
+                  // });
+                },
+              ),
+            if (_tcontroller.index == 2)
+              IconButton(
+                icon: Icon(Icons.notification_important),
+                onPressed: () {
+                  // setState(() {
+                  //   _volume += 10;
+                  // });
+                },
+              ),
           ],
           bottom: TabBar(
             controller: _tcontroller,
@@ -93,8 +97,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           controller: _tcontroller,
           children: [
             Leagues(),
-            matches(),
-            matches(),
+            Matches(),
+            favorites(),
           ],
         ),
       ),

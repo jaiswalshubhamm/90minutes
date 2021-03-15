@@ -10,10 +10,11 @@ class MyExpandableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CountriesDetailsProvider>(builder: (context, myModel, child) {
-      if (myModel.countries.status == Status.COMPLETED) {
+    return Consumer<CountriesDetailsProvider>(
+        builder: (context, myModel, child) {
+      if (myModel.countries.status == NetworkStatus.COMPLETED) {
         return Text("${myModel.countries.data.response}");
-      } else if (myModel.countries.status == Status.ERROR) {
+      } else if (myModel.countries.status == NetworkStatus.ERROR) {
         return Text("Error : ${myModel.countries.message}");
       } else {
         return Text("${myModel.countries.message}");
@@ -22,34 +23,33 @@ class MyExpandableWidget extends StatelessWidget {
   }
 }
 
-
-  // Widget build(BuildContext context) {
-  //   return ExpansionTile(
-  //       title: Text(
-  //         "league.leagueName",
-  //         style: TextStyle(
-  //           fontSize: 25,
-  //           fontWeight: FontWeight.bold,
-  //           color: Colors.pinkAccent,
-  //         ),
-  //       ),
-  //       children: [
-  //         Text(
-  //           "league.leagueName",
-  //           style: TextStyle(
-  //             fontSize: 25,
-  //             fontWeight: FontWeight.bold,
-  //             color: Colors.pinkAccent,
-  //           ),
-  //         ),
-  //         Text(
-  //           "league.leagueName",
-  //           style: TextStyle(
-  //             fontSize: 25,
-  //             fontWeight: FontWeight.bold,
-  //             color: Colors.pinkAccent,
-  //           ),
-  //         )
-  //       ]);
-  // }
+// Widget build(BuildContext context) {
+//   return ExpansionTile(
+//       title: Text(
+//         "league.leagueName",
+//         style: TextStyle(
+//           fontSize: 25,
+//           fontWeight: FontWeight.bold,
+//           color: Colors.pinkAccent,
+//         ),
+//       ),
+//       children: [
+//         Text(
+//           "league.leagueName",
+//           style: TextStyle(
+//             fontSize: 25,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.pinkAccent,
+//           ),
+//         ),
+//         Text(
+//           "league.leagueName",
+//           style: TextStyle(
+//             fontSize: 25,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.pinkAccent,
+//           ),
+//         )
+//       ]);
+// }
 // }

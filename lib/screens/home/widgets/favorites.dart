@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-Widget leagues() {
+Widget favorites() {
   return Text('favoroites');
 }

@@ -3,6 +3,7 @@ import 'package:nintyminutesflutter/providers/authProvider.dart';
 import 'package:nintyminutesflutter/providers/countriesDetailsProvider.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/leagueDetailsProvider.dart';
 import 'screens/home/home.dart';
 import 'screens/logIn/login.dart';
 import 'screens/signUp/register.dart';
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<CountriesDetailsProvider>(
           create: (context) => CountriesDetailsProvider(),
+        ),
+        ChangeNotifierProvider<LeaguesDetailsProvider>(
+          create: (context) => LeaguesDetailsProvider(),
         ),
       ],
       child: MaterialApp(
