@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/providers/authProvider.dart';
-import 'package:nintyminutesflutter/providers/countriesDetailsProvider.dart';
-import 'package:nintyminutesflutter/providers/matchDetailsProvider.dart';
+import 'package:flutter/services.dart';
+import 'providers/authProvider.dart';
+import 'providers/countriesDetailsProvider.dart';
+import 'providers/matchDetailsProvider.dart';
 import 'package:provider/provider.dart';
-
 import 'providers/leagueDetailsProvider.dart';
-import 'screens/home/home.dart';
-import 'screens/logIn/login.dart';
-import 'screens/signUp/register.dart';
+import 'router.dart' as router;
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(
@@ -30,12 +32,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: '90Minutes',
         debugShowCheckedModeBanner: false,
-        routes: {
-          "/": (context) => Home(),
-          // "/feedback": (context) => FeedbackScreen(),
-          "/login": (context) => LoginScreen(),
-          "/register": (context) => RegisterScreen(),
-        },
+        initialRoute: '/',
+        onGenerateRoute: router.generateRoute,
       ),
     );
   }

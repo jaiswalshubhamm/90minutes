@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/models/countries.dart';
-import 'package:nintyminutesflutter/network/apiResponse.dart';
-import 'package:nintyminutesflutter/services/countries.dart';
+import '../models/countries.dart';
+import '../network/apiResponse.dart';
+import '../services/countries.dart';
 
 class CountriesDetailsProvider with ChangeNotifier {
   CountriesService _countriesService;

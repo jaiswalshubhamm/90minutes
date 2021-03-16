@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
-import 'package:nintyminutesflutter/providers/authProvider.dart';
-import 'package:nintyminutesflutter/screens/home/home.dart';
 import 'package:provider/provider.dart';
+import '../../config/palette.dart';
+import '../../providers/authProvider.dart';
+import '../../screens/home/home.dart';
 
 import '../background.dart';
 import 'widgets.dart/formWidget.dart';

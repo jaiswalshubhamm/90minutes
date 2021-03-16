@@ -12,7 +12,7 @@ class Leagues {
     paging =
         json['paging'] != null ? new Paging.fromJson(json['paging']) : null;
     if (json['response'] != null) {
-      response = new List<Response>();
+      response = <Response>[];
       json['response'].forEach((v) {
         response.add(new Response.fromJson(v));
       });
@@ -65,7 +65,7 @@ class Response {
     country =
         json['country'] != null ? new Country.fromJson(json['country']) : null;
     if (json['seasons'] != null) {
-      seasons = new List<Seasons>();
+      seasons = <Seasons>[];
       json['seasons'].forEach((v) {
         seasons.add(new Seasons.fromJson(v));
       });

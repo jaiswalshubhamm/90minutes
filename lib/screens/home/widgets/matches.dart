@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/models/matches.dart';
-import 'package:nintyminutesflutter/network/apiResponse.dart';
-import 'package:nintyminutesflutter/providers/matchDetailsProvider.dart';
 import 'package:provider/provider.dart';
+import '../../../models/matches.dart';
+import '../../../network/apiResponse.dart';
+import '../../../providers/matchDetailsProvider.dart';
 
 class Matches extends StatefulWidget {
   Matches({Key key}) : super(key: key);
@@ -64,6 +64,7 @@ class _MatchesState extends State<Matches> {
             ),
           );
         },
+        itemCount: _matches.length,
       );
     } else if (matchesData.matches.status == NetworkStatus.ERROR) {
       return Text("Error : ${matchesData.matches.message}");

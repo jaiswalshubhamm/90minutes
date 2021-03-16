@@ -1,6 +1,6 @@
-import 'package:nintyminutesflutter/models/countries.dart';
-import 'package:nintyminutesflutter/network/apiPath.dart';
-import 'package:nintyminutesflutter/network/httpClient.dart';
+import '../models/countries.dart';
+import '../network/apiPath.dart';
+import '../network/httpClient.dart';
 
 class CountriesService {
   Future<Countries> fetchCountriesDetails() async {

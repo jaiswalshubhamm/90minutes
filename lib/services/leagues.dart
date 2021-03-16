@@ -1,6 +1,6 @@
-import 'package:nintyminutesflutter/models/leaugeModel.dart';
-import 'package:nintyminutesflutter/network/apiPath.dart';
-import 'package:nintyminutesflutter/network/httpClient.dart';
+import '../models/leaugeModel.dart';
+import '../network/httpClient.dart';
+import '../network/apiPath.dart';
 
 class LeaguesService {
   Future<Leagues> fetchLeaguesDetails() async {

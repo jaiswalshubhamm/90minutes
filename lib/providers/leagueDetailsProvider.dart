@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/models/leaugeModel.dart';
-import 'package:nintyminutesflutter/network/apiResponse.dart';
-import 'package:nintyminutesflutter/services/leagues.dart';
+import '../models/leaugeModel.dart';
+import '../network/apiResponse.dart';
+import '../services/leagues.dart';
 
 class LeaguesDetailsProvider with ChangeNotifier {
   LeaguesService _leaguesService;

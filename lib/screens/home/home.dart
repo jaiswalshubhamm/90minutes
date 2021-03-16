@@ -1,12 +1,12 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
-import 'package:nintyminutesflutter/providers/matchDetailsProvider.dart';
-import 'package:nintyminutesflutter/screens/home/widgets/favorites.dart';
-import 'package:nintyminutesflutter/screens/home/widgets/leagues.dart';
-import 'package:nintyminutesflutter/screens/home/widgets/matches.dart';
-import 'package:nintyminutesflutter/widgets/drawer.dart';
 import 'package:provider/provider.dart';
+import '../../config/palette.dart';
+import '../../providers/matchDetailsProvider.dart';
+import '../../widgets/drawer.dart';
+import 'widgets/leagues.dart';
+import 'widgets/matches.dart';
+
+import 'widgets/favorites.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -78,11 +78,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 onChanged: (value) {
                   setState(() {
                     isSwitched = value;
-                    // print(isSwitched);
+                    Provider.of<MatchesDetailsProvider>(context, listen: false)
+                        .setLive(isSwitched);
+                    print(isSwitched);
                   });
                 },
                 activeTrackColor: Colors.lightGreenAccent,
-                activeColor: Colors.green,
+                activeColor: Palette.primary,
               ),
             if (_tcontroller.index == 1)
               IconButton(
@@ -92,29 +94,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             if (_tcontroller.index == 2)
               IconButton(
                 icon: Icon(Icons.delete),
-                onPressed: () {
-                  // setState(() {
-                  //   _volume += 10;
-                  // });
-                },
+                onPressed: () {},
               ),
             if (_tcontroller.index == 2)
               IconButton(
                 icon: Icon(Icons.edit),
-                onPressed: () {
-                  // setState(() {
-                  //   _volume += 10;
-                  // });
-                },
+                onPressed: () {},
               ),
             if (_tcontroller.index == 2)
               IconButton(
                 icon: Icon(Icons.notification_important),
-                onPressed: () {
-                  // setState(() {
-                  //   _volume += 10;
-                  // });
-                },
+                onPressed: () {},
               ),
           ],
           bottom: TabBar(

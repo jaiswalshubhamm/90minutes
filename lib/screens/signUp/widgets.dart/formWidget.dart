@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
-import 'package:nintyminutesflutter/providers/authProvider.dart';
 import 'package:provider/provider.dart';
+import '../../../config/palette.dart';
+import '../../../providers/authProvider.dart';
 
 class FormWidgetSignup extends StatefulWidget {
   @override

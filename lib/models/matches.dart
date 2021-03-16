@@ -12,7 +12,7 @@ class Matches {
     paging =
         json['paging'] != null ? new Paging.fromJson(json['paging']) : null;
     if (json['response'] != null) {
-      response = new List<Response>();
+      response = <Response>[];
       json['response'].forEach((v) {
         response.add(new Response.fromJson(v));
       });

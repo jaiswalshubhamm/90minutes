@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/widgets/drawer.dart';
+import '../widgets/drawer.dart';
 
 class FeedbackScreen extends StatefulWidget {
   @override

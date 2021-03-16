@@ -6,13 +6,13 @@ class Countries {
 
   Countries({this.get, this.results, this.paging, this.response});
 
-  Countries.fromJson(Map<String, dynamic> json) { 
+  Countries.fromJson(Map<String, dynamic> json) {
     get = json['get'];
     results = json['results'];
     paging =
         json['paging'] != null ? new Paging.fromJson(json['paging']) : null;
     if (json['response'] != null) {
-      response = new List<Response>();
+      response = <Response>[];
       json['response'].forEach((v) {
         response.add(new Response.fromJson(v));
       });

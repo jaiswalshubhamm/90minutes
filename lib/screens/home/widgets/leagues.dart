@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/models/leaugeModel.dart';
-// import 'package:flutter_svg/svg.dart';
-import 'package:nintyminutesflutter/network/apiResponse.dart';
-import 'package:nintyminutesflutter/providers/leagueDetailsProvider.dart';
 import 'package:provider/provider.dart';
+import '../../../models/leaugeModel.dart';
+import '../../../network/apiResponse.dart';
+import '../../../providers/leagueDetailsProvider.dart';
 
 class Leagues extends StatefulWidget {
   Leagues({Key key}) : super(key: key);
@@ -44,9 +43,17 @@ class _LeaguesState extends State<Leagues> {
               title: Text(
                 _leagues[i].league.name,
               ),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/leagues',
+                  arguments: _leagues[i].league.id,
+                );
+              },
             ),
           );
         },
+        itemCount: _leagues.length,
       );
     } else if (leaguesData.leagues.status == NetworkStatus.ERROR) {
       return Text("Error : ${leaguesData.leagues.message}");
