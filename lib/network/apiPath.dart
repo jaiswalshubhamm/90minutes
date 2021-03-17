@@ -1,7 +1,8 @@
 enum APIPath {
   fetch_countries,
   fetch_leagues,
-  fetch_matches,
+  fetch_fixtures,
+  fetch_odd,
 }
 
 class APIPathHelper {
@@ -11,8 +12,10 @@ class APIPathHelper {
         return "/countries";
       case APIPath.fetch_leagues:
         return "/leagues";
-      case APIPath.fetch_matches:
+      case APIPath.fetch_fixtures:
         return "/fixtures";
+      case APIPath.fetch_odd:
+        return "/odds";
       default:
         return "";
     }

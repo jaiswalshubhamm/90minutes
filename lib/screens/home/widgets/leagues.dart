@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../models/leaugeModel.dart';
 import '../../../network/apiResponse.dart';
 import '../../../providers/leagueDetailsProvider.dart';
+import '../../../widgets/loading.dart';
 
 class Leagues extends StatefulWidget {
   Leagues({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class _LeaguesState extends State<Leagues> {
     List<Response> _leagues = leaguesData.leagues.data?.response;
 
     if (leaguesData.leagues.status != NetworkStatus.COMPLETED) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: Loading());
     } else if (leaguesData.leagues.status == NetworkStatus.COMPLETED) {
       return ListView.builder(
         padding: EdgeInsets.all(16.0),

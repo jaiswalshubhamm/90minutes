@@ -1,12 +1,12 @@
-class Matches {
+class Fixtures {
   String get;
   int results;
   Paging paging;
   List<Response> response;
 
-  Matches({this.get, this.results, this.paging, this.response});
+  Fixtures({this.get, this.results, this.paging, this.response});
 
-  Matches.fromJson(Map<String, dynamic> json) {
+  Fixtures.fromJson(Map<String, dynamic> json) {
     get = json['get'];
     results = json['results'];
     paging =
@@ -356,8 +356,8 @@ class Score {
 }
 
 class Extratime {
-  Null home;
-  Null away;
+  int home;
+  int away;
 
   Extratime({this.home, this.away});
 

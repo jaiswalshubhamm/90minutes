@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../config/palette.dart';
-import '../../providers/matchDetailsProvider.dart';
+import '../../providers/fixturesDetailsProvider.dart';
 import '../../widgets/drawer.dart';
 import 'widgets/leagues.dart';
-import 'widgets/matches.dart';
-
+import 'widgets/fixtures.dart';
 import 'widgets/favorites.dart';
 
 class Home extends StatefulWidget {
@@ -45,8 +44,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
     if (newDate == null) return;
     String dateParam = getText(newDate);
-    print(dateParam);
-    Provider.of<MatchesDetailsProvider>(context, listen: false)
+    setState(() {
+      isSwitched = false;
+    });
+    Provider.of<FixturesDetailsProvider>(context, listen: false)
         .setDate(dateParam);
   }
 
@@ -78,9 +79,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 onChanged: (value) {
                   setState(() {
                     isSwitched = value;
-                    Provider.of<MatchesDetailsProvider>(context, listen: false)
+                    Provider.of<FixturesDetailsProvider>(context, listen: false)
                         .setLive(isSwitched);
-                    print(isSwitched);
                   });
                 },
                 activeTrackColor: Colors.lightGreenAccent,
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           controller: _tcontroller,
           children: [
             Leagues(),
-            Matches(),
+            Fixtures(),
             favorites(),
           ],
         ),
