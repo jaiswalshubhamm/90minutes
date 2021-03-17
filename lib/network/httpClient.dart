@@ -19,7 +19,6 @@ class HttpClient {
       HttpHeaders.contentTypeHeader: 'application/json',
       'x-rapidapi-host': "v3.football.api-sports.io",
       'x-rapidapi-key': "fc466db0a1b07a4049cc27cc28a92c30"
-      // c1d23053708b123ee28aa1ec1ea60cad"
     };
     try {
       final response = await http.get(uri, headers: header);

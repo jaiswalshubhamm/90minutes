@@ -123,7 +123,6 @@ class _FormWidgetSignupState extends State<FormWidgetSignup> {
                   );
                   return;
                 }
-                print(_formData);
                 if (_formKey2.currentState.validate()) {
                   Scaffold.of(context).showSnackBar(
                     SnackBar(

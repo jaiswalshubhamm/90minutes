@@ -5,15 +5,18 @@ class CustomText extends StatelessWidget {
   final String text;
   final double size;
   final Color color;
+  final Color bgColor;
   final FontWeight weight;
 
-  CustomText({@required this.text, this.size, this.color, this.weight});
+  CustomText(
+      {@required this.text, this.size, this.color, this.bgColor, this.weight});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
+        backgroundColor: bgColor ?? Palette.white,
         fontSize: size ?? 16,
         color: color ?? Palette.black,
         fontWeight: weight ?? FontWeight.normal,

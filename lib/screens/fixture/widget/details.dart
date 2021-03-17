@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../config/palette.dart';
 import '../../../providers/fixtureProvider.dart';
 import '../../../providers/oddProvider.dart';
-import '../../../models/fixtures.dart';
+import '../../../models/fixtures.dart' as fixture;
+import '../../../models/odd.dart' as odd;
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
 import '../../../widgets/loading.dart';
@@ -18,11 +20,15 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     var fixtureDetailData = Provider.of<FixtureDetailsProvider>(context);
-    // var oddData = Provider.of<OddProvider>(context);
-    List<Response> _fixture = fixtureDetailData.fixtures.data?.response;
+    var oddData = Provider.of<OddProvider>(context);
+
+    List<fixture.Response> _fixture = fixtureDetailData.fixtures.data?.response;
+    List<odd.Response> _odd = oddData.odd.data?.response;
+    print(_odd);
     if (fixtureDetailData.fixtures.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
-    } else if (fixtureDetailData.fixtures.status == NetworkStatus.COMPLETED) {
+    } else if (fixtureDetailData.fixtures.status == NetworkStatus.COMPLETED &&
+        oddData.odd.status == NetworkStatus.COMPLETED) {
       return SingleChildScrollView(
         child: Column(
           children: [
@@ -77,30 +83,125 @@ class _DetailsState extends State<Details> {
             Center(
               child: CustomText(text: 'Full Time', size: 10),
             ),
+            SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CustomText(
-                  text:
-                      'bet${_fixture[0].score.fulltime.home ?? '-'}   --   ${_fixture[0].score.fulltime.away ?? '-'}',
-                  size: 24,
+                SizedBox(width: 5),
+                Expanded(
+                  child: Container(
+                    height: 25,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Palette.primary,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                      ),
+                    ),
+                    child: CustomText(
+                      text: 'bet365',
+                      size: 16,
+                      bgColor: Palette.primary,
+                    ),
+                  ),
                 ),
-                CustomText(
-                  text:
-                      '${_fixture[0].score.fulltime.home ?? '-'}   --   ${_fixture[0].score.fulltime.away ?? '-'}',
-                  size: 24,
+                Expanded(
+                  child: Container(
+                    height: 25,
+                    alignment: Alignment.center,
+                    color: Palette.darkerGrey,
+                    child: CustomText(
+                      text: (_odd.length != 0)
+                          ? _odd[0].bookmakers[0].bets[0].values[0].odd
+                          : '--',
+                      size: 20,
+                      bgColor: Palette.darkerGrey,
+                    ),
+                  ),
                 ),
-                CustomText(
-                  text:
-                      '${_fixture[0].score.fulltime.home ?? '-'}   --   ${_fixture[0].score.fulltime.away ?? '-'}',
-                  size: 24,
+                Expanded(
+                  child: Container(
+                    height: 25,
+                    alignment: Alignment.center,
+                    color: Palette.darkerGrey,
+                    child: CustomText(
+                      text: (_odd.length != 0)
+                          ? _odd[0].bookmakers[0].bets[0].values[1].odd
+                          : '--',
+                      size: 20,
+                      bgColor: Palette.darkerGrey,
+                    ),
+                  ),
                 ),
-                CustomText(
-                  text:
-                      '${_fixture[0].score.fulltime.home ?? '-'}   --   ${_fixture[0].score.fulltime.away ?? '-'}',
-                  size: 24,
+                Expanded(
+                  child: Container(
+                    height: 25,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Palette.darkerGrey,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
+                      ),
+                    ),
+                    child: CustomText(
+                      text: (_odd.length != 0)
+                          ? _odd[0].bookmakers[0].bets[0].values[2].odd
+                          : '--',
+                      size: 20,
+                      bgColor: Palette.darkerGrey,
+                    ),
+                  ),
                 ),
+                SizedBox(width: 5),
               ],
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 20),
+                      CustomText(
+                        text: 'Venue',
+                        size: 20,
+                        weight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: 'Name ',
+                        size: 16,
+                      ),
+                      CustomText(
+                        text: _fixture[0].fixture.venue.name,
+                        size: 16,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: 'Location ',
+                        size: 16,
+                      ),
+                      CustomText(
+                        text: _fixture[0].fixture.venue.city,
+                        size: 16,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

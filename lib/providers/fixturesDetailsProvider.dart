@@ -27,7 +27,6 @@ class FixturesDetailsProvider with ChangeNotifier {
 
   void setLive(bool live) {
     _live = live;
-    print(_live);
     if (_live) {
       _params = {"live": "all"};
     } else {

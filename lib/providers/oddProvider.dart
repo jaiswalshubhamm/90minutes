@@ -5,7 +5,6 @@ import '../network/apiResponse.dart';
 
 class OddProvider with ChangeNotifier {
   int _id;
-
   Map<String, String> _params = {};
 
   OddService _oddService;
@@ -16,9 +15,8 @@ class OddProvider with ChangeNotifier {
 
   void setId(int id) {
     _id = id;
-    _params = {"id": '$_id'};
+    _params = {"fixture": '$_id', 'bookmaker': '8', 'bet': '1'};
     fetchOdd();
-    notifyListeners();
   }
 
   OddProvider() {

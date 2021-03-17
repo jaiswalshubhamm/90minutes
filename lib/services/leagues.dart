@@ -6,7 +6,6 @@ class LeaguesService {
   Future<Leagues> fetchLeaguesDetails() async {
     final response = await HttpClient.instance
         .fetchData(APIPathHelper.getValue(APIPath.fetch_leagues));
-    print(response);
     return Leagues.fromJson(response);
   }
 }

@@ -7,7 +7,6 @@ class FixturesService {
     final response = await HttpClient.instance.fetchData(
         APIPathHelper.getValue(APIPath.fetch_fixtures),
         params: params);
-    print(response);
     return Fixtures.fromJson(response);
   }
 }
