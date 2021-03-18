@@ -14,7 +14,7 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text ?? '😢 Cant Get',
       style: TextStyle(
         backgroundColor: bgColor ?? Palette.white,
         fontSize: size ?? 16,

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/fixtureProvider.dart';
 import '../../../providers/oddProvider.dart';
-import '../../../models/fixtures.dart' as fixture;
+import '../../../models/fixture.dart' as fixture;
 import '../../../models/odd.dart' as odd;
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
@@ -19,15 +19,15 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     var fixtureDetailData = Provider.of<FixtureDetailsProvider>(context);
     var oddData = Provider.of<OddProvider>(context);
 
-    List<fixture.Response> _fixture = fixtureDetailData.fixtures.data?.response;
+    List<fixture.Response> _fixture = fixtureDetailData.fixture.data?.response;
     List<odd.Response> _odd = oddData.odd.data?.response;
-    print(_odd);
-    if (fixtureDetailData.fixtures.status != NetworkStatus.COMPLETED) {
+    if (fixtureDetailData.fixture.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
-    } else if (fixtureDetailData.fixtures.status == NetworkStatus.COMPLETED &&
+    } else if (fixtureDetailData.fixture.status == NetworkStatus.COMPLETED &&
         oddData.odd.status == NetworkStatus.COMPLETED) {
       return SingleChildScrollView(
         child: Column(
@@ -200,16 +200,23 @@ class _DetailsState extends State<Details> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 15),
+                  Image.network(
+                    (_fixture[0].fixture.venue.id != null)
+                        ? 'https://media.api-sports.io/football/venues/${_fixture[0].fixture.venue.id}.png'
+                        : 'https://media.api-sports.io/football/leagues/304.png',
+                    width: (screenSize.width - 40),
+                  ),
                 ],
               ),
             ),
           ],
         ),
       );
-    } else if (fixtureDetailData.fixtures.status == NetworkStatus.ERROR) {
-      return Text("Error : ${fixtureDetailData.fixtures.message}");
+    } else if (fixtureDetailData.fixture.status == NetworkStatus.ERROR) {
+      return Text("Error : ${fixtureDetailData.fixture.message}");
     } else {
-      return Text("${fixtureDetailData.fixtures.message}");
+      return Text("${fixtureDetailData.fixture.message}");
     }
   }
 }
