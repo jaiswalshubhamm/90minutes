@@ -9,14 +9,7 @@ import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
 import '../../../widgets/loading.dart';
 
-class Fixtures extends StatefulWidget {
-  Fixtures({Key key}) : super(key: key);
-
-  @override
-  _FixturesState createState() => _FixturesState();
-}
-
-class _FixturesState extends State<Fixtures> {
+class Fixtures extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var fixturesData = Provider.of<FixturesDetailsProvider>(context);

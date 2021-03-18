@@ -38,8 +38,8 @@ class FixtureDetailsProvider with ChangeNotifier {
     String league = '${_fixture.data?.response[0].league.id}';
     String season = '${_fixture.data?.response[0].league.season}';
     await fetchStanding(league, season);
-    await checkStanding();
     await checkLineup();
+    await checkStanding();
     notifyListeners();
   }
 

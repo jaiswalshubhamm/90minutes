@@ -51,7 +51,10 @@ flutter:
   assets:
     - assets/images/dlogo.png
     - assets/images/main3.png
-  #   - images/a_dot_ham.jpeg
+    - assets/images/footballField.png
+    - assets/images/homeGoalkeeper.png
+    - assets/images/homePlayer.png
+    - assets/images/awayGoalkeeper.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

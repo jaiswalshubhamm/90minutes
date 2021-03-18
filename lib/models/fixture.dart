@@ -402,7 +402,7 @@ class Events {
   Assist assist;
   String type;
   String detail;
-  Null comments;
+  String comments;
 
   Events(
       {this.time,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/providers/fixtureProvider.dart';
 import 'package:provider/provider.dart';
+import '../../providers/fixtureProvider.dart';
 import '../../config/palette.dart';
 import '../../screens/home/widgets/favorites.dart';
 import 'widget/details.dart';
+import 'widget/lineup.dart';
+import 'widget/standings.dart';
 
 class FixtureScreen extends StatefulWidget {
   final int id;
@@ -56,8 +58,8 @@ class _FixtureScreenState extends State<FixtureScreen> {
               body: TabBarView(
                 children: [
                   Details(),
-                  if (fixtureDetailData.isLineup) favorites(),
-                  if (fixtureDetailData.isStanding) favorites(),
+                  if (fixtureDetailData.isLineup) Lineup(),
+                  if (fixtureDetailData.isStanding) Standings(),
                   favorites(),
                 ],
               ),

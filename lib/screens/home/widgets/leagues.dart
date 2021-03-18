@@ -5,14 +5,7 @@ import '../../../network/apiResponse.dart';
 import '../../../providers/leagueDetailsProvider.dart';
 import '../../../widgets/loading.dart';
 
-class Leagues extends StatefulWidget {
-  Leagues({Key key}) : super(key: key);
-
-  @override
-  _LeaguesState createState() => _LeaguesState();
-}
-
-class _LeaguesState extends State<Leagues> {
+class Leagues extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var leaguesData = Provider.of<LeaguesDetailsProvider>(context);

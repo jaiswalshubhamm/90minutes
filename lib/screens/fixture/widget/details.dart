@@ -9,14 +9,7 @@ import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
 import '../../../widgets/loading.dart';
 
-class Details extends StatefulWidget {
-  Details({Key key}) : super(key: key);
-
-  @override
-  _DetailsState createState() => _DetailsState();
-}
-
-class _DetailsState extends State<Details> {
+class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -182,7 +175,7 @@ class _DetailsState extends State<Details> {
                       ),
                       CustomText(
                         text: _fixture[0].fixture.venue.name,
-                        size: 16,
+                        size: 13,
                       ),
                     ],
                   ),
@@ -196,7 +189,7 @@ class _DetailsState extends State<Details> {
                       ),
                       CustomText(
                         text: _fixture[0].fixture.venue.city,
-                        size: 16,
+                        size: 13,
                       ),
                     ],
                   ),
