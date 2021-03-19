@@ -16,7 +16,6 @@ class _StandingsState extends State<Standings> {
   List<bool> isSelected = [true, false, false];
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     var fixtureDetailData = Provider.of<FixtureDetailsProvider>(context);
     List<standing.Response> _standing =
         fixtureDetailData.standing.data?.response;
