@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../config/palette.dart';
+import '../../../widgets/customText.dart';
 
 class Player extends StatelessWidget {
   final int id;
@@ -23,8 +25,8 @@ class Player extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: 25,
-                  width: 25,
+                  height: 30,
+                  width: 30,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(image),
@@ -32,22 +34,19 @@ class Player extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: Text(
-                      "$number" ?? "1",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                      ),
+                    child: CustomText(
+                      text: "$number" ?? "1",
+                      color: Palette.white,
+                      size: 8,
+                      bgColor: Palette.transparent,
                     ),
                   ),
                 ),
-                Text(
-                  name ?? "Player $id",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 10,
-                  ),
+                CustomText(
+                  text: name ?? "Player $id",
+                  weight: FontWeight.bold,
+                  size: 10,
+                  bgColor: Palette.transparent,
                 ),
               ],
             ),

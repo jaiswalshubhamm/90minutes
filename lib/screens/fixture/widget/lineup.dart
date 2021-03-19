@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/screens/fixture/widget/player.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/fixtureProvider.dart';
-import '../../../providers/oddProvider.dart';
 import '../../../models/fixture.dart' as fixture;
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
 import '../../../widgets/loading.dart';
+import 'player.dart';
 
 class Lineup extends StatelessWidget {
   @override
@@ -18,6 +17,7 @@ class Lineup extends StatelessWidget {
       return Center(child: Loading());
     } else if (fixtureDetailData.fixture.status == NetworkStatus.COMPLETED) {
       return SingleChildScrollView(
+        physics: ScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -64,7 +64,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -96,7 +96,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -116,7 +116,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -142,7 +142,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -157,7 +157,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +172,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -198,7 +198,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -218,7 +218,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -250,7 +250,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -285,6 +285,7 @@ class Lineup extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Card(
+              elevation: 5.0,
               child: ListTile(
                 leading: Image.network(
                   _fixture[0].lineups[0].team.logo,
@@ -296,42 +297,83 @@ class Lineup extends StatelessWidget {
                 ),
               ),
             ),
-            Card(
-              child: ListTile(
-                leading: CustomText(
-                  text: 'Coach',
-                  size: 20,
-                ),
-                title: CustomText(
-                  text: _fixture[0].lineups[0].coach.name,
-                  size: 16,
-                ),
+            ListTile(
+              leading: CustomText(
+                text: 'Coach',
+                size: 20,
+              ),
+              title: CustomText(
+                text: _fixture[0].lineups[0].coach.name,
+                size: 14,
               ),
             ),
             ListView.builder(
-              padding: EdgeInsets.all(16.0),
+              physics: NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemExtent: 25,
               itemBuilder: (context, i) {
-                return Card(
-                  child: ListTile(
-                    leading: CustomText(
-                      text:
-                          '${_fixture[0].lineups[0].startXI[i].player.number}',
-                    ),
-                    title: CustomText(
-                        text:
-                          '${_fixture[0].lineups[0].startXI[i].player.number}',
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/leagues',
-                      );
-                    },
+                return ListTile(
+                  leading: CustomText(
+                    text: '${_fixture[0].lineups[0].startXI[i].player.number}',
+                    size: 20,
                   ),
+                  title: CustomText(
+                    text: _fixture[0].lineups[0].startXI[i].player.name,
+                    size: 14,
+                  ),
+                  onTap: () {},
+                  // ),
                 );
               },
               itemCount: _fixture[0].lineups[0].startXI.length,
-            )
+            ),
+            SizedBox(height: 15),
+            Card(
+              elevation: 5.0,
+              child: ListTile(
+                leading: Image.network(
+                  _fixture[0].lineups[1].team.logo,
+                  height: 80,
+                ),
+                title: CustomText(
+                  text: _fixture[0].lineups[1].team.name,
+                  size: 20,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: CustomText(
+                text: 'Coach',
+                size: 20,
+              ),
+              title: CustomText(
+                text: _fixture[0].lineups[1].coach.name,
+                size: 14,
+              ),
+            ),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemExtent: 25,
+              itemBuilder: (context, i) {
+                return ListTile(
+                  leading: CustomText(
+                    text: '${_fixture[0].lineups[1].startXI[i].player.number}',
+                    size: 20,
+                  ),
+                  title: CustomText(
+                    text: _fixture[0].lineups[1].startXI[i].player.name,
+                    size: 14,
+                  ),
+                  onTap: () {},
+                  // ),
+                );
+              },
+              itemCount: _fixture[0].lineups[1].startXI.length,
+            ),
+            SizedBox(height: 15),
           ],
         ),
       );
