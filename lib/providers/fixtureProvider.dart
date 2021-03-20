@@ -21,6 +21,14 @@ class FixtureDetailsProvider with ChangeNotifier {
 
   ApiResponse<FixtureModel> get fixture => _fixture;
 
+  ApiResponse<FixtureModel> _homeLast5;
+
+  ApiResponse<FixtureModel> get homeLast5 => _homeLast5;
+
+  ApiResponse<FixtureModel> _awayLast5;
+
+  ApiResponse<FixtureModel> get awayLast5 => _awayLast5;
+
   ApiResponse<Standing> _standing;
 
   ApiResponse<Standing> get standing => _standing;
@@ -35,11 +43,11 @@ class FixtureDetailsProvider with ChangeNotifier {
     isStanding = false;
     isLineup = false;
     await fetchFixtureProvider();
-    String league = '${_fixture.data?.response[0].league.id}';
-    String season = '${_fixture.data?.response[0].league.season}';
-    await fetchStanding(league, season);
+    await fetchStanding();
     await checkLineup();
     await checkStanding();
+    await fetchHomeLast5();
+    await fetchAwayLast5();
     notifyListeners();
   }
 
@@ -72,8 +80,11 @@ class FixtureDetailsProvider with ChangeNotifier {
     }
   }
 
-  fetchStanding(String league, String season) async {
-    Map<String, String> _standingParams = {"league": league, "season": season};
+  fetchStanding() async {
+    Map<String, String> _standingParams = {
+      "league": '${_fixture.data?.response[0].league.id}',
+      "season": '${_fixture.data?.response[0].league.season}'
+    };
     _standing = ApiResponse.loading('loading... ');
     try {
       Standing standing = await _standingService.fetchStanding(_standingParams);
@@ -81,6 +92,36 @@ class FixtureDetailsProvider with ChangeNotifier {
       print(_standing);
     } catch (e) {
       _standing = ApiResponse.error(e.toString());
+    }
+  }
+
+  fetchHomeLast5() async {
+    Map<String, String> _homeLast5Params = {
+      "team": '${_fixture.data?.response[0].teams.home.id}',
+      "last": '5'
+    };
+    _homeLast5 = ApiResponse.loading('loading... ');
+    try {
+      FixtureModel fixture =
+          await _fixtureService.fetchFixture(_homeLast5Params);
+      _homeLast5 = ApiResponse.completed(fixture);
+    } catch (e) {
+      _homeLast5 = ApiResponse.error(e.toString());
+    }
+  }
+
+  fetchAwayLast5() async {
+    Map<String, String> _awayLast5Params = {
+      "team": '${_fixture.data?.response[0].teams.away.id}',
+      "last": '5'
+    };
+    _awayLast5 = ApiResponse.loading('loading... ');
+    try {
+      FixtureModel fixture =
+          await _fixtureService.fetchFixture(_awayLast5Params);
+      _awayLast5 = ApiResponse.completed(fixture);
+    } catch (e) {
+      _awayLast5 = ApiResponse.error(e.toString());
     }
   }
 }

@@ -5,6 +5,7 @@ import '../../config/palette.dart';
 import '../../screens/home/widgets/favorites.dart';
 import 'widget/details.dart';
 import 'widget/lineup.dart';
+import 'widget/matches.dart';
 import 'widget/standings.dart';
 
 class FixtureScreen extends StatefulWidget {
@@ -60,7 +61,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                   Details(),
                   if (fixtureDetailData.isLineup) Lineup(),
                   if (fixtureDetailData.isStanding) Standings(),
-                  favorites(),
+                  Matches(),
                 ],
               ),
             ),
