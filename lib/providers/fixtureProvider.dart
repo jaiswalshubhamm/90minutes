@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:nintyminutesflutter/models/standing.dart';
-import 'package:nintyminutesflutter/services/standing.dart';
+import '../models/standing.dart';
+import '../services/standing.dart';
 import '../models/fixture.dart';
 import '../services/fixture.dart';
 import '../network/apiResponse.dart';
@@ -29,6 +29,10 @@ class FixtureDetailsProvider with ChangeNotifier {
 
   ApiResponse<FixtureModel> get awayLast5 => _awayLast5;
 
+  ApiResponse<FixtureModel> _h2h;
+
+  ApiResponse<FixtureModel> get h2h => _h2h;
+
   ApiResponse<Standing> _standing;
 
   ApiResponse<Standing> get standing => _standing;
@@ -48,6 +52,7 @@ class FixtureDetailsProvider with ChangeNotifier {
     await checkStanding();
     await fetchHomeLast5();
     await fetchAwayLast5();
+    await fetchH2h();
     notifyListeners();
   }
 
@@ -122,6 +127,20 @@ class FixtureDetailsProvider with ChangeNotifier {
       _awayLast5 = ApiResponse.completed(fixture);
     } catch (e) {
       _awayLast5 = ApiResponse.error(e.toString());
+    }
+  }
+
+  fetchH2h() async {
+    Map<String, String> _h2hParams = {
+      "h2h":
+          '${_fixture.data?.response[0].teams.home.id}-${_fixture.data?.response[0].teams.away.id}',
+    };
+    _h2h = ApiResponse.loading('loading... ');
+    try {
+      FixtureModel fixture = await _fixtureService.fetchH2h(_h2hParams);
+      _h2h = ApiResponse.completed(fixture);
+    } catch (e) {
+      _h2h = ApiResponse.error(e.toString());
     }
   }
 }

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/fixtureProvider.dart';
 import '../../config/palette.dart';
-import '../../screens/home/widgets/favorites.dart';
 import 'widget/details.dart';
 import 'widget/lineup.dart';
 import 'widget/matches.dart';
-import 'widget/standings.dart';
+import 'widget/standings/standings.dart';
 
 class FixtureScreen extends StatefulWidget {
   final int id;

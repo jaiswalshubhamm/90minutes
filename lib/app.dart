@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'providers/authProvider.dart';
 import 'providers/countriesDetailsProvider.dart';
+import 'providers/leagueProvider.dart';
 import 'providers/leagueDetailsProvider.dart';
 import 'providers/fixturesDetailsProvider.dart';
 import 'providers/fixtureProvider.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<LeaguesDetailsProvider>(
           create: (context) => LeaguesDetailsProvider(),
+        ),
+        ChangeNotifierProvider<LeagueDetailsProvider>(
+          create: (context) => LeagueDetailsProvider(),
         ),
         ChangeNotifierProvider<FixturesDetailsProvider>(
           create: (context) => FixturesDetailsProvider(),

@@ -4,6 +4,7 @@ enum APIPath {
   fetch_fixtures,
   fetch_standings,
   fetch_odd,
+  fetch_h2h,
 }
 
 class APIPathHelper {
@@ -19,6 +20,8 @@ class APIPathHelper {
         return "/standings";
       case APIPath.fetch_odd:
         return "/odds";
+      case APIPath.fetch_h2h:
+        return "/fixtures/headtohead";
       default:
         return "";
     }
