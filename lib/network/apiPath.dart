@@ -5,6 +5,7 @@ enum APIPath {
   fetch_standings,
   fetch_odd,
   fetch_h2h,
+  fetch_players,
 }
 
 class APIPathHelper {
@@ -22,6 +23,8 @@ class APIPathHelper {
         return "/odds";
       case APIPath.fetch_h2h:
         return "/fixtures/headtohead";
+      case APIPath.fetch_players:
+        return "/players/topscorers";
       default:
         return "";
     }

@@ -310,122 +310,124 @@ class _MatchesState extends State<Matches> {
                 ),
               ),
             ),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              padding: EdgeInsets.all(14.0),
-              itemBuilder: (context, i) {
-                return GestureDetector(
-                  child: Card(
-                    child: Column(
-                      children: [
-                        ListTile(
-                          leading: Image.network(
-                            h2h[i].league.logo ??
-                                "https://media.api-sports.io/football/leagues/4.png",
-                            height: 30,
-                            width: 30,
-                          ),
-                          title: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                    text: h2h[i].league.country,
-                                    size: 12,
-                                  ),
-                                  CustomText(
-                                    text: h2h[i].league.name,
-                                    weight: FontWeight.bold,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          color: Palette.darkerGrey,
-                          thickness: .5,
-                        ),
-                        ListTile(
-                          leading: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Center(
-                                child: Text(
-                                  h2h[i].fixture.date.substring(11, 16),
+            if (h2h != null)
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                padding: EdgeInsets.all(14.0),
+                itemBuilder: (context, i) {
+                  return GestureDetector(
+                    child: Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Image.network(
+                              h2h[i].league.logo ??
+                                  "https://media.api-sports.io/football/leagues/4.png",
+                              height: 30,
+                              width: 30,
+                            ),
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      text: h2h[i].league.country,
+                                      size: 12,
+                                    ),
+                                    CustomText(
+                                      text: h2h[i].league.name,
+                                      weight: FontWeight.bold,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              VerticalDivider(
-                                color: Palette.darkerGrey,
-                                thickness: 1,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          title: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    h2h[i].teams.home.name,
-                                  ),
-                                  Text(
-                                    h2h[i].teams.away.name,
-                                  ),
-                                ],
-                              ),
-                            ],
+                          Divider(
+                            color: Palette.darkerGrey,
+                            thickness: .5,
                           ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    '${h2h[i].goals.home ?? ''}',
+                          ListTile(
+                            leading: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    h2h[i].fixture.date.substring(11, 16),
                                   ),
-                                  Text(
-                                    '${h2h[i].goals.away ?? ''}',
-                                  ),
-                                ],
-                              ),
-                              VerticalDivider(
-                                color: Palette.darkerGrey,
-                                thickness: 1,
-                              ),
-                              Icon(
-                                Icons.notifications,
-                                color: Palette.darkerGrey,
-                              ),
-                            ],
+                                ),
+                                VerticalDivider(
+                                  color: Palette.darkerGrey,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ),
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      h2h[i].teams.home.name,
+                                    ),
+                                    Text(
+                                      h2h[i].teams.away.name,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      '${h2h[i].goals.home ?? ''}',
+                                    ),
+                                    Text(
+                                      '${h2h[i].goals.away ?? ''}',
+                                    ),
+                                  ],
+                                ),
+                                VerticalDivider(
+                                  color: Palette.darkerGrey,
+                                  thickness: 1,
+                                ),
+                                Icon(
+                                  Icons.notifications,
+                                  color: Palette.darkerGrey,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  onTap: () {
-                    Provider.of<FixtureDetailsProvider>(context, listen: false)
-                        .setId(h2h[i].fixture.id);
-                    Provider.of<OddProvider>(context, listen: false)
-                        .setId(h2h[i].fixture.id);
-                    Navigator.pushNamed(
-                      context,
-                      '/fixture',
-                    );
-                  },
-                );
-              },
-              itemCount: h2h.length,
-            ),
+                    onTap: () {
+                      Provider.of<FixtureDetailsProvider>(context,
+                              listen: false)
+                          .setId(h2h[i].fixture.id);
+                      Provider.of<OddProvider>(context, listen: false)
+                          .setId(h2h[i].fixture.id);
+                      Navigator.pushNamed(
+                        context,
+                        '/fixture',
+                      );
+                    },
+                  );
+                },
+                itemCount: h2h.length,
+              ),
           ],
         ),
       );

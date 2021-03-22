@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/providers/leagueProvider.dart';
 import 'package:provider/provider.dart';
 import '../../../models/leaugeModel.dart';
 import '../../../network/apiResponse.dart';
@@ -38,10 +39,11 @@ class Leagues extends StatelessWidget {
                 _leagues[i].league.name,
               ),
               onTap: () {
+                Provider.of<LeagueDetailsProvider>(context, listen: false)
+                    .setId(_leagues[i].league.id);
                 Navigator.pushNamed(
                   context,
                   '/leagues',
-                  arguments: _leagues[i].league.id,
                 );
               },
             ),

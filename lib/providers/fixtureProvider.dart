@@ -94,7 +94,6 @@ class FixtureDetailsProvider with ChangeNotifier {
     try {
       Standing standing = await _standingService.fetchStanding(_standingParams);
       _standing = ApiResponse.completed(standing);
-      print(_standing);
     } catch (e) {
       _standing = ApiResponse.error(e.toString());
     }

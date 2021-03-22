@@ -40,6 +40,10 @@ class FixturesDetailsProvider with ChangeNotifier {
     _id = id;
     _params = {"id": '$_id'};
     fetchFixturesDetails();
+    print('Hu');
+    print('Hu');
+    print('Hu');
+    print('Hu');
     notifyListeners();
   }
 
