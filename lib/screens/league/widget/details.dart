@@ -37,24 +37,24 @@ class Details extends StatelessWidget {
                   height: 80,
                   width: 60,
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
                       text:
                           '${_league[0].league.type},  ${_league[0].league.name}',
-                      size: 18,
+                      size: 20,
                       color: Palette.primary,
                     ),
                     SizedBox(height: 10),
                     Row(
                       children: [
-                        SvgPicture.network(
-                          _league[0].country.flag ??
-                              'https://media.api-sports.io/flags/gb.svg',
-                          height: 20,
-                        ),
+                        if (_league[0].country.flag != null)
+                          SvgPicture.network(
+                            _league[0].country.flag,
+                            height: 20,
+                          ),
                         SizedBox(width: 10),
                         CustomText(
                           text: '${_league[0].country.name}',
@@ -66,10 +66,16 @@ class Details extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            LinearProgressIndicator(
-              value: .8,
-            ),
-            SizedBox(height: 20),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 16, right: 16),
+            //   child: LinearProgressIndicator(
+            //     backgroundColor: Palette.primary,
+            //     // valueColor: Palette.lose,
+            //     minHeight: 8,
+            //     value: .8,
+            //   ),
+            // ),
+            // SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: CustomText(
@@ -88,6 +94,7 @@ class Details extends StatelessWidget {
                 itemBuilder: (context, i) {
                   return GestureDetector(
                     child: Card(
+                      color: Palette.lightGrey,
                       child: Column(
                         children: [
                           ListTile(
@@ -103,13 +110,26 @@ class Details extends StatelessWidget {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CustomText(
-                                      text: _featured[i].league.country,
-                                      size: 12,
+                                    Row(
+                                      children: [
+                                        if (_league[0].country.flag != null)
+                                          SvgPicture.network(
+                                            _league[0].country.flag,
+                                            height: 10,
+                                          ),
+                                        SizedBox(width: 6),
+                                        CustomText(
+                                          text: _featured[i].league.country,
+                                          size: 12,
+                                          bgColor: Palette.lightGrey,
+                                        ),
+                                      ],
                                     ),
+                                    SizedBox(height: 3),
                                     CustomText(
                                       text: _featured[i].league.name,
                                       weight: FontWeight.bold,
+                                      bgColor: Palette.lightGrey,
                                     ),
                                   ],
                                 ),
