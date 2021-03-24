@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import '../models/league.dart';
 import '../models/standing.dart';
 import '../models/players.dart';
+import '../models/fixture.dart';
 import '../services/league.dart';
 import '../services/standing.dart';
 import '../services/players.dart';
+import '../services/fixture.dart';
 import '../network/apiResponse.dart';
 
 class LeagueDetailsProvider with ChangeNotifier {
@@ -22,6 +24,8 @@ class LeagueDetailsProvider with ChangeNotifier {
 
   PlayerService _playerService;
 
+  FixtureService _fixtureService;
+
   ApiResponse<LeagueModel> _league;
 
   ApiResponse<LeagueModel> get league => _league;
@@ -34,10 +38,19 @@ class LeagueDetailsProvider with ChangeNotifier {
 
   ApiResponse<Players> get players => _players;
 
+  ApiResponse<FixtureModel> _last10;
+
+  ApiResponse<FixtureModel> get last10 => _last10;
+
+  ApiResponse<FixtureModel> _featured;
+
+  ApiResponse<FixtureModel> get featured => _featured;
+
   LeagueDetailsProvider() {
     _leagueService = LeagueService();
     _standingService = StandingService();
     _playerService = PlayerService();
+    _fixtureService = FixtureService();
   }
 
   void call() async {
@@ -49,11 +62,16 @@ class LeagueDetailsProvider with ChangeNotifier {
       _year = '${_league.data?.response[0].seasons.last.year}';
     }
     notifyListeners();
+    await fetchFeatured();
+    print(_featured);
+    notifyListeners();
     await fetchStanding();
     await checkStanding();
     notifyListeners();
     await fetchTopPlayers();
     await checkTopPlayers();
+    notifyListeners();
+    await fetchLast10();
     notifyListeners();
   }
 
@@ -82,11 +100,15 @@ class LeagueDetailsProvider with ChangeNotifier {
     isTopPlayers = false;
     _year = year;
     _params = {"league": '$_id', 'season': _year};
+    fetchFeatured();
+    notifyListeners();
     await fetchStanding();
     await checkStanding();
     notifyListeners();
     await fetchTopPlayers();
     await checkTopPlayers();
+    notifyListeners();
+    await fetchLast10();
     notifyListeners();
   }
 
@@ -125,6 +147,37 @@ class LeagueDetailsProvider with ChangeNotifier {
       _players = ApiResponse.completed(players);
     } catch (e) {
       _players = ApiResponse.error(e.toString());
+    }
+  }
+
+  fetchLast10() async {
+    Map<String, String> _last10Params = {
+      'league': '$_id',
+      'season': '$_year',
+      'last': '10',
+    };
+    _last10 = ApiResponse.loading('loading... ');
+    try {
+      FixtureModel fixture = await _fixtureService.fetchFixture(_last10Params);
+      _last10 = ApiResponse.completed(fixture);
+    } catch (e) {
+      _last10 = ApiResponse.error(e.toString());
+    }
+  }
+
+  fetchFeatured() async {
+    Map<String, String> _featuredParams = {
+      'league': '$_id',
+      'season': '$_year',
+      'last': '5',
+    };
+    _featured = ApiResponse.loading('loading... ');
+    try {
+      FixtureModel fixture =
+          await _fixtureService.fetchFixture(_featuredParams);
+      _featured = ApiResponse.completed(fixture);
+    } catch (e) {
+      _featured = ApiResponse.error(e.toString());
     }
   }
 }

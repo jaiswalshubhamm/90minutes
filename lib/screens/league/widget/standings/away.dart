@@ -90,7 +90,7 @@ class AwayStanding extends StatelessWidget {
                   ),
                   DataCell(
                     Text(
-                        '${team.away.goals.against} : ${team.away.goals.forr}'),
+                        '${team.away.goals.against} : ${team.away.goals.goalsFor}'),
                   ),
                 ],
               ),

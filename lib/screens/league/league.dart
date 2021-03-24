@@ -6,7 +6,7 @@ import '../../widgets/customText.dart';
 import 'widget/details.dart';
 import 'widget/standings/standings.dart';
 import 'widget/topPlayer.dart';
-import 'package:nintyminutesflutter/screens/home/widgets/favorites.dart';
+import 'widget/matches.dart';
 
 class LeagueScreen extends StatefulWidget {
   final int id;
@@ -101,7 +101,7 @@ class _LeagueScreenState extends State<LeagueScreen> {
                   Details(),
                   if (leagueDetailData.isStanding) Standings(),
                   if (leagueDetailData.isTopPlayers) TopPlayer(),
-                  favorites(),
+                  Matches(),
                 ],
               ),
             ),

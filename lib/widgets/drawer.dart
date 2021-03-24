@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/authProvider.dart';
+import 'customText.dart';
 
 class MenuDrawer extends StatefulWidget {
   @override
@@ -57,15 +58,22 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.home),
-            title: Text('Home'),
+            title: CustomText(
+              text: 'Home',
+              size: 18,
+              weight: FontWeight.w700,
+            ),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-          Divider(),
           ListTile(
             leading: Icon(Icons.feedback),
-            title: Text('Feedback'),
+            title: CustomText(
+              text: 'Feedback',
+              size: 18,
+              weight: FontWeight.w700,
+            ),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/feedback');
             },
@@ -73,17 +81,24 @@ class _MenuDrawerState extends State<MenuDrawer> {
           if (!(authData.isLoggedIn || isAuth))
             ListTile(
               leading: Icon(Icons.login),
-              title: Text('SignIn'),
+              title: CustomText(
+                text: 'SignIn',
+                size: 18,
+                weight: FontWeight.w700,
+              ),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/login');
               },
             ),
-          Divider(),
           if (authData.isLoggedIn || isAuth)
             ListTile(
               leading: Icon(Icons.logout),
-              title: Text('SignOut'),
+              title: CustomText(
+                text: 'SignOut',
+                size: 18,
+                weight: FontWeight.w700,
+              ),
               onTap: () {
                 authData.logout();
                 Navigator.of(context).pushNamed('/');

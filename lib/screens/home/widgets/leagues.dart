@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/providers/leagueProvider.dart';
 import 'package:provider/provider.dart';
+import '../../../providers/leagueDetailsProvider.dart';
+import '../../../providers/leagueProvider.dart';
 import '../../../models/leaugeModel.dart';
 import '../../../network/apiResponse.dart';
-import '../../../providers/leagueDetailsProvider.dart';
 import '../../../widgets/loading.dart';
 
 class Leagues extends StatelessWidget {
@@ -19,6 +19,7 @@ class Leagues extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
           return Card(
+            color: Colors.grey[30],
             child: ListTile(
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -29,6 +30,7 @@ class Leagues extends StatelessWidget {
                     height: 25,
                     width: 25,
                   ),
+                  SizedBox(width: 10,),
                   VerticalDivider(
                     color: Colors.grey,
                     thickness: 1.0,

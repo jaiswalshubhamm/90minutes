@@ -90,20 +90,22 @@ class _StandingsState extends State<Standings> {
                 height: 40,
               ),
               title: CustomText(
-                text:
-                    '${_standing[0].league.name},  ${_standing[0].league.country} ${_standing[0].league.season}',
-                    size: 18
-              ),
+                  text:
+                      '${_standing[0].league.name},  ${_standing[0].league.country} ${_standing[0].league.season}',
+                  size: 18),
             ),
             Divider(
               color: Palette.darkerGrey,
             ),
             if (isSelected[0])
-              AllStanding(standings: _standing[0].league.standings),
+              for (var group in _standing[0].league.standings)
+                AllStanding(standings: group),
             if (isSelected[1])
-              HomeStanding(standings: _standing[0].league.standings),
+              for (var group in _standing[0].league.standings)
+                HomeStanding(standings: group),
             if (isSelected[2])
-              AwayStanding(standings: _standing[0].league.standings),
+              for (var group in _standing[0].league.standings)
+                AwayStanding(standings: group),
           ],
         ),
       );

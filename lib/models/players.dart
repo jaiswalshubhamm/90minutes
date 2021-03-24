@@ -520,11 +520,11 @@ class Cards {
 }
 
 class Penalty {
-  Null won;
-  Null commited;
+  int won;
+  int commited;
   int scored;
   int missed;
-  Null saved;
+  int saved;
 
   Penalty({this.won, this.commited, this.scored, this.missed, this.saved});
 

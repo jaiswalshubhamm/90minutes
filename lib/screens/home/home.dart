@@ -64,7 +64,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: Color(0xFFFAFAFA),
+        backgroundColor: Palette.white,
         appBar: AppBar(
           title: Text(
             "90 MINUTES",
