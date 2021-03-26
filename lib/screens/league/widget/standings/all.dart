@@ -119,99 +119,39 @@ class AllStanding extends StatelessWidget {
                       ),
                       (team.form != null)
                           ? DataCell(
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 16,
-                                    backgroundColor:
-                                        (team.form.substring(0, 1) == 'D')
+                              Container(
+                                width: 200,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, i) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: CircleAvatar(
+                                        radius: 16,
+                                        backgroundColor: (team.form
+                                                    .substring(i, i + 1) ==
+                                                'D')
                                             ? Palette.darkerGrey
-                                            : (team.form.substring(0, 1) == 'L')
+                                            : (team.form.substring(i, i + 1) ==
+                                                    'L')
                                                 ? Palette.lose
                                                 : Palette.primary,
-                                    child: Center(
-                                      child: Text(
-                                        team.form.substring(0, 1),
-                                        style: TextStyle(color: Palette.white),
+                                        child: Center(
+                                          child: Text(
+                                            team.form.substring(i, i + 1),
+                                            style:
+                                                TextStyle(color: Palette.white),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  CircleAvatar(
-                                    radius: 16,
-                                    backgroundColor:
-                                        (team.form.substring(1, 2) == 'D')
-                                            ? Palette.darkerGrey
-                                            : (team.form.substring(1, 2) == 'L')
-                                                ? Palette.lose
-                                                : Palette.primary,
-                                    child: Center(
-                                      child: Text(
-                                        team.form.substring(1, 2),
-                                        style: TextStyle(color: Palette.white),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  CircleAvatar(
-                                    radius: 16,
-                                    backgroundColor:
-                                        (team.form.substring(2, 3) == 'D')
-                                            ? Palette.darkerGrey
-                                            : (team.form.substring(2, 3) == 'L')
-                                                ? Palette.lose
-                                                : Palette.primary,
-                                    child: Center(
-                                      child: Text(
-                                        team.form.substring(2, 3),
-                                        style: TextStyle(color: Palette.white),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  CircleAvatar(
-                                    radius: 16,
-                                    backgroundColor:
-                                        (team.form.substring(3, 4) == 'D')
-                                            ? Palette.darkerGrey
-                                            : (team.form.substring(3, 4) == 'L')
-                                                ? Palette.lose
-                                                : Palette.primary,
-                                    child: Center(
-                                      child: Text(
-                                        team.form.substring(3, 4),
-                                        style: TextStyle(color: Palette.white),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  CircleAvatar(
-                                    radius: 16,
-                                    backgroundColor:
-                                        (team.form.substring(4, 5) == 'D')
-                                            ? Palette.darkerGrey
-                                            : (team.form.substring(4, 5) == 'L')
-                                                ? Palette.lose
-                                                : Palette.primary,
-                                    child: Center(
-                                      child: Text(
-                                        team.form.substring(4, 5),
-                                        style: TextStyle(color: Palette.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                    );
+                                  },
+                                  itemCount: team.form.length,
+                                ),
                               ),
                             )
-                          : DataCell(Text('Not')),
+                          : DataCell(Text('Not Found')),
                       DataCell(
                         Text('${team.points}'),
                       ),

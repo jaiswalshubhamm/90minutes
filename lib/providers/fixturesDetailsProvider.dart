@@ -8,8 +8,6 @@ class FixturesDetailsProvider with ChangeNotifier {
 
   bool _live = false;
 
-  int _id;
-
   Map<String, String> _params = {};
 
   FixturesService _fixturesService;
@@ -22,7 +20,6 @@ class FixturesDetailsProvider with ChangeNotifier {
     _date = date;
     _params = {"date": _date};
     fetchFixturesDetails();
-    notifyListeners();
   }
 
   void setLive(bool live) {
@@ -33,18 +30,6 @@ class FixturesDetailsProvider with ChangeNotifier {
       _params = {"date": _date};
     }
     fetchFixturesDetails();
-    notifyListeners();
-  }
-
-  void setId(int id) {
-    _id = id;
-    _params = {"id": '$_id'};
-    fetchFixturesDetails();
-    print('Hu');
-    print('Hu');
-    print('Hu');
-    print('Hu');
-    notifyListeners();
   }
 
   FixturesDetailsProvider() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
-import 'package:nintyminutesflutter/widgets/customText.dart';
+import '../../../../config/palette.dart';
+import '../../../../widgets/customText.dart';
 
 class AwayStanding extends StatelessWidget {
   final List standings;
@@ -90,7 +90,7 @@ class AwayStanding extends StatelessWidget {
                   ),
                   DataCell(
                     Text(
-                        '${team.away.goals.against} : ${team.away.goals.forr}'),
+                        '${team.away.goals.against} : ${team.away.goals.goalsFor}'),
                   ),
                 ],
               ),

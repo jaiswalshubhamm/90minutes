@@ -90,7 +90,7 @@ class HomeStanding extends StatelessWidget {
                   ),
                   DataCell(
                     Text(
-                        '${team.home.goals.against} : ${team.home.goals.forr}'),
+                        '${team.home.goals.against} : ${team.home.goals.goalsFor}'),
                   ),
                 ],
               ),

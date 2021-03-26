@@ -8,6 +8,7 @@ import 'providers/leagueDetailsProvider.dart';
 import 'providers/fixturesDetailsProvider.dart';
 import 'providers/fixtureProvider.dart';
 import 'providers/oddProvider.dart';
+import 'providers/teamProvider.dart';
 import 'router.dart' as router;
 
 class MyApp extends StatelessWidget {
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<OddProvider>(
           create: (context) => OddProvider(),
+        ),
+        ChangeNotifierProvider<TeamProvider>(
+          create: (context) => TeamProvider(),
         ),
       ],
       child: MaterialApp(

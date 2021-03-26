@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/providers/teamProvider.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/fixtureProvider.dart';
@@ -58,18 +59,38 @@ class Details extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.network(
-                  _fixture[0].teams.home.logo,
-                  width: 100,
+                GestureDetector(
+                  child: Image.network(
+                    _fixture[0].teams.home.logo,
+                    width: 100,
+                  ),
+                  onTap: () {
+                    Provider.of<TeamProvider>(context, listen: false)
+                        .setId(_fixture[0].teams.home.id);
+                    Navigator.pushNamed(
+                      context,
+                      '/team',
+                    );
+                  },
                 ),
                 CustomText(
                   text:
                       '${_fixture[0].score.fulltime.home ?? '-'}   --   ${_fixture[0].score.fulltime.away ?? '-'}',
                   size: 24,
                 ),
-                Image.network(
-                  _fixture[0].teams.away.logo,
-                  width: 100,
+                GestureDetector(
+                  child: Image.network(
+                    _fixture[0].teams.away.logo,
+                    width: 100,
+                  ),
+                  onTap: () {
+                    Provider.of<TeamProvider>(context, listen: false)
+                        .setId(_fixture[0].teams.away.id);
+                    Navigator.pushNamed(
+                      context,
+                      '/team',
+                    );
+                  },
                 ),
               ],
             ),

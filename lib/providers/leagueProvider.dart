@@ -63,7 +63,6 @@ class LeagueDetailsProvider with ChangeNotifier {
     }
     notifyListeners();
     await fetchFeatured();
-    print(_featured);
     notifyListeners();
     await fetchStanding();
     await checkStanding();

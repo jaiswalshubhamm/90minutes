@@ -30,80 +30,131 @@ class _StandingsState extends State<Standings> {
         child: Column(
           children: [
             SizedBox(
-              height: 10,
+              height: 20,
             ),
-            ToggleButtons(
-              isSelected: isSelected,
-              selectedColor: Palette.primary,
-              fillColor: Palette.secondary,
-              color: Palette.black,
-              selectedBorderColor: Palette.primary,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
+            Container(
+              padding: EdgeInsets.zero,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Palette.darkerGrey,
+                borderRadius: BorderRadius.circular(26.0),
+              ),
+              child: ToggleButtons(
+                isSelected: isSelected,
+                selectedColor: Palette.primary,
+                fillColor: Palette.primary,
+                color: Palette.white,
+                borderRadius: BorderRadius.circular(26),
+                selectedBorderColor: Palette.primary,
+                children: <Widget>[
+                  Container(
+                    width: (MediaQuery.of(context).size.width - 90) / 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          (isSelected[0]) ? Icons.check : Icons.clear,
+                          size: 16.0,
+                          color: Palette.white,
+                        ),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        CustomText(
+                          text: "ALL",
+                          color: Palette.white,
+                          bgColor: (isSelected[0])
+                              ? Palette.primary
+                              : Palette.darkerGrey,
+                        ),
+                      ],
+                    ),
                   ),
-                  child: CustomText(
-                    text: 'All',
-                    size: 18,
-                    bgColor: Palette.transparent,
+                  Container(
+                    width: (MediaQuery.of(context).size.width - 90) / 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          (isSelected[1]) ? Icons.check : Icons.clear,
+                          size: 16.0,
+                          color: Palette.white,
+                        ),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        CustomText(
+                          text: "HOME",
+                          color: Palette.white,
+                          bgColor: (isSelected[1])
+                              ? Palette.primary
+                              : Palette.darkerGrey,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
+                  Container(
+                    width: (MediaQuery.of(context).size.width - 90) / 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          (isSelected[2]) ? Icons.check : Icons.clear,
+                          size: 16.0,
+                          color: Palette.white,
+                        ),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        CustomText(
+                          text: "AWAY",
+                          color: Palette.white,
+                          bgColor: (isSelected[2])
+                              ? Palette.primary
+                              : Palette.darkerGrey,
+                        ),
+                      ],
+                    ),
                   ),
-                  child: CustomText(
-                    text: 'Home',
-                    size: 18,
-                    bgColor: Palette.transparent,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                  ),
-                  child: CustomText(
-                    text: 'Away',
-                    size: 18,
-                    bgColor: Palette.transparent,
-                  ),
-                ),
-              ],
-              onPressed: (int newIndex) {
-                setState(
-                  () {
-                    for (int index = 0; index < isSelected.length; index++) {
-                      if (index == newIndex) {
-                        isSelected[index] = true;
-                      } else {
-                        isSelected[index] = false;
+                ],
+                onPressed: (int newIndex) {
+                  setState(
+                    () {
+                      for (int index = 0; index < isSelected.length; index++) {
+                        if (index == newIndex) {
+                          isSelected[index] = true;
+                        } else {
+                          isSelected[index] = false;
+                        }
                       }
-                    }
-                  },
-                );
-              },
+                    },
+                  );
+                },
+              ),
             ),
             ListTile(
               leading: Image.network(
                 _standing[0].league.logo,
-                height: 30,
-                width: 30,
+                height: 40,
               ),
               title: CustomText(
                 text:
-                    '${_standing[0].league.name},  ${_standing[0].league.country}',
+                    '${_standing[0].league.name},  ${_standing[0].league.country} ${_standing[0].league.season}',
+                size: 18,
               ),
             ),
             Divider(
               color: Palette.darkerGrey,
             ),
             if (isSelected[0])
-              AllStanding(standings: _standing[0].league.standings),
+              for (var group in _standing[0].league.standings)
+                AllStanding(standings: group),
             if (isSelected[1])
-              HomeStanding(standings: _standing[0].league.standings),
+              for (var group in _standing[0].league.standings)
+                HomeStanding(standings: group),
             if (isSelected[2])
-              AwayStanding(standings: _standing[0].league.standings),
+              for (var group in _standing[0].league.standings)
+                AwayStanding(standings: group),
           ],
         ),
       );
