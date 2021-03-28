@@ -9,7 +9,8 @@ enum APIPath {
   fetch_player,
   fetch_team,
   fetch_statistics,
-  fetch_transfers
+  fetch_transfers,
+  fetch_trophies
 }
 
 class APIPathHelper {
@@ -37,6 +38,8 @@ class APIPathHelper {
         return "/teams/statistics";
       case APIPath.fetch_transfers:
         return "/transfers";
+      case APIPath.fetch_trophies:
+        return "/trophies";
       default:
         return "";
     }

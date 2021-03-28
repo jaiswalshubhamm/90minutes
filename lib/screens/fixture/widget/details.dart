@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/providers/teamProvider.dart';
 import 'package:provider/provider.dart';
+import '../../../providers/teamProvider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/fixtureProvider.dart';
 import '../../../providers/oddProvider.dart';

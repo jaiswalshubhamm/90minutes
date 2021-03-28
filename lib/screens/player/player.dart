@@ -10,6 +10,8 @@ import 'widget/details.dart';
 // import 'widgets/statistics.dart';
 import 'package:nintyminutesflutter/screens/home/widgets/favorites.dart';
 
+import 'widget/matches.dart';
+
 class PlayerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class PlayerScreen extends StatelessWidget {
             children: [
               Details(),
               favorites(),
-              favorites(),
+              Matches(),
             ],
           ),
         ),

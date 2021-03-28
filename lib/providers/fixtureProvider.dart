@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
+import '../network/apiResponse.dart';
 import '../models/standing.dart';
-import '../services/standing.dart';
 import '../models/fixture.dart';
 import '../services/fixture.dart';
-import '../network/apiResponse.dart';
+import '../services/standing.dart';
 
 class FixtureDetailsProvider with ChangeNotifier {
   int tabControllerLength;

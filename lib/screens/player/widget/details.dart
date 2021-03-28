@@ -5,7 +5,7 @@ import '../../../config/palette.dart';
 import '../../../providers/playerProvider.dart';
 import '../../../models/players.dart' as player;
 import '../../../models/transfer.dart' as transfer;
-import '../../../models/fixture.dart' as fixture;
+import '../../../models/trophies.dart' as trophies;
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
 import '../../../widgets/loading.dart';
@@ -17,11 +17,13 @@ class Details extends StatelessWidget {
 
     List<player.Response> _player = playerData.players.data?.response;
     List<transfer.Response> _transfer = playerData.transfers?.data?.response;
+    List<trophies.Response> _trophies = playerData.trophies?.data?.response;
     if (playerData.players.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
     } else if (playerData.players.status == NetworkStatus.COMPLETED) {
       return SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Divider(
               color: Palette.darkerGrey,
@@ -50,7 +52,7 @@ class Details extends StatelessWidget {
               thickness: .5,
             ),
             Container(
-              color: Palette.darkerGrey,
+              color: Palette.lightGrey,
               height: 200,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -71,15 +73,18 @@ class Details extends StatelessWidget {
                                 text:
                                     '${_player[0].statistics[0].league.country}',
                                 size: 18,
-                                bgColor: Palette.darkerGrey,
+                                bgColor: Palette.lightGrey,
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 3,
                           ),
                           CustomText(
                             text: 'Nationality',
                             size: 14,
-                            color: Palette.lightGrey,
-                            bgColor: Palette.darkerGrey,
+                            color: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
                           ),
                         ],
                       ),
@@ -90,20 +95,23 @@ class Details extends StatelessWidget {
                               CustomText(
                                 text: '${_player[0].player.age}',
                                 size: 20,
-                                bgColor: Palette.darkerGrey,
+                                bgColor: Palette.lightGrey,
                               ),
                               CustomText(
                                 text: 'YRS',
                                 size: 14,
-                                bgColor: Palette.darkerGrey,
+                                bgColor: Palette.lightGrey,
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 3,
                           ),
                           CustomText(
                             text: '${_player[0].player.birth.date}',
                             size: 14,
-                            color: Palette.lightGrey,
-                            bgColor: Palette.darkerGrey,
+                            color: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
                           ),
                         ],
                       ),
@@ -112,13 +120,16 @@ class Details extends StatelessWidget {
                           CustomText(
                             text: '${_player[0].player.birth.place}',
                             size: 14,
-                            bgColor: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
+                          ),
+                          SizedBox(
+                            height: 3,
                           ),
                           CustomText(
                             text: 'Birth Place',
                             size: 14,
-                            color: Palette.lightGrey,
-                            bgColor: Palette.darkerGrey,
+                            color: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
                           ),
                         ],
                       ),
@@ -132,13 +143,16 @@ class Details extends StatelessWidget {
                           CustomText(
                             text: _player[0].player.height,
                             size: 18,
-                            bgColor: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
+                          ),
+                          SizedBox(
+                            height: 3,
                           ),
                           CustomText(
                             text: 'Height',
                             size: 14,
-                            color: Palette.lightGrey,
-                            bgColor: Palette.darkerGrey,
+                            color: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
                           ),
                         ],
                       ),
@@ -147,13 +161,16 @@ class Details extends StatelessWidget {
                           CustomText(
                             text: _player[0].player.weight,
                             size: 20,
-                            bgColor: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
+                          ),
+                          SizedBox(
+                            height: 3,
                           ),
                           CustomText(
                             text: 'Weight',
                             size: 14,
-                            color: Palette.lightGrey,
-                            bgColor: Palette.darkerGrey,
+                            color: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
                           ),
                         ],
                       ),
@@ -162,13 +179,16 @@ class Details extends StatelessWidget {
                           CustomText(
                             text: _player[0].statistics[0].games.position,
                             size: 20,
-                            bgColor: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
+                          ),
+                          SizedBox(
+                            height: 3,
                           ),
                           CustomText(
                             text: 'Position',
                             size: 14,
-                            color: Palette.lightGrey,
-                            bgColor: Palette.darkerGrey,
+                            color: Palette.darkerGrey,
+                            bgColor: Palette.lightGrey,
                           ),
                         ],
                       ),
@@ -177,10 +197,16 @@ class Details extends StatelessWidget {
                 ],
               ),
             ),
-            CustomText(
-              text: 'Transfers',
-              size: 20,
-              bgColor: Palette.darkerGrey,
+            SizedBox(
+              height: 12,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: CustomText(
+                text: 'Transfers',
+                size: 20,
+                weight: FontWeight.w600,
+              ),
             ),
             if (_transfer != null)
               ListView.builder(
@@ -198,49 +224,105 @@ class Details extends StatelessWidget {
                         height: 30,
                         width: 30,
                       ),
-                      title: Row(
-                        mainAxisSize: MainAxisSize.min,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  CustomText(
-                                    text: _transfer[0]
-                                        .transfers[i]
-                                        .teams
-                                        .teamsIn
-                                        .name,
-                                    size: 12,
-                                    bgColor: Palette.lightGrey,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 3),
-                              CustomText(
-                                text: _transfer[0]
-                                    .transfers[i]
-                                    .teams
-                                    .teamsIn
-                                    .name,
-                                weight: FontWeight.bold,
-                                bgColor: Palette.lightGrey,
-                              ),
-                            ],
+                          CustomText(
+                            text:
+                                '${_transfer[0].transfers[i].teams.out.name}-${_transfer[0].transfers[i].teams.teamsIn.name}',
+                            bgColor: Palette.lightGrey,
+                            weight: FontWeight.bold,
+                          ),
+                          CustomText(
+                            text: '${_transfer[0].transfers[i].date}'
+                                .substring(0, 10),
+                            bgColor: Palette.lightGrey,
                           ),
                         ],
                       ),
                       trailing: CustomText(
                         text: _transfer[0].transfers[i].type,
                         weight: FontWeight.bold,
+                        color: Palette.primary,
                         bgColor: Palette.lightGrey,
                       ),
                     ),
                   );
                 },
-                itemCount: _transfer?.length,
-              )
+                itemCount: _transfer[0].transfers.length,
+              ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: CustomText(
+                text: 'Trophies',
+                size: 24,
+                weight: FontWeight.w600,
+              ),
+            ),
+            if (_trophies != null)
+              DataTable(
+                columnSpacing: 15,
+                columns: <DataColumn>[
+                  DataColumn(
+                    label: CustomText(
+                      text: '#',
+                      color: Palette.primary,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  DataColumn(
+                    label: CustomText(
+                      text: 'Country',
+                      color: Palette.primary,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  DataColumn(
+                    label: CustomText(
+                      text: 'League',
+                      color: Palette.primary,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  DataColumn(
+                    label: CustomText(
+                      text: 'Season',
+                      color: Palette.primary,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  DataColumn(
+                    label: CustomText(
+                      text: 'Place',
+                      color: Palette.primary,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+                rows: _trophies
+                    .map(
+                      (trophy) => DataRow(
+                        cells: [
+                          DataCell(
+                            CustomText(text: '${_trophies.indexOf(trophy)}'),
+                          ),
+                          DataCell(
+                            Text(trophy.league),
+                          ),
+                          DataCell(
+                            Text(trophy.country),
+                          ),
+                          DataCell(
+                            Text(trophy.season),
+                          ),
+                          DataCell(
+                            Text(trophy.place),
+                          ),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ),
           ],
         ),
       );
