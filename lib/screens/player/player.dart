@@ -30,25 +30,24 @@ class PlayerScreen extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: CustomText(
-                    text: 'Player Info',
+                    text: (_player != null)
+                    ? _player[0].player.name
+                    : 'Player Info',
+                    // text: _player[0].player.name,
                     bgColor: Palette.primary,
                     color: Palette.white,
                     weight: FontWeight.w600,
+                    size: 14,
                   ),
                   background: Container(
                     color: Palette.primary,
                     child: Center(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Palette.white,
-                        ),
-                        child: Image.network(
+                      child: CircleAvatar(
+                        radius: 32.0,
+                        backgroundImage: NetworkImage(
                           (_player != null)
                               ? _player[0].player.photo
                               : 'https://media.api-sports.io/football/leagues/340.png',
-                          height: 50,
                         ),
                       ),
                     ),
@@ -61,8 +60,8 @@ class PlayerScreen extends StatelessWidget {
                     indicatorColor: Palette.white,
                     tabs: [
                       Tab(text: "DETAILS"),
+                      Tab(text: "STATISTICS"),
                       Tab(text: "MATCHES"),
-                      Tab(text: "STANDINGS"),
                     ],
                     unselectedLabelColor: Palette.lightGrey,
                   ),
@@ -93,7 +92,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      // color: Palette.secondary,
       color: Palette.primary,
       child: tabBar,
     );

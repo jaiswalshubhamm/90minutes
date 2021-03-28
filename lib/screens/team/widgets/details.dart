@@ -216,14 +216,14 @@ class Details extends StatelessWidget {
                 itemCount: _league.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: 0.75,
+                  childAspectRatio: 1.5,
                   mainAxisSpacing: .5,
                 ),
                 itemBuilder: (context, i) {
                   return Container(
+                    padding: EdgeInsets.only(top: 16),
                     child: Image.network(
                       _league[i].league.logo,
-                      height: 20,
                     ),
                   );
                 },

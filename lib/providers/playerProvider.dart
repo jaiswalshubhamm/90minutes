@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/players.dart';
+import '../models/transfer.dart';
 import '../network/apiResponse.dart';
 import '../services/players.dart';
+import '../services/transfer.dart';
 
 class PlayerProvider with ChangeNotifier {
   int _id;
@@ -11,12 +13,19 @@ class PlayerProvider with ChangeNotifier {
 
   PlayerService _playerService;
 
+  TransferService _transferService;
+
   ApiResponse<Players> _players;
 
   ApiResponse<Players> get players => _players;
 
+  ApiResponse<Transfers> _transfer;
+
+  ApiResponse<Transfers> get transfers => _transfer;
+
   PlayerProvider() {
     _playerService = PlayerService();
+    _transferService = TransferService();
   }
 
   void setPlayerParams(int id, String season) async {
@@ -34,6 +43,16 @@ class PlayerProvider with ChangeNotifier {
       _players = ApiResponse.completed(players);
     } catch (e) {
       _players = ApiResponse.error(e.toString());
+    }
+  }
+
+  fetchTransfer() async {
+    _transfer = ApiResponse.loading('loading... ');
+    try {
+      Transfers transfer = await _transferService.fetchTransfers(_params);
+      _transfer = ApiResponse.completed(transfer);
+    } catch (e) {
+      _transfer = ApiResponse.error(e.toString());
     }
   }
 }
