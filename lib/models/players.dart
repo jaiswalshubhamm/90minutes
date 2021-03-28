@@ -261,7 +261,7 @@ class League {
   String country;
   String logo;
   String flag;
-  int season;
+  String season;
 
   League({this.id, this.name, this.country, this.logo, this.flag, this.season});
 
@@ -271,7 +271,7 @@ class League {
     country = json['country'];
     logo = json['logo'];
     flag = json['flag'];
-    season = json['season'];
+    season = json['season'].toString();
   }
 
   Map<String, dynamic> toJson() {

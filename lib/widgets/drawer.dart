@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/authProvider.dart';
+import 'darkMode.dart';
 import 'customText.dart';
 
 class MenuDrawer extends StatefulWidget {
@@ -104,6 +105,9 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 Navigator.of(context).pushNamed('/');
               },
             ),
+          ListTile(
+            leading: ChangeThemeButtonWidget(),
+          ),
         ],
       ),
     );

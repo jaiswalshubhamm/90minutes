@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/leagueProvider.dart';
+import '../../../providers/playerProvider.dart';
 import '../../../models/players.dart' as player;
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
@@ -93,12 +94,13 @@ class TopPlayer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                // Provider.of<PlayerDetailsProvider>(context, listen: false)
-                //     .setId(_players[i].player.id);
-                // Navigator.pushNamed(
-                //   context,
-                //   '/player',
-                // );
+                Provider.of<PlayerProvider>(context, listen: false)
+                    .setPlayerParams(_players[i].player.id,
+                        '${_players[i].statistics.last.league.season}');
+                Navigator.pushNamed(
+                  context,
+                  '/player',
+                );
               },
             ),
           );

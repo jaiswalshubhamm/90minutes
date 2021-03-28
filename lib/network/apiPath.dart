@@ -5,8 +5,10 @@ enum APIPath {
   fetch_standings,
   fetch_odd,
   fetch_h2h,
-  fetch_players,
+  fetch_topScorers,
+  fetch_player,
   fetch_team,
+  fetch_statistics,
 }
 
 class APIPathHelper {
@@ -24,10 +26,14 @@ class APIPathHelper {
         return "/odds";
       case APIPath.fetch_h2h:
         return "/fixtures/headtohead";
-      case APIPath.fetch_players:
+      case APIPath.fetch_topScorers:
         return "/players/topscorers";
+      case APIPath.fetch_player:
+        return "/players";
       case APIPath.fetch_team:
         return "/teams";
+      case APIPath.fetch_statistics:
+        return "/teams/statistics";
       default:
         return "";
     }

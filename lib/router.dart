@@ -4,6 +4,7 @@ import 'screens/home/home.dart';
 import 'screens/league/league.dart';
 import 'screens/logIn/login.dart';
 import 'screens/fixture/fixture.dart';
+import 'screens/player/player.dart';
 import 'screens/signUp/register.dart';
 import 'screens/team/team.dart';
 
@@ -22,6 +23,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => FixtureScreen(id: args));
     case '/team':
       return MaterialPageRoute(builder: (_) => TeamScreen());
+    case '/player':
+      return MaterialPageRoute(builder: (_) => PlayerScreen());
     case '/feed':
       return MaterialPageRoute(builder: (_) => FeedbackScreen());
     default:

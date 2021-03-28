@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'providers/playerProvider.dart';
+import 'providers/themeProvider.dart';
 import 'providers/authProvider.dart';
 import 'providers/countriesDetailsProvider.dart';
 import 'providers/leagueProvider.dart';
@@ -13,44 +15,59 @@ import 'router.dart' as router;
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AuthProvider>(
-          create: (context) => AuthProvider(),
-        ),
-        ChangeNotifierProvider<CountriesDetailsProvider>(
-          create: (context) => CountriesDetailsProvider(),
-        ),
-        ChangeNotifierProvider<LeaguesDetailsProvider>(
-          create: (context) => LeaguesDetailsProvider(),
-        ),
-        ChangeNotifierProvider<LeagueDetailsProvider>(
-          create: (context) => LeagueDetailsProvider(),
-        ),
-        ChangeNotifierProvider<FixturesDetailsProvider>(
-          create: (context) => FixturesDetailsProvider(),
-        ),
-        ChangeNotifierProvider<FixtureDetailsProvider>(
-          create: (context) => FixtureDetailsProvider(),
-        ),
-        ChangeNotifierProvider<OddProvider>(
-          create: (context) => OddProvider(),
-        ),
-        ChangeNotifierProvider<TeamProvider>(
-          create: (context) => TeamProvider(),
-        ),
-      ],
-      child: MaterialApp(
-        title: '90Minutes',
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        onGenerateRoute: router.generateRoute,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      builder: (context, _) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider<AuthProvider>(
+              create: (context) => AuthProvider(),
+            ),
+            ChangeNotifierProvider<CountriesDetailsProvider>(
+              create: (context) => CountriesDetailsProvider(),
+            ),
+            ChangeNotifierProvider<LeaguesDetailsProvider>(
+              create: (context) => LeaguesDetailsProvider(),
+            ),
+            ChangeNotifierProvider<LeagueDetailsProvider>(
+              create: (context) => LeagueDetailsProvider(),
+            ),
+            ChangeNotifierProvider<FixturesDetailsProvider>(
+              create: (context) => FixturesDetailsProvider(),
+            ),
+            ChangeNotifierProvider<FixtureDetailsProvider>(
+              create: (context) => FixtureDetailsProvider(),
+            ),
+            ChangeNotifierProvider<OddProvider>(
+              create: (context) => OddProvider(),
+            ),
+            ChangeNotifierProvider<TeamProvider>(
+              create: (context) => TeamProvider(),
+            ),
+            ChangeNotifierProvider<PlayerProvider>(
+              create: (context) => PlayerProvider(),
+            ),
+          ],
+          child: MaterialApp(
+            title: '90Minutes',
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            debugShowCheckedModeBanner: false,
+            initialRoute: '/',
+            onGenerateRoute: router.generateRoute,
+          ),
+        );
+      });
 }

@@ -5,7 +5,7 @@ import '../models/players.dart';
 import '../models/fixture.dart';
 import '../services/league.dart';
 import '../services/standing.dart';
-import '../services/players.dart';
+import '../services/topScorers.dart';
 import '../services/fixture.dart';
 import '../network/apiResponse.dart';
 
@@ -22,7 +22,7 @@ class LeagueDetailsProvider with ChangeNotifier {
 
   StandingService _standingService;
 
-  PlayerService _playerService;
+  TopScorersService _topScorersService;
 
   FixtureService _fixtureService;
 
@@ -49,7 +49,7 @@ class LeagueDetailsProvider with ChangeNotifier {
   LeagueDetailsProvider() {
     _leagueService = LeagueService();
     _standingService = StandingService();
-    _playerService = PlayerService();
+    _topScorersService = TopScorersService();
     _fixtureService = FixtureService();
   }
 
@@ -142,7 +142,8 @@ class LeagueDetailsProvider with ChangeNotifier {
     };
     _players = ApiResponse.loading('loading... ');
     try {
-      Players players = await _playerService.fetchPlayers(_topPlayersParams);
+      Players players =
+          await _topScorersService.fetchTopScorers(_topPlayersParams);
       _players = ApiResponse.completed(players);
     } catch (e) {
       _players = ApiResponse.error(e.toString());
