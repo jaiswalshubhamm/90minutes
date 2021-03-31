@@ -94,7 +94,8 @@ class _MatchesState extends State<Matches> {
                             children: [
                               Center(
                                 child: Text(
-                                  homeLast5[i].fixture.date.substring(11, 16),
+                                  '${homeLast5[i].fixture.date}'
+                                      .substring(11, 16),
                                 ),
                               ),
                               VerticalDivider(
@@ -225,7 +226,8 @@ class _MatchesState extends State<Matches> {
                             children: [
                               Center(
                                 child: Text(
-                                  awayLast5[i].fixture.date.substring(11, 16),
+                                  '${awayLast5[i].fixture.date}'
+                                      .substring(11, 16),
                                 ),
                               ),
                               VerticalDivider(
@@ -357,7 +359,7 @@ class _MatchesState extends State<Matches> {
                               children: [
                                 Center(
                                   child: Text(
-                                    h2h[i].fixture.date.substring(11, 16),
+                                    '${h2h[i].fixture.date}'.substring(11, 16),
                                   ),
                                 ),
                                 VerticalDivider(

@@ -21,7 +21,7 @@ class HttpClient {
       'x-rapidapi-key': "fc466db0a1b07a4049cc27cc28a92c30"
     };
     try {
-      final response = await http.get(uri, headers: header);
+      final response = await http.get(Uri.parse(uri), headers: header);
       print(response.body.toString());
       responseJson = _returnResponse(response);
     } on SocketException {
@@ -42,8 +42,8 @@ class HttpClient {
     var responseJson;
     var header = {HttpHeaders.contentTypeHeader: 'application/json'};
     try {
-      final response =
-          await http.post(APIBase.baseURL + url, body: body, headers: header);
+      final response = await http.post(Uri.parse(APIBase.baseURL + url),
+          body: body, headers: header);
       responseJson = _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');

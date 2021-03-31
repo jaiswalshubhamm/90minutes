@@ -33,7 +33,7 @@ class AuthProvider with ChangeNotifier {
     final url =
         'https://90minutes.greenappleinfotech.com/api/login?email=$email&password=$password';
     try {
-      final response = await http.post(url);
+      final response = await http.post(Uri.parse(url));
       final responseData = json.decode(response.body);
       if (response.statusCode == 200) {
         _isLoggedIn = true;
@@ -55,13 +55,11 @@ class AuthProvider with ChangeNotifier {
     final url =
         'https://90minutes.greenappleinfotech.com/api/register?email=$email&password=$password&c_password=$cPassword&name=$name';
     try {
-      final response = await http.post(url);
-      // final _responseData = json.decode(response.body);
+      final response = await http.post(Uri.parse(url));
       if (response.statusCode == 200) {
         _login(email, password);
       } else {
         _isLoggedIn = false;
-        // return _responseData;
       }
     } catch (error) {
       print(error);

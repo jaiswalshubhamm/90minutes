@@ -66,7 +66,7 @@ class Details extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-                        // Padding(
+            // Padding(
             //   padding: const EdgeInsets.only(left: 16, right: 16),
             //   child: LinearProgressIndicator(
             //     backgroundColor: Palette.primary,
@@ -146,7 +146,8 @@ class Details extends StatelessWidget {
                               children: [
                                 Center(
                                   child: Text(
-                                    _featured[i].fixture.date.substring(11, 16),
+                                    '${_featured[i].fixture.date}'
+                                        .substring(11, 16),
                                   ),
                                 ),
                                 VerticalDivider(

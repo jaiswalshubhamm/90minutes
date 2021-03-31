@@ -114,7 +114,7 @@ class _FormWidgetSignupState extends State<FormWidgetSignup> {
                 }
                 _formKey2.currentState.save();
                 if (_formData['password'] != _formData['c_password']) {
-                  Scaffold.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
                         'Password and Confirm Password must be same..',
@@ -124,7 +124,7 @@ class _FormWidgetSignupState extends State<FormWidgetSignup> {
                   return;
                 }
                 if (_formKey2.currentState.validate()) {
-                  Scaffold.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
                         'Authenticating User...',

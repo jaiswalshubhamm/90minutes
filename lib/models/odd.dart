@@ -13,7 +13,7 @@ class Odd {
     paging =
         json['paging'] != null ? new Paging.fromJson(json['paging']) : null;
     if (json['response'] != null) {
-      response = new List<Response>();
+      response = new List<Response>.empty();
       json['response'].forEach((v) {
         response.add(new Response.fromJson(v));
       });
@@ -69,7 +69,7 @@ class Response {
         json['fixture'] != null ? new Fixture.fromJson(json['fixture']) : null;
     update = json['update'];
     if (json['bookmakers'] != null) {
-      bookmakers = new List<Bookmakers>();
+      bookmakers = new List<Bookmakers>.empty();
       json['bookmakers'].forEach((v) {
         bookmakers.add(new Bookmakers.fromJson(v));
       });
@@ -159,7 +159,7 @@ class Bookmakers {
     id = json['id'];
     name = json['name'];
     if (json['bets'] != null) {
-      bets = new List<Bets>();
+      bets = new List<Bets>.empty();
       json['bets'].forEach((v) {
         bets.add(new Bets.fromJson(v));
       });
@@ -188,7 +188,7 @@ class Bets {
     id = json['id'];
     name = json['name'];
     if (json['values'] != null) {
-      values = new List<Values>();
+      values = new List<Values>.empty();
       json['values'].forEach((v) {
         values.add(new Values.fromJson(v));
       });

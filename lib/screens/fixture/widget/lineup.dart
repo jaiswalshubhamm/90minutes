@@ -56,10 +56,10 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXI[0].player.id,
-                        name: _fixture[0].lineups[0].startXI[0].player.name,
+                        id: _fixture[0].lineups[0].startXi[0].player.id,
+                        name: _fixture[0].lineups[0].startXi[0].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[0].startXI[0].player.number,
+                        number: _fixture[0].lineups[0].startXi[0].player.number,
                       ),
                     ],
                   ),
@@ -70,48 +70,28 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXI[1].player.id,
-                        name: _fixture[0].lineups[0].startXI[1].player.name,
+                        id: _fixture[0].lineups[0].startXi[1].player.id,
+                        name: _fixture[0].lineups[0].startXi[1].player.name,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[1].player.number,
+                        number: _fixture[0].lineups[0].startXi[1].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXI[2].player.id,
-                        name: _fixture[0].lineups[0].startXI[2].player.name,
+                        id: _fixture[0].lineups[0].startXi[2].player.id,
+                        name: _fixture[0].lineups[0].startXi[2].player.name,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[2].player.number,
+                        number: _fixture[0].lineups[0].startXi[2].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXI[3].player.id,
-                        name: _fixture[0].lineups[0].startXI[3].player.name,
+                        id: _fixture[0].lineups[0].startXi[3].player.id,
+                        name: _fixture[0].lineups[0].startXi[3].player.name,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[3].player.number,
+                        number: _fixture[0].lineups[0].startXi[3].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXI[4].player.id,
-                        name: _fixture[0].lineups[0].startXI[4].player.name,
+                        id: _fixture[0].lineups[0].startXi[4].player.id,
+                        name: _fixture[0].lineups[0].startXi[4].player.name,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[4].player.number,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Player(
-                        id: _fixture[0].lineups[0].startXI[5].player.id,
-                        name: _fixture[0].lineups[0].startXI[5].player.name,
-                        image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[5].player.number,
-                      ),
-                      Player(
-                        id: _fixture[0].lineups[0].startXI[6].player.id,
-                        name: _fixture[0].lineups[0].startXI[6].player.name,
-                        image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[6].player.number,
+                        number: _fixture[0].lineups[0].startXi[4].player.number,
                       ),
                     ],
                   ),
@@ -122,22 +102,42 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXI[7].player.id,
-                        name: _fixture[0].lineups[0].startXI[7].player.name,
+                        id: _fixture[0].lineups[0].startXi[5].player.id,
+                        name: _fixture[0].lineups[0].startXi[5].player.name,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[7].player.number,
+                        number: _fixture[0].lineups[0].startXi[5].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXI[8].player.id,
-                        name: _fixture[0].lineups[0].startXI[8].player.name,
+                        id: _fixture[0].lineups[0].startXi[6].player.id,
+                        name: _fixture[0].lineups[0].startXi[6].player.name,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[8].player.number,
+                        number: _fixture[0].lineups[0].startXi[6].player.number,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Player(
+                        id: _fixture[0].lineups[0].startXi[7].player.id,
+                        name: _fixture[0].lineups[0].startXi[7].player.name,
+                        image: 'assets/images/homePlayer.png',
+                        number: _fixture[0].lineups[0].startXi[7].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXI[9].player.id,
-                        name: _fixture[0].lineups[0].startXI[9].player.name,
+                        id: _fixture[0].lineups[0].startXi[8].player.id,
+                        name: _fixture[0].lineups[0].startXi[8].player.name,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXI[9].player.number,
+                        number: _fixture[0].lineups[0].startXi[8].player.number,
+                      ),
+                      Player(
+                        id: _fixture[0].lineups[0].startXi[9].player.id,
+                        name: _fixture[0].lineups[0].startXi[9].player.name,
+                        image: 'assets/images/homePlayer.png',
+                        number: _fixture[0].lineups[0].startXi[9].player.number,
                       ),
                     ],
                   ),
@@ -148,11 +148,11 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXI[10].player.id,
-                        name: _fixture[0].lineups[0].startXI[10].player.name,
+                        id: _fixture[0].lineups[0].startXi[10].player.id,
+                        name: _fixture[0].lineups[0].startXi[10].player.name,
                         image: 'assets/images/homePlayer.png',
                         number:
-                            _fixture[0].lineups[0].startXI[10].player.number,
+                            _fixture[0].lineups[0].startXi[10].player.number,
                       ),
                     ],
                   ),
@@ -163,11 +163,11 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXI[10].player.id,
-                        name: _fixture[0].lineups[1].startXI[10].player.name,
+                        id: _fixture[0].lineups[1].startXi[10].player.id,
+                        name: _fixture[0].lineups[1].startXi[10].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
                         number:
-                            _fixture[0].lineups[1].startXI[10].player.number,
+                            _fixture[0].lineups[1].startXi[10].player.number,
                       ),
                     ],
                   ),
@@ -178,42 +178,22 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXI[9].player.id,
-                        name: _fixture[0].lineups[1].startXI[9].player.name,
+                        id: _fixture[0].lineups[1].startXi[9].player.id,
+                        name: _fixture[0].lineups[1].startXi[9].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[9].player.number,
+                        number: _fixture[0].lineups[1].startXi[9].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXI[8].player.id,
-                        name: _fixture[0].lineups[1].startXI[8].player.name,
+                        id: _fixture[0].lineups[1].startXi[8].player.id,
+                        name: _fixture[0].lineups[1].startXi[8].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[8].player.number,
+                        number: _fixture[0].lineups[1].startXi[8].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXI[7].player.id,
-                        name: _fixture[0].lineups[1].startXI[7].player.name,
+                        id: _fixture[0].lineups[1].startXi[7].player.id,
+                        name: _fixture[0].lineups[1].startXi[7].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[7].player.number,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Player(
-                        id: _fixture[0].lineups[1].startXI[6].player.id,
-                        name: _fixture[0].lineups[1].startXI[6].player.name,
-                        image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[6].player.number,
-                      ),
-                      Player(
-                        id: _fixture[0].lineups[1].startXI[5].player.id,
-                        name: _fixture[0].lineups[1].startXI[5].player.name,
-                        image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[5].player.number,
+                        number: _fixture[0].lineups[1].startXi[7].player.number,
                       ),
                     ],
                   ),
@@ -224,28 +204,48 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXI[4].player.id,
-                        name: _fixture[0].lineups[1].startXI[4].player.name,
+                        id: _fixture[0].lineups[1].startXi[6].player.id,
+                        name: _fixture[0].lineups[1].startXi[6].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[4].player.number,
+                        number: _fixture[0].lineups[1].startXi[6].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXI[3].player.id,
-                        name: _fixture[0].lineups[1].startXI[3].player.name,
+                        id: _fixture[0].lineups[1].startXi[5].player.id,
+                        name: _fixture[0].lineups[1].startXi[5].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[3].player.number,
+                        number: _fixture[0].lineups[1].startXi[5].player.number,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Player(
+                        id: _fixture[0].lineups[1].startXi[4].player.id,
+                        name: _fixture[0].lineups[1].startXi[4].player.name,
+                        image: 'assets/images/homeGoalkeeper.png',
+                        number: _fixture[0].lineups[1].startXi[4].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXI[2].player.id,
-                        name: _fixture[0].lineups[1].startXI[2].player.name,
+                        id: _fixture[0].lineups[1].startXi[3].player.id,
+                        name: _fixture[0].lineups[1].startXi[3].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[2].player.number,
+                        number: _fixture[0].lineups[1].startXi[3].player.number,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXI[1].player.id,
-                        name: _fixture[0].lineups[1].startXI[1].player.name,
+                        id: _fixture[0].lineups[1].startXi[2].player.id,
+                        name: _fixture[0].lineups[1].startXi[2].player.name,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[1].player.number,
+                        number: _fixture[0].lineups[1].startXi[2].player.number,
+                      ),
+                      Player(
+                        id: _fixture[0].lineups[1].startXi[1].player.id,
+                        name: _fixture[0].lineups[1].startXi[1].player.name,
+                        image: 'assets/images/homeGoalkeeper.png',
+                        number: _fixture[0].lineups[1].startXi[1].player.number,
                       ),
                     ],
                   ),
@@ -256,10 +256,10 @@ class Lineup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXI[0].player.id,
-                        name: _fixture[0].lineups[1].startXI[0].player.name,
+                        id: _fixture[0].lineups[1].startXi[0].player.id,
+                        name: _fixture[0].lineups[1].startXi[0].player.name,
                         image: 'assets/images/awayGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXI[0].player.number,
+                        number: _fixture[0].lineups[1].startXi[0].player.number,
                       ),
                     ],
                   ),
@@ -315,18 +315,18 @@ class Lineup extends StatelessWidget {
               itemBuilder: (context, i) {
                 return ListTile(
                   leading: CustomText(
-                    text: '${_fixture[0].lineups[0].startXI[i].player.number}',
+                    text: '${_fixture[0].lineups[0].startXi[i].player.number}',
                     size: 20,
                   ),
                   title: CustomText(
-                    text: _fixture[0].lineups[0].startXI[i].player.name,
+                    text: _fixture[0].lineups[0].startXi[i].player.name,
                     size: 14,
                   ),
                   onTap: () {},
                   // ),
                 );
               },
-              itemCount: _fixture[0].lineups[0].startXI.length,
+              itemCount: _fixture[0].lineups[0].startXi.length,
             ),
             SizedBox(height: 15),
             Card(
@@ -360,18 +360,18 @@ class Lineup extends StatelessWidget {
               itemBuilder: (context, i) {
                 return ListTile(
                   leading: CustomText(
-                    text: '${_fixture[0].lineups[1].startXI[i].player.number}',
+                    text: '${_fixture[0].lineups[1].startXi[i].player.number}',
                     size: 20,
                   ),
                   title: CustomText(
-                    text: _fixture[0].lineups[1].startXI[i].player.name,
+                    text: _fixture[0].lineups[1].startXi[i].player.name,
                     size: 14,
                   ),
                   onTap: () {},
                   // ),
                 );
               },
-              itemCount: _fixture[0].lineups[1].startXI.length,
+              itemCount: _fixture[0].lineups[1].startXi.length,
             ),
             SizedBox(height: 15),
           ],

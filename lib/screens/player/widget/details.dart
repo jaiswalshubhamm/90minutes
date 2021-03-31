@@ -108,7 +108,8 @@ class Details extends StatelessWidget {
                             height: 3,
                           ),
                           CustomText(
-                            text: '${_player[0].player.birth.date}',
+                            text: '${_player[0].player.birth.date}'
+                                .substring(0, 10),
                             size: 14,
                             color: Palette.darkerGrey,
                             bgColor: Palette.lightGrey,

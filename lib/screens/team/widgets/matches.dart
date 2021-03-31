@@ -66,7 +66,7 @@ class _MatchesState extends State<Matches> {
                       children: [
                         Center(
                           child: Text(
-                            last10[i].fixture.date.substring(11, 16),
+                            '${last10[i].fixture.date}'.substring(11, 16),
                           ),
                         ),
                         VerticalDivider(

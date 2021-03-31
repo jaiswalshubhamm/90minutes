@@ -68,7 +68,7 @@ class _FormWidgetLoginState extends State<FormWidgetLogin> {
                 }
                 _formKey.currentState.save();
                 if (_formKey.currentState.validate()) {
-                  Scaffold.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Authenticating User..')));
                   await Provider.of<AuthProvider>(
                     context,

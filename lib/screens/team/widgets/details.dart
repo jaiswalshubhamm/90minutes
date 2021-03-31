@@ -141,7 +141,8 @@ class Details extends StatelessWidget {
                               children: [
                                 Center(
                                   child: Text(
-                                    _featured[i].fixture.date.substring(11, 16),
+                                    '${_featured[i].fixture.date}'
+                                        .substring(11, 16),
                                   ),
                                 ),
                                 VerticalDivider(
