@@ -22,98 +22,104 @@ class Fixtures extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
           return GestureDetector(
-            child: Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Image.network(
-                      _fixtures[i].league.logo ??
-                          "https://media.api-sports.io/football/leagues/4.png",
-                      height: 30,
-                      width: 30,
-                    ),
-                    title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              children: [
+                Container(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Image.network(
+                          _fixtures[i].league.logo ??
+                              "https://media.api-sports.io/football/leagues/4.png",
+                          height: 30,
+                          width: 30,
+                        ),
+                        title: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            CustomText(
-                              text: _fixtures[i].league.country,
-                              size: 12,
-                            ),
-                            CustomText(
-                              text: _fixtures[i].league.name,
-                              weight: FontWeight.bold,
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: _fixtures[i].league.country,
+                                    size: 12,
+                                  ),
+                                  CustomText(
+                                    text: _fixtures[i].league.name,
+                                    weight: FontWeight.bold,
+                                    color: Palette.primary,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    color: Palette.darkerGrey,
-                    thickness: .5,
-                  ),
-                  ListTile(
-                    leading: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Center(
-                          child: Text(
-                            _fixtures[i].fixture.date.substring(11, 16),
-                          ),
-                        ),
-                        VerticalDivider(
-                          color: Palette.darkerGrey,
-                          thickness: 1,
-                        ),
-                      ],
-                    ),
-                    title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                      ListTile(
+                        leading: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              _fixtures[i].teams.home.name,
+                            Center(
+                              child: Text(
+                                _fixtures[i].fixture.date.substring(11, 16),
+                              ),
                             ),
-                            Text(
-                              _fixtures[i].teams.away.name,
+                            VerticalDivider(
+                              color: Palette.darkerGrey,
+                              thickness: 1,
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        title: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              '${_fixtures[i].goals.home ?? ''}',
-                            ),
-                            Text(
-                              '${_fixtures[i].goals.away ?? ''}',
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _fixtures[i].teams.home.name,
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  _fixtures[i].teams.away.name,
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        VerticalDivider(
-                          color: Palette.darkerGrey,
-                          thickness: 1,
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  '${_fixtures[i].goals.home ?? ''}',
+                                ),
+                                Text(
+                                  '${_fixtures[i].goals.away ?? ''}',
+                                ),
+                              ],
+                            ),
+                            VerticalDivider(
+                              color: Palette.darkerGrey,
+                              thickness: 1,
+                            ),
+                            Icon(
+                              Icons.notifications,
+                              color: Palette.darkerGrey,
+                            ),
+                          ],
                         ),
-                        Icon(
-                          Icons.notifications,
-                          color: Palette.darkerGrey,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 8),
+                Divider(thickness: .6),
+              ],
             ),
             onTap: () {
               Provider.of<FixtureDetailsProvider>(context, listen: false)

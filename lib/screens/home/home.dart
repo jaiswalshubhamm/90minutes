@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/providers/themeProvider.dart';
 import 'package:provider/provider.dart';
 import '../../config/palette.dart';
 import '../../providers/fixturesDetailsProvider.dart';
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    _tcontroller = TabController(length: 3, vsync: this);
+    _tcontroller = TabController(length: 3, vsync: this, initialIndex: 1);
     _tcontroller.addListener(() {
       setState(() {});
     });
@@ -64,7 +65,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: Palette.white,
         appBar: AppBar(
           title: Text(
             "90 MINUTES",
@@ -91,24 +91,22 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 icon: Icon(Icons.today),
                 onPressed: () => pickDate(context),
               ),
-            if (_tcontroller.index == 2)
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {},
-              ),
-            if (_tcontroller.index == 2)
-              IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () {},
-              ),
-            if (_tcontroller.index == 2)
-              IconButton(
-                icon: Icon(Icons.notification_important),
-                onPressed: () {},
-              ),
+            // if (_tcontroller.index == 2)
+            //   IconButton(
+            //     icon: Icon(Icons.delete),
+            //     onPressed: () {},
+            //   ),
+            // if (_tcontroller.index == 2)
+            //   IconButton(
+            //     icon: Icon(Icons.notification_important),
+            //     onPressed: () {},
+            //   ),
           ],
           bottom: TabBar(
             controller: _tcontroller,
+            labelColor: Provider.of<ThemeProvider>(context).isDarkMode
+                ? Palette.white
+                : Palette.black,
             tabs: [
               Tab(text: "LEAUGES"),
               Tab(text: "MATCHES"),

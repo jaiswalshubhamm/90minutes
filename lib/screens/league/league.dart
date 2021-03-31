@@ -32,7 +32,6 @@ class _LeagueScreenState extends State<LeagueScreen> {
           return DefaultTabController(
             length: leagueDetailData.tabControllerLength,
             child: Scaffold(
-              backgroundColor: Palette.white,
               appBar: AppBar(
                 title: (leagueDetailData.league.data?.response != null)
                     ? Theme(

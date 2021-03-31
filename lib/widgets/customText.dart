@@ -16,9 +16,8 @@ class CustomText extends StatelessWidget {
     return Text(
       text ?? '😢 Cant Get',
       style: TextStyle(
-        backgroundColor: bgColor ?? Palette.white,
         fontSize: size ?? 16,
-        color: color ?? Palette.black,
+        color: color,
         fontWeight: weight ?? FontWeight.normal,
       ),
     );

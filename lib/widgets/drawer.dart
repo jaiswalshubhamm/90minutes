@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/config/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/authProvider.dart';
@@ -51,9 +52,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       : "Welcome Guest !",
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.teal,
+                    color: Palette.primary,
                   ),
                 ),
+                SizedBox(height: 10),
               ],
             ),
           ),
@@ -65,7 +67,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               weight: FontWeight.w700,
             ),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/');
+              Navigator.of(context).pushReplacementNamed('/home');
             },
           ),
           ListTile(
@@ -105,6 +107,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 Navigator.of(context).pushNamed('/');
               },
             ),
+          Divider(),
+          SizedBox(height: 10),
           ListTile(
             leading: ChangeThemeButtonWidget(),
           ),

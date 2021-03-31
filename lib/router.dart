@@ -11,7 +11,7 @@ import 'screens/team/team.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   final args = settings.arguments;
   switch (settings.name) {
-    case '/':
+    case '/home':
       return MaterialPageRoute(builder: (_) => Home());
     case '/login':
       return MaterialPageRoute(builder: (_) => LoginScreen());

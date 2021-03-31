@@ -31,11 +31,14 @@ class Details extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: 20),
-                Image.network(
-                  _league[0].league.logo ??
-                      "https://media.api-sports.io/football/leagues/4.png",
-                  height: 80,
-                  width: 60,
+                Container(
+                  color: Palette.white,
+                  child: Image.network(
+                    _league[0].league.logo ??
+                        "https://media.api-sports.io/football/leagues/4.png",
+                    height: 80,
+                    width: 60,
+                  ),
                 ),
                 SizedBox(width: 16),
                 Column(
@@ -66,16 +69,6 @@ class Details extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 16, right: 16),
-            //   child: LinearProgressIndicator(
-            //     backgroundColor: Palette.primary,
-            //     // valueColor: Palette.lose,
-            //     minHeight: 8,
-            //     value: .8,
-            //   ),
-            // ),
-            // SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: CustomText(
@@ -93,115 +86,122 @@ class Details extends StatelessWidget {
                 padding: EdgeInsets.all(14.0),
                 itemBuilder: (context, i) {
                   return GestureDetector(
-                    child: Card(
-                      color: Palette.lightGrey,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: Image.network(
-                              _featured[i].league.logo ??
-                                  "https://media.api-sports.io/football/leagues/4.png",
-                              height: 30,
-                              width: 30,
-                            ),
-                            title: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: Container(
+                                  color: Palette.white,
+                                  child: Image.network(
+                                    _featured[i].league.logo ??
+                                        "https://media.api-sports.io/football/leagues/4.png",
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                                title: Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Row(
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        if (_league[0].country.flag != null)
-                                          SvgPicture.network(
-                                            _league[0].country.flag,
-                                            height: 10,
-                                          ),
-                                        SizedBox(width: 6),
+                                        Row(
+                                          children: [
+                                            if (_league[0].country.flag != null)
+                                              SvgPicture.network(
+                                                _league[0].country.flag,
+                                                height: 10,
+                                              ),
+                                            SizedBox(width: 6),
+                                            CustomText(
+                                              text: _featured[i].league.country,
+                                              size: 12,
+                                              bgColor: Palette.lightGrey,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 3),
                                         CustomText(
-                                          text: _featured[i].league.country,
-                                          size: 12,
+                                          text: _featured[i].league.name,
+                                          weight: FontWeight.bold,
                                           bgColor: Palette.lightGrey,
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 3),
-                                    CustomText(
-                                      text: _featured[i].league.name,
-                                      weight: FontWeight.bold,
-                                      bgColor: Palette.lightGrey,
-                                    ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Palette.darkerGrey,
-                            thickness: .5,
-                          ),
-                          ListTile(
-                            leading: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Center(
-                                  child: Text(
-                                    '${_featured[i].fixture.date}'
-                                        .substring(11, 16),
-                                  ),
-                                ),
-                                VerticalDivider(
-                                  color: Palette.darkerGrey,
-                                  thickness: 1,
-                                ),
-                              ],
-                            ),
-                            title: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              ),
+                              ListTile(
+                                leading: Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
-                                      _featured[i].teams.home.name,
+                                    Center(
+                                      child: Text(
+                                        '${_featured[i].fixture.date}'
+                                            .substring(11, 16),
+                                      ),
                                     ),
-                                    Text(
-                                      _featured[i].teams.away.name,
+                                    VerticalDivider(
+                                      color: Palette.darkerGrey,
+                                      thickness: 1,
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                title: Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
-                                      '${_featured[i].goals.home ?? ''}',
-                                    ),
-                                    Text(
-                                      '${_featured[i].goals.away ?? ''}',
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          _featured[i].teams.home.name,
+                                        ),
+                                        SizedBox(height: 10),
+                                        Text(
+                                          _featured[i].teams.away.name,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                                VerticalDivider(
-                                  color: Palette.darkerGrey,
-                                  thickness: 1,
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          '${_featured[i].goals.home ?? ''}',
+                                        ),
+                                        Text(
+                                          '${_featured[i].goals.away ?? ''}',
+                                        ),
+                                      ],
+                                    ),
+                                    VerticalDivider(
+                                      color: Palette.darkerGrey,
+                                      thickness: 1,
+                                    ),
+                                    Icon(
+                                      Icons.notifications,
+                                      color: Palette.darkerGrey,
+                                    ),
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.notifications,
-                                  color: Palette.darkerGrey,
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 8),
+                        Divider(thickness: .6),
+                      ],
                     ),
                     onTap: () {
                       Provider.of<FixtureDetailsProvider>(context,
