@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../config/palette.dart';
 import '../../providers/authProvider.dart';
+import '../../widgets/customText.dart';
 import '../home/home.dart';
 import '../background.dart';
 import 'widgets/formWidget.dart';
@@ -21,44 +23,41 @@ class _LoginScreenState extends State<LoginScreen> {
         : Scaffold(
             body: Builder(
               builder: (BuildContext context) {
-                return Background(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: Text(
-                          "LOGIN",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                            fontSize: 36,
+                return SingleChildScrollView(
+                  child: Background(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          child: CustomText(
+                            text: "LOGIN",
+                            weight: FontWeight.bold,
+                            color: Palette.primary,
+                            size: 36,
                           ),
-                          textAlign: TextAlign.left,
                         ),
-                      ),
-                      SizedBox(height: size.height * 0.03),
-                      FormWidgetLogin(),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                        child: GestureDetector(
-                          onTap: () => {
-                            Navigator.of(context).pushNamed('/register'),
-                          },
-                          child: Text(
-                            "Don't Have an Account? Sign up",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                        SizedBox(height: size.height * 0.03),
+                        FormWidgetLogin(),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 10),
+                          child: GestureDetector(
+                            onTap: () => {
+                              Navigator.of(context).pushNamed('/register'),
+                            },
+                            child: CustomText(
+                              text: "Don't Have an Account? Sign up",
+                              size: 12,
+                              weight: FontWeight.bold,
                               color: Colors.teal,
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

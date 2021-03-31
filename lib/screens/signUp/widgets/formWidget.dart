@@ -1,28 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/screens/signUp/widgets/confirmPasswordField.dart';
 import 'package:provider/provider.dart';
+import '../../../widgets/customText.dart';
+import '../../../config/palette.dart';
 import '../../../providers/authProvider.dart';
+import 'nameField.dart';
 import 'emailField.dart';
 import 'passwordField.dart';
 
-class FormWidgetLogin extends StatefulWidget {
+class FormWidgetSignup extends StatefulWidget {
   @override
-  _FormWidgetLoginState createState() => _FormWidgetLoginState();
+  _FormWidgetSignupState createState() => _FormWidgetSignupState();
 }
 
-class _FormWidgetLoginState extends State<FormWidgetLogin> {
+class _FormWidgetSignupState extends State<FormWidgetSignup> {
   Map<String, String> _formData = {
     'email': '',
+    'name': '',
     'password': '',
+    'c_password': ''
   };
-  final formKey = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
   final emailController = TextEditingController();
+  final nameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
     emailController.dispose();
+    nameController.dispose();
     passwordController.dispose();
-
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -31,37 +40,58 @@ class _FormWidgetLoginState extends State<FormWidgetLogin> {
     Size size = MediaQuery.of(context).size;
 
     return Form(
-      key: formKey,
+      key: formKey2,
       child: SingleChildScrollView(
         child: AutofillGroup(
           child: Column(
             children: [
+              NameFieldWidget(controller: nameController),
+              SizedBox(height: size.height * 0.03),
               EmailFieldWidget(controller: emailController),
               SizedBox(height: size.height * 0.03),
               PasswordFieldWidget(controller: passwordController),
+              SizedBox(height: size.height * 0.03),
+              ConfirmPasswordFieldWidget(controller: confirmPasswordController),
               SizedBox(height: size.height * 0.05),
               Container(
                 alignment: Alignment.centerRight,
-                margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                margin: EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 10,
+                ),
                 child: ElevatedButton(
                   onPressed: () async {
-                    _formData['email'] = emailController.text;
-                    _formData['password'] = passwordController.text;
-                    if (!formKey.currentState.validate()) {
+                    if (!formKey2.currentState.validate()) {
                       return;
                     }
-                    formKey.currentState.save();
-                    if (formKey.currentState.validate()) {
-                      ScaffoldMessenger.of(context)
-                        ..removeCurrentSnackBar()
-                        ..showSnackBar(
-                            SnackBar(content: Text('Authenticating User..')));
+                    formKey2.currentState.save();
+                    if (_formData['password'] != _formData['c_password']) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Password and Confirm Password must be same..',
+                          ),
+                        ),
+                      );
+                      return;
+                    }
+                    if (formKey2.currentState.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Authenticating User...',
+                          ),
+                          duration: Duration(seconds: 3),
+                        ),
+                      );
                       await Provider.of<AuthProvider>(
                         context,
                         listen: false,
-                      ).login(
+                      ).register(
+                        _formData['name'],
                         _formData['email'],
                         _formData['password'],
+                        _formData['c_password'],
                       );
                     }
                   },
@@ -81,23 +111,21 @@ class _FormWidgetLoginState extends State<FormWidgetLogin> {
                       borderRadius: BorderRadius.circular(80.0),
                       gradient: new LinearGradient(
                         colors: [
+                          Palette.primary,
                           Color.fromRGBO(17, 168, 23, 1),
-                          Color.fromRGBO(17, 168, 23, 0.4)
                         ],
                       ),
                     ),
                     padding: const EdgeInsets.all(0),
-                    child: Text(
-                      "LOGIN",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: CustomText(
+                      text: "REGISTER",
+                      color: Palette.white,
+                      bgColor: Palette.transparent,
+                      weight: FontWeight.bold,
                     ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -105,13 +133,3 @@ class _FormWidgetLoginState extends State<FormWidgetLogin> {
     );
   }
 }
-
-//   void login() {
-//     final form = formKey.currentState!;
-
-//     if (form.validate()) {
-//       TextInput.finishAutofillContext();
-//       final email = emailController.text;
-
-//     
-//   }

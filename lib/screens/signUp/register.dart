@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../config/palette.dart';
 import '../../providers/authProvider.dart';
+import '../../widgets/customText.dart';
 import '../../screens/home/home.dart';
-
 import '../background.dart';
-import 'widgets.dart/formWidget.dart';
+import 'widgets/formWidget.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -21,22 +21,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return (authData.isLoggedIn)
         ? Home()
         : Scaffold(
-            body: Background(
-              child: SingleChildScrollView(
+            body: SingleChildScrollView(
+              child: Background(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: Text(
-                        "REGISTER",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Palette.primary,
-                          fontSize: 36,
-                        ),
-                        textAlign: TextAlign.left,
+                      child: CustomText(
+                        text: "REGISTER",
+                        weight: FontWeight.bold,
+                        color: Palette.primary,
+                        size: 36,
                       ),
                     ),
                     SizedBox(height: size.height * 0.03),

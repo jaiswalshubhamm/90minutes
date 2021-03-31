@@ -1,5 +1,7 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'config/palette.dart';
 import 'package:flutter/services.dart';
 import 'providers/playerProvider.dart';
 import 'providers/themeProvider.dart';
@@ -12,6 +14,7 @@ import 'providers/fixtureProvider.dart';
 import 'providers/oddProvider.dart';
 import 'providers/teamProvider.dart';
 import 'router.dart' as router;
+import 'screens/home/home.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -65,6 +68,14 @@ class MyApp extends StatelessWidget {
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
             debugShowCheckedModeBanner: false,
+            home: AnimatedSplashScreen(
+              duration: 2500,
+              splash: Image.asset("assets/images/dlogo.png"),
+              splashIconSize: 140,
+              nextScreen: Home(),
+              splashTransition: SplashTransition.scaleTransition,
+              backgroundColor: Palette.white,
+            ),
             initialRoute: '/',
             onGenerateRoute: router.generateRoute,
           ),
