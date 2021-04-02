@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/providers/notification.dart';
-import 'package:nintyminutesflutter/providers/themeProvider.dart';
 import 'package:provider/provider.dart';
 import '../../config/palette.dart';
 import '../../providers/fixturesDetailsProvider.dart';
+import 'package:nintyminutesflutter/providers/authProvider.dart';
+import 'package:nintyminutesflutter/providers/notification.dart';
+import 'package:nintyminutesflutter/providers/themeProvider.dart';
 import '../../widgets/drawer.dart';
 import 'widgets/leagues.dart';
 import 'widgets/fixtures.dart';
@@ -25,6 +26,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _tcontroller.addListener(() {
       setState(() {});
     });
+    Provider.of<AuthProvider>(context, listen: false).checkIfLoggedIn();
     Provider.of<NotificationProvider>(context, listen: false).initialize();
     super.initState();
   }

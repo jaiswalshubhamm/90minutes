@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/providers/notification.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/fixturesDetailsProvider.dart';
 import '../../../providers/fixtureProvider.dart';
 import '../../../providers/oddProvider.dart';
+import '../../../providers/authProvider.dart';
 import '../../../models/fixtures.dart';
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
@@ -14,6 +14,7 @@ class Fixtures extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var fixturesData = Provider.of<FixturesDetailsProvider>(context);
+    var authProvider = Provider.of<AuthProvider>(context);
     List<Response> _fixtures = fixturesData.fixtures.data?.response;
 
     if (fixturesData.fixtures.status != NetworkStatus.COMPLETED) {
@@ -108,15 +109,36 @@ class Fixtures extends StatelessWidget {
                               color: Palette.darkerGrey,
                               thickness: 1,
                             ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.notifications,
-                                color: Palette.darkerGrey,
-                              ),
-                              onPressed: () {
-                                Provider.of<NotificationProvider>(context,
-                                        listen: false)
-                                    .instantNotification();
+                            Consumer<AuthProvider>(
+                              builder: (context, person, child) {
+                                return IconButton(
+                                  icon: Icon(Icons.notifications,
+                                      color: (authProvider.favorite.contains(
+                                              _fixtures[i].fixture.id))
+                                          ? Palette.primary
+                                          : Palette.darkerGrey),
+                                  onPressed: () {
+                                    if (authProvider.isLoggedIn) {
+                                      if (authProvider.favorite
+                                          .contains(_fixtures[i].fixture.id)) {
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .removeFromFovorite(authProvider.id,
+                                                _fixtures[i].fixture.id);
+                                      } else {
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .addToFovorite(authProvider.id,
+                                                _fixtures[i].fixture.id);
+                                      }
+                                    } else {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/login',
+                                      );
+                                    }
+                                  },
+                                );
                               },
                             ),
                           ],

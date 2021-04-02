@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:nintyminutesflutter/models/user.dart';
+import 'package:nintyminutesflutter/models/favorite.dart';
+import '../models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -11,6 +12,11 @@ class AuthProvider with ChangeNotifier {
   String _name;
   String _email;
   String _token;
+  List _favorite = [];
+
+  bool get isLoggedIn {
+    return _isLoggedIn;
+  }
 
   int get id {
     return _id;
@@ -28,8 +34,21 @@ class AuthProvider with ChangeNotifier {
     return _token;
   }
 
-  bool get isLoggedIn {
-    return _isLoggedIn;
+  List get favorite {
+    return _favorite;
+  }
+
+  void checkIfLoggedIn() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+
+    var token = localStorage.getString('token');
+    if (token != null) {
+      _isLoggedIn = true;
+      _name = localStorage.getString('name');
+      _token = localStorage.getString('token');
+      _id = localStorage.getInt('id');
+      getFovorite(_id);
+    }
   }
 
   void logout() async {
@@ -68,6 +87,12 @@ class AuthProvider with ChangeNotifier {
           _name = userData.success.name;
           _email = userData.success.email;
           _token = responseData['success']['token'];
+          getFovorite(_id);
+
+          SharedPreferences localStorage =
+              await SharedPreferences.getInstance();
+          localStorage.setString('name', userData.success.name);
+          localStorage.setInt('id', userData.success.id);
         } catch (err) {
           print(err);
         }
@@ -103,5 +128,52 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     return _login(email, password);
+  }
+
+  void addToFovorite(int userId, int fixtureId) async {
+    final url =
+        'https://90minutes.co.za/api/addtofavourit?user_id=$userId&fixture_id=$fixtureId';
+    try {
+      final response = await http.post(Uri.parse(url));
+      if (response.statusCode == 200) {
+        _favorite.add(fixtureId);
+        print(_favorite);
+      }
+    } catch (error) {
+      print(error);
+    }
+    notifyListeners();
+  }
+
+  void removeFromFovorite(int userId, int fixtureId) async {
+    final url =
+        'https://90minutes.co.za/api/removefromfavourit?user_id=$userId&fixture_id=$fixtureId';
+    try {
+      final response = await http.post(Uri.parse(url));
+      if (response.statusCode == 200) {
+        _favorite.remove(fixtureId);
+      }
+    } catch (error) {
+      print(error);
+    }
+    notifyListeners();
+  }
+
+  void getFovorite(int userId) async {
+    final url = 'https://90minutes.co.za/api/getfavouritdetails/$userId';
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        var responseJson = json.decode(response.body.toString());
+        Favorite favorites = Favorite.fromJson(responseJson);
+        favorites.data.forEach((value) {
+          _favorite.add(value.fixtureId);
+        });
+        notifyListeners();
+      }
+    } catch (error) {
+      print(error);
+    }
+    print(_favorite);
   }
 }

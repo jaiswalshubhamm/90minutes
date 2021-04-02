@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/authProvider.dart';
 import '../config/palette.dart';
 import 'darkMode.dart';
@@ -12,22 +11,12 @@ class MenuDrawer extends StatefulWidget {
 }
 
 class _MenuDrawerState extends State<MenuDrawer> {
-  bool isAuth = false;
-  @override
-  void initState() {
-    _checkIfLoggedIn();
-    super.initState();
-  }
-
-  void _checkIfLoggedIn() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('token');
-    if (token != null) {
-      setState(() {
-        isAuth = true;
-      });
-    }
-  }
+  // bool isAuth = false;
+  // @override
+  // void initState() {
+  //   _checkIfLoggedIn();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +36,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  (authData.isLoggedIn || isAuth)
+                  (authData.isLoggedIn)
                       ? 'Welcome ${authData.name} !'
                       : "Welcome Guest !",
                   style: TextStyle(
@@ -81,7 +70,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               Navigator.of(context).pushReplacementNamed('/feedback');
             },
           ),
-          if (!(authData.isLoggedIn || isAuth))
+          if (!(authData.isLoggedIn))
             ListTile(
               leading: Icon(Icons.login),
               title: CustomText(
@@ -94,7 +83,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 Navigator.of(context).pushNamed('/login');
               },
             ),
-          if (authData.isLoggedIn || isAuth)
+          if (authData.isLoggedIn)
             ListTile(
               leading: Icon(Icons.logout),
               title: CustomText(
@@ -104,7 +93,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               ),
               onTap: () {
                 authData.logout();
-                Navigator.of(context).pushNamed('/');
+                Navigator.of(context).pushNamed('/home');
               },
             ),
           Divider(),
