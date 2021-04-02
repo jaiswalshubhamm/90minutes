@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
+import '../config/palette.dart';
 
-class ThemeProvider extends ChangeNotifier {
+class ThemeProvider with ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
 
   bool get isDarkMode {
@@ -22,15 +22,16 @@ class ThemeProvider extends ChangeNotifier {
 
 class MyThemes {
   static final darkTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.grey.shade900,
-    primaryColor: Colors.white,
+    scaffoldBackgroundColor: Palette.darkMode,
+    backgroundColor: Palette.darkMode,
+    primaryColor: Palette.darkMode,
     colorScheme: ColorScheme.dark(),
     iconTheme: IconThemeData(color: Palette.primary, opacity: 0.8),
   );
 
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    primaryColor: Colors.white,
+    primaryColor: Palette.lightGrey,
     colorScheme: ColorScheme.light(),
   );
 }

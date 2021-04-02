@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/authProvider.dart';
+import '../config/palette.dart';
 import 'darkMode.dart';
 import 'customText.dart';
 

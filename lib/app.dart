@@ -13,72 +13,77 @@ import 'providers/fixturesDetailsProvider.dart';
 import 'providers/fixtureProvider.dart';
 import 'providers/oddProvider.dart';
 import 'providers/teamProvider.dart';
+import 'providers/notification.dart';
 import 'router.dart' as router;
 import 'screens/home/home.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      builder: (context, _) {
-        final themeProvider = Provider.of<ThemeProvider>(context);
+        create: (context) => ThemeProvider(),
+        builder: (context, _) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
 
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ]);
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown,
+          ]);
 
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ]);
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider<AuthProvider>(
-              create: (context) => AuthProvider(),
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown,
+          ]);
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider<AuthProvider>(
+                create: (context) => AuthProvider(),
+              ),
+              ChangeNotifierProvider<CountriesDetailsProvider>(
+                create: (context) => CountriesDetailsProvider(),
+              ),
+              ChangeNotifierProvider<LeaguesDetailsProvider>(
+                create: (context) => LeaguesDetailsProvider(),
+              ),
+              ChangeNotifierProvider<LeagueDetailsProvider>(
+                create: (context) => LeagueDetailsProvider(),
+              ),
+              ChangeNotifierProvider<FixturesDetailsProvider>(
+                create: (context) => FixturesDetailsProvider(),
+              ),
+              ChangeNotifierProvider<FixtureDetailsProvider>(
+                create: (context) => FixtureDetailsProvider(),
+              ),
+              ChangeNotifierProvider<OddProvider>(
+                create: (context) => OddProvider(),
+              ),
+              ChangeNotifierProvider<TeamProvider>(
+                create: (context) => TeamProvider(),
+              ),
+              ChangeNotifierProvider<PlayerProvider>(
+                create: (context) => PlayerProvider(),
+              ),
+              ChangeNotifierProvider<NotificationProvider>(
+                create: (context) => NotificationProvider(),
+              ),
+            ],
+            child: MaterialApp(
+              title: '90Minutes',
+              themeMode: themeProvider.themeMode,
+              theme: MyThemes.lightTheme,
+              darkTheme: MyThemes.darkTheme,
+              debugShowCheckedModeBanner: false,
+              home: AnimatedSplashScreen(
+                duration: 2500,
+                splash: Image.asset("assets/images/dlogo.png"),
+                splashIconSize: 140,
+                nextScreen: Home(),
+                splashTransition: SplashTransition.scaleTransition,
+                backgroundColor: Palette.white,
+              ),
+              initialRoute: '/',
+              onGenerateRoute: router.generateRoute,
             ),
-            ChangeNotifierProvider<CountriesDetailsProvider>(
-              create: (context) => CountriesDetailsProvider(),
-            ),
-            ChangeNotifierProvider<LeaguesDetailsProvider>(
-              create: (context) => LeaguesDetailsProvider(),
-            ),
-            ChangeNotifierProvider<LeagueDetailsProvider>(
-              create: (context) => LeagueDetailsProvider(),
-            ),
-            ChangeNotifierProvider<FixturesDetailsProvider>(
-              create: (context) => FixturesDetailsProvider(),
-            ),
-            ChangeNotifierProvider<FixtureDetailsProvider>(
-              create: (context) => FixtureDetailsProvider(),
-            ),
-            ChangeNotifierProvider<OddProvider>(
-              create: (context) => OddProvider(),
-            ),
-            ChangeNotifierProvider<TeamProvider>(
-              create: (context) => TeamProvider(),
-            ),
-            ChangeNotifierProvider<PlayerProvider>(
-              create: (context) => PlayerProvider(),
-            ),
-          ],
-          child: MaterialApp(
-            title: '90Minutes',
-            themeMode: themeProvider.themeMode,
-            theme: MyThemes.lightTheme,
-            darkTheme: MyThemes.darkTheme,
-            debugShowCheckedModeBanner: false,
-            home: AnimatedSplashScreen(
-              duration: 2500,
-              splash: Image.asset("assets/images/dlogo.png"),
-              splashIconSize: 140,
-              nextScreen: Home(),
-              splashTransition: SplashTransition.scaleTransition,
-              backgroundColor: Palette.white,
-            ),
-            initialRoute: '/',
-            onGenerateRoute: router.generateRoute,
-          ),
-        );
-      });
+          );
+        },
+      );
 }

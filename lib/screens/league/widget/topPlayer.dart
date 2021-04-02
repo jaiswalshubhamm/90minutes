@@ -21,14 +21,12 @@ class TopPlayer extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
           return Card(
-            color: Palette.lightGrey,
             child: ListTile(
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CustomText(
                     text: '${i + 1}',
-                    bgColor: Palette.lightGrey,
                   ),
                   SizedBox(
                     width: 10,
@@ -56,7 +54,6 @@ class TopPlayer extends StatelessWidget {
                 children: [
                   CustomText(
                     text: _players[i].player.name,
-                    bgColor: Palette.lightGrey,
                   ),
                   SizedBox(
                     height: 5,
@@ -72,7 +69,6 @@ class TopPlayer extends StatelessWidget {
                         width: 5,
                       ),
                       CustomText(
-                        bgColor: Palette.lightGrey,
                         text: _players[i].statistics[0].team.name,
                       ),
                     ],

@@ -19,6 +19,7 @@ class CustomText extends StatelessWidget {
         fontSize: size ?? 16,
         color: color,
         fontWeight: weight ?? FontWeight.normal,
+        backgroundColor: bgColor ?? Palette.transparent,
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/providers/notification.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/fixturesDetailsProvider.dart';
@@ -107,9 +108,16 @@ class Fixtures extends StatelessWidget {
                               color: Palette.darkerGrey,
                               thickness: 1,
                             ),
-                            Icon(
-                              Icons.notifications,
-                              color: Palette.darkerGrey,
+                            IconButton(
+                              icon: Icon(
+                                Icons.notifications,
+                                color: Palette.darkerGrey,
+                              ),
+                              onPressed: () {
+                                Provider.of<NotificationProvider>(context,
+                                        listen: false)
+                                    .instantNotification();
+                              },
                             ),
                           ],
                         ),

@@ -119,7 +119,6 @@ class Details extends StatelessWidget {
                                             CustomText(
                                               text: _featured[i].league.country,
                                               size: 12,
-                                              bgColor: Palette.lightGrey,
                                             ),
                                           ],
                                         ),
@@ -127,7 +126,6 @@ class Details extends StatelessWidget {
                                         CustomText(
                                           text: _featured[i].league.name,
                                           weight: FontWeight.bold,
-                                          bgColor: Palette.lightGrey,
                                         ),
                                       ],
                                     ),

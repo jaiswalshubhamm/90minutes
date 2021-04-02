@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/providers/notification.dart';
 import 'package:nintyminutesflutter/providers/themeProvider.dart';
 import 'package:provider/provider.dart';
 import '../../config/palette.dart';
@@ -24,6 +25,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _tcontroller.addListener(() {
       setState(() {});
     });
+    Provider.of<NotificationProvider>(context, listen: false).initialize();
     super.initState();
   }
 

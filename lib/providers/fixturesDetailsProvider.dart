@@ -46,7 +46,7 @@ class FixturesDetailsProvider with ChangeNotifier {
         month = '0$month';
       }
       if (day.length < 2) {
-        month = '0$day';
+        day = '0$day';
       }
       _date = '${currentDate.year}-$month-$day';
       _params = {"date": _date};

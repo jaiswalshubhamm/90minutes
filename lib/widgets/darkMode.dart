@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/config/palette.dart';
 // import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:provider/provider.dart';
 import '../providers/themeProvider.dart';
@@ -12,14 +13,13 @@ class ChangeThemeButtonWidget extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return LiteRollingSwitch(
-      //initial value
       value: themeProvider.isDarkMode,
       textOn: 'Dark',
       textOff: 'Light',
-      colorOn: Colors.black,
-      colorOff: Colors.greenAccent[700],
-      iconOn: Icons.ac_unit,
-      iconOff: Icons.wb_sunny,
+      colorOn: Palette.darkMode,
+      colorOff: Palette.primary,
+      iconOn: Icons.nightlight_round,
+      iconOff: Icons.brightness_5,
       textSize: 16.0,
       onChanged: (value) {
         final provider = Provider.of<ThemeProvider>(context, listen: false);

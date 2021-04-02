@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
-import 'package:nintyminutesflutter/widgets/customText.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/leagueDetailsProvider.dart';
 import '../../../providers/leagueProvider.dart';
 import '../../../models/leaugeModel.dart';
 import '../../../network/apiResponse.dart';
 import '../../../widgets/loading.dart';
+import '../../../widgets/customText.dart';
 
 class Leagues extends StatelessWidget {
   @override
@@ -20,46 +19,38 @@ class Leagues extends StatelessWidget {
       return ListView.builder(
         padding: EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
-          return Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 6),
-                height: 50,
-                child: ListTile(
-                  leading: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.network(
-                        _leagues[i].league.logo ??
-                            "https://media.api-sports.io/football/leagues/4.png",
-                        height: 28,
-                        width: 28,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      VerticalDivider(
-                        color: Colors.grey,
-                        thickness: 0.8,
-                      ),
-                    ],
+          return Card(
+            child: ListTile(
+              leading: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.network(
+                    _leagues[i].league.logo ??
+                        "https://media.api-sports.io/football/leagues/4.png",
+                    height: 28,
+                    width: 28,
                   ),
-                  title: CustomText(
-                    text: _leagues[i].league.name,
+                  SizedBox(
+                    width: 10,
                   ),
-                  onTap: () {
-                    Provider.of<LeagueDetailsProvider>(context, listen: false)
-                        .setId(_leagues[i].league.id);
-                    Navigator.pushNamed(
-                      context,
-                      '/leagues',
-                    );
-                  },
-                ),
+                  VerticalDivider(
+                    color: Colors.grey,
+                    thickness: 0.8,
+                  ),
+                ],
               ),
-              SizedBox(height: 8),
-              Divider(thickness: .6),
-            ],
+              title: CustomText(
+                text: _leagues[i].league.name,
+              ),
+              onTap: () {
+                Provider.of<LeagueDetailsProvider>(context, listen: false)
+                    .setId(_leagues[i].league.id);
+                Navigator.pushNamed(
+                  context,
+                  '/leagues',
+                );
+              },
+            ),
           );
         },
         itemCount: _leagues.length,
