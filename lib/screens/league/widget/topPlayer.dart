@@ -68,8 +68,10 @@ class TopPlayer extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      CustomText(
-                        text: _players[i].statistics[0].team.name,
+                      Flexible(
+                        child: CustomText(
+                          text: _players[i].statistics[0].team.name,
+                        ),
                       ),
                     ],
                   )

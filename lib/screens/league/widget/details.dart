@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nintyminutesflutter/providers/authProvider.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/fixtureProvider.dart';
@@ -14,8 +15,8 @@ import '../../../widgets/loading.dart';
 class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
     var leagueDetailData = Provider.of<LeagueDetailsProvider>(context);
-
     List<league.Response> _league = leagueDetailData.league.data?.response;
     List<fixture.Response> _featured =
         leagueDetailData.featured?.data?.response;
@@ -187,9 +188,54 @@ class Details extends StatelessWidget {
                                       color: Palette.darkerGrey,
                                       thickness: 1,
                                     ),
-                                    Icon(
-                                      Icons.notifications,
-                                      color: Palette.darkerGrey,
+                                    Consumer<AuthProvider>(
+                                      builder: (context, person, child) {
+                                        return IconButton(
+                                          icon: Icon(
+                                            authProvider.favorite.contains(
+                                                    _featured[i].fixture.id)
+                                                ? Icons.notifications_active
+                                                : Icons.notifications,
+                                            color:
+                                                authProvider.favorite.contains(
+                                              _featured[i].fixture.id,
+                                            )
+                                                    ? Palette.primary
+                                                    : Palette.darkerGrey,
+                                          ),
+                                          onPressed: () {
+                                            if (authProvider.isLoggedIn) {
+                                              if (authProvider.favorite
+                                                  .contains(_featured[i]
+                                                      .fixture
+                                                      .id)) {
+                                                Provider.of<AuthProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .removeFromFovorite(
+                                                        authProvider.id,
+                                                        _featured[i]
+                                                            .fixture
+                                                            .id);
+                                              } else {
+                                                Provider.of<AuthProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .addToFovorite(
+                                                        authProvider.id,
+                                                        _featured[i]
+                                                            .fixture
+                                                            .id);
+                                              }
+                                            } else {
+                                              Navigator.pushNamed(
+                                                context,
+                                                '/login',
+                                              );
+                                            }
+                                          },
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),

@@ -112,11 +112,22 @@ class Fixtures extends StatelessWidget {
                             Consumer<AuthProvider>(
                               builder: (context, person, child) {
                                 return IconButton(
-                                  icon: Icon(Icons.notifications,
-                                      color: (authProvider.favorite.contains(
-                                              _fixtures[i].fixture.id))
-                                          ? Palette.primary
-                                          : Palette.darkerGrey),
+                                  icon: Icon(
+                                    authProvider.favorite
+                                            .contains(_fixtures[i].fixture.id)
+                                        ? Icons.notifications_active
+                                        : Icons.notifications,
+                                    color: authProvider.favorite.contains(
+                                      _fixtures[i].fixture.id,
+                                    )
+                                        ? Palette.primary
+                                        : Palette.darkerGrey,
+                                  ),
+                                  // icon: Icon(Icons.notifications,
+                                  //     color: (authProvider.favorite.contains(
+                                  //             _fixtures[i].fixture.id))
+                                  //         ? Palette.primary
+                                  //         : Palette.darkerGrey),
                                   onPressed: () {
                                     if (authProvider.isLoggedIn) {
                                       if (authProvider.favorite

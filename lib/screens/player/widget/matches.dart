@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/providers/authProvider.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
 import '../../../providers/playerProvider.dart';
@@ -17,6 +18,7 @@ class Matches extends StatefulWidget {
 class _MatchesState extends State<Matches> {
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
     var playerData = Provider.of<PlayerProvider>(context);
 
     List<fixture.Response> last10 = playerData.last10?.data?.response;
@@ -110,9 +112,43 @@ class _MatchesState extends State<Matches> {
                           color: Palette.darkerGrey,
                           thickness: 1,
                         ),
-                        Icon(
-                          Icons.notifications,
-                          color: Palette.darkerGrey,
+                        Consumer<AuthProvider>(
+                          builder: (context, person, child) {
+                            return IconButton(
+                              icon: Icon(
+                                authProvider.favorite
+                                        .contains(last10[i].fixture.id)
+                                    ? Icons.notifications_active
+                                    : Icons.notifications,
+                                color: authProvider.favorite.contains(
+                                  last10[i].fixture.id,
+                                )
+                                    ? Palette.primary
+                                    : Palette.darkerGrey,
+                              ),
+                              onPressed: () {
+                                if (authProvider.isLoggedIn) {
+                                  if (authProvider.favorite
+                                      .contains(last10[i].fixture.id)) {
+                                    Provider.of<AuthProvider>(context,
+                                            listen: false)
+                                        .removeFromFovorite(authProvider.id,
+                                            last10[i].fixture.id);
+                                  } else {
+                                    Provider.of<AuthProvider>(context,
+                                            listen: false)
+                                        .addToFovorite(authProvider.id,
+                                            last10[i].fixture.id);
+                                  }
+                                } else {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/login',
+                                  );
+                                }
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),

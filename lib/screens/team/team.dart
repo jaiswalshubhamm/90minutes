@@ -7,7 +7,7 @@ import '../../widgets/customText.dart';
 import 'widgets/details.dart';
 import 'widgets/matches.dart';
 import 'widgets/standings/standings.dart';
-import 'widgets/statistics.dart';
+import 'widgets/statistics/statistics.dart';
 
 class TeamScreen extends StatefulWidget {
   final int id;

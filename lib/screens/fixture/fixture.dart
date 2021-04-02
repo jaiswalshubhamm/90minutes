@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/fixtureProvider.dart';
+import '../../providers/authProvider.dart';
 import '../../config/palette.dart';
 import 'widget/details.dart';
 import 'widget/lineup.dart';
-import 'widget/matches.dart';
+import 'widget/matches/matches.dart';
 import 'widget/standings/standings.dart';
 
 class FixtureScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
     var fixtureDetailData = Provider.of<FixtureDetailsProvider>(context);
     return Container(
       child: Consumer<FixtureDetailsProvider>(
@@ -39,9 +41,44 @@ class _FixtureScreenState extends State<FixtureScreen> {
                 backgroundColor: Palette.primary,
                 elevation: 20.0,
                 actions: [
-                  IconButton(
-                    icon: Icon(Icons.notifications_none_outlined),
-                    onPressed: () {},
+                  Consumer<AuthProvider>(
+                    builder: (context, person, child) {
+                      return IconButton(
+                        icon: Icon(
+                          (fixtureDetailData.fixture.data != null)
+                              ? (authProvider.favorite.contains(
+                                      fixtureDetailData
+                                          .fixture.data.response[0].fixture.id))
+                                  ? Icons.notifications_active
+                                  : Icons.notifications
+                              : Icons.notifications,
+                          color: Palette.white,
+                        ),
+                        onPressed: () {
+                          if (authProvider.isLoggedIn) {
+                            if (authProvider.favorite.contains(fixtureDetailData
+                                .fixture.data.response[0].fixture.id)) {
+                              Provider.of<AuthProvider>(context, listen: false)
+                                  .removeFromFovorite(
+                                      authProvider.id,
+                                      fixtureDetailData
+                                          .fixture.data.response[0].fixture.id);
+                            } else {
+                              Provider.of<AuthProvider>(context, listen: false)
+                                  .addToFovorite(
+                                      authProvider.id,
+                                      fixtureDetailData
+                                          .fixture.data.response[0].fixture.id);
+                            }
+                          } else {
+                            Navigator.pushNamed(
+                              context,
+                              '/login',
+                            );
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
                 bottom: TabBar(

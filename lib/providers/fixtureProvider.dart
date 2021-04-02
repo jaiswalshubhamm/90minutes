@@ -64,7 +64,7 @@ class FixtureDetailsProvider with ChangeNotifier {
   }
 
   Future<void> checkLineup() async {
-    if (_fixture.data.response[0].lineups.length > 0) {
+    if (_fixture.data?.response[0].lineups.length > 0) {
       tabControllerLength = tabControllerLength + 1;
       isLineup = true;
     }
