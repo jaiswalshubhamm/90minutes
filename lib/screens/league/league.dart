@@ -34,59 +34,52 @@ class _LeagueScreenState extends State<LeagueScreen> {
             child: Scaffold(
               appBar: AppBar(
                 title: (leagueDetailData.league.data?.response != null)
-                    ? Theme(
-                        data: Theme.of(context).copyWith(
-                          canvasColor: Palette.primary,
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            iconEnabledColor: Colors.black,
-                            value: _year,
-                            elevation: 5,
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: Palette.white,
-                            ),
-                            iconSize: 20,
-                            items: leagueDetailData
-                                .league.data?.response[0].seasons
-                                .map((map) {
-                              return DropdownMenuItem<String>(
-                                value: '${map.year}',
-                                child: Container(
-                                  color: Palette.white,
-                                  child: CustomText(
-                                    text: '${map.year} ',
-                                    color: Palette.white,
-                                    size: 20,
-                                    bgColor: Palette.primary,
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                            hint: CustomText(
-                              text:
-                                  '${leagueDetailData.league.data?.response[0].seasons.last.year} ',
-                              bgColor: Palette.primary,
-                              color: Palette.white,
-                              size: 16,
-                              weight: FontWeight.w600,
-                            ),
-                            onChanged: (String value) {
-                              setState(() {
-                                _year = value;
-                              });
-                              leagueDetailData.setYear(_year);
-                            },
+                    ? DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          iconEnabledColor: Colors.black,
+                          value: _year,
+                          elevation: 5,
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: Palette.white,
                           ),
+                          iconSize: 20,
+                          items: leagueDetailData
+                              .league.data?.response[0].seasons
+                              .map((map) {
+                            return DropdownMenuItem<String>(
+                              value: '${map.year}',
+                              child: Container(
+                                color: Palette.white,
+                                child: CustomText(
+                                  text: '${map.year} ',
+                                  color: Palette.white,
+                                  size: 20,
+                                  bgColor: Palette.primary,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          hint: CustomText(
+                            text:
+                                '${leagueDetailData.league.data?.response[0].seasons.last.year}',
+                            color: Palette.white,
+                            weight: FontWeight.w700,
+                          ),
+                          onChanged: (String value) {
+                            setState(() {
+                              _year = value;
+                            });
+                            leagueDetailData.setYear(_year);
+                          },
                         ),
                       )
                     : Text('2020'),
-                backgroundColor: Palette.primary,
-                elevation: 20.0,
                 bottom: TabBar(
-                  indicatorColor: Palette.primary,
                   isScrollable: true,
+                  labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                  indicatorColor: Palette.white,
+                  indicatorWeight: 4.0,
                   tabs: [
                     Tab(text: "DETAILS"),
                     if (leagueDetailData.isStanding) Tab(text: "STANDINGS"),

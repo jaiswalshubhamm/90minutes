@@ -32,14 +32,8 @@ class _FixtureScreenState extends State<FixtureScreen> {
           return DefaultTabController(
             length: fixtureDetailData.tabControllerLength,
             child: Scaffold(
-              backgroundColor: Color(0xFFFAFAFA),
               appBar: AppBar(
-                title: Text(
-                  "90 MINUTES",
-                  style: TextStyle(color: Palette.white),
-                ),
-                backgroundColor: Palette.primary,
-                elevation: 20.0,
+                title: Text("90 MINUTES"),
                 actions: [
                   Consumer<AuthProvider>(
                     builder: (context, person, child) {
@@ -82,8 +76,10 @@ class _FixtureScreenState extends State<FixtureScreen> {
                   ),
                 ],
                 bottom: TabBar(
-                  indicatorColor: Palette.primary,
                   isScrollable: true,
+                  indicatorColor: Palette.primary,
+                  labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                  indicatorWeight: 4.0,
                   tabs: [
                     Tab(text: "DETAILS"),
                     if (fixtureDetailData.isLineup) Tab(text: "LINEUPS"),

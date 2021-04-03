@@ -48,10 +48,12 @@ class Details extends StatelessWidget {
             Row(
               children: [
                 SizedBox(width: 20),
-                CustomText(
-                  text:
-                      '${_fixture[0].teams.home.name} - ${_fixture[0].teams.away.name}',
-                  size: 20,
+                Flexible(
+                  child: CustomText(
+                    text:
+                        '${_fixture[0].teams.home.name} - ${_fixture[0].teams.away.name}',
+                    size: 20,
+                  ),
                 ),
               ],
             ),

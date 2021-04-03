@@ -21,17 +21,83 @@ class ThemeProvider with ChangeNotifier {
 }
 
 class MyThemes {
-  static final darkTheme = ThemeData(
+  static final darkTheme = ThemeData.dark().copyWith(
+    appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(
+        color: Palette.white,
+      ),
+      textTheme: TextTheme(
+        headline6: TextStyle(
+          color: Palette.white,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      centerTitle: false,
+      elevation: 16.0,
+      color: Palette.primary,
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: Palette.white,
+      unselectedLabelColor: Palette.lightGrey,
+      labelPadding: EdgeInsets.only(top: 4),
+      indicatorSize: TabBarIndicatorSize.tab,
+    ),
     scaffoldBackgroundColor: Palette.darkMode,
-    backgroundColor: Palette.darkMode,
-    primaryColor: Palette.darkMode,
-    colorScheme: ColorScheme.dark(),
-    iconTheme: IconThemeData(color: Palette.primary, opacity: 0.8),
+    iconTheme: IconThemeData(
+      color: Palette.primary,
+      opacity: 0.8,
+    ),
+    colorScheme: ColorScheme.dark().copyWith(
+      primary: Palette.lose,
+      secondary: Palette.secondary,
+      error: Palette.lose,
+    ),
+    cardTheme: CardTheme(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      color: Palette.darkMode.withOpacity(.7),
+      elevation: 8,
+    ),
   );
 
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    primaryColor: Palette.lightGrey,
-    colorScheme: ColorScheme.light(),
+    appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(
+        color: Palette.white,
+      ),
+      textTheme: TextTheme(
+        headline6: TextStyle(
+          color: Palette.white,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      centerTitle: false,
+      elevation: 16.0,
+      color: Palette.primary,
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: Palette.white,
+      unselectedLabelColor: Palette.lightGrey,
+      labelPadding: EdgeInsets.only(top: 4),
+      indicatorSize: TabBarIndicatorSize.tab,
+    ),
+    scaffoldBackgroundColor: Palette.white,
+    iconTheme: IconThemeData(color: Palette.white),
+    colorScheme: ColorScheme.light(
+      primary: Palette.primary,
+      secondary: Palette.secondary,
+      error: Palette.lose,
+    ),
+    cardTheme: CardTheme(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      elevation: 8,
+      color: Palette.lightGrey,
+    ),
   );
 }

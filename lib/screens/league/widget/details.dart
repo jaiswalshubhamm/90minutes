@@ -87,165 +87,147 @@ class Details extends StatelessWidget {
                 padding: EdgeInsets.all(14.0),
                 itemBuilder: (context, i) {
                   return GestureDetector(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                leading: Container(
-                                  color: Palette.white,
-                                  child: Image.network(
-                                    _featured[i].league.logo ??
-                                        "https://media.api-sports.io/football/leagues/4.png",
-                                    height: 30,
-                                    width: 30,
+                    child: Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Container(
+                              color: Palette.white,
+                              child: Image.network(
+                                _featured[i].league.logo ??
+                                    "https://media.api-sports.io/football/leagues/4.png",
+                                height: 30,
+                                width: 30,
+                              ),
+                            ),
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        if (_league[0].country.flag != null)
+                                          SvgPicture.network(
+                                            _league[0].country.flag,
+                                            height: 10,
+                                          ),
+                                        SizedBox(width: 6),
+                                        CustomText(
+                                          text: _featured[i].league.country,
+                                          size: 12,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 3),
+                                    CustomText(
+                                      text: _featured[i].league.name,
+                                      weight: FontWeight.bold,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          ListTile(
+                            leading: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    '${_featured[i].fixture.date}'
+                                        .substring(11, 16),
                                   ),
                                 ),
-                                title: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                VerticalDivider(
+                                  color: Palette.darkerGrey,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ),
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            if (_league[0].country.flag != null)
-                                              SvgPicture.network(
-                                                _league[0].country.flag,
-                                                height: 10,
-                                              ),
-                                            SizedBox(width: 6),
-                                            CustomText(
-                                              text: _featured[i].league.country,
-                                              size: 12,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 3),
-                                        CustomText(
-                                          text: _featured[i].league.name,
-                                          weight: FontWeight.bold,
-                                        ),
-                                      ],
+                                    Text(
+                                      _featured[i].teams.home.name,
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      _featured[i].teams.away.name,
                                     ),
                                   ],
                                 ),
-                              ),
-                              ListTile(
-                                leading: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                              ],
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Center(
-                                      child: Text(
-                                        '${_featured[i].fixture.date}'
-                                            .substring(11, 16),
+                                    Text(
+                                      '${_featured[i].goals.home ?? ''}',
+                                    ),
+                                    Text(
+                                      '${_featured[i].goals.away ?? ''}',
+                                    ),
+                                  ],
+                                ),
+                                VerticalDivider(
+                                  color: Palette.darkerGrey,
+                                  thickness: 1,
+                                ),
+                                Consumer<AuthProvider>(
+                                  builder: (context, person, child) {
+                                    return IconButton(
+                                      icon: Icon(
+                                        authProvider.favorite.contains(
+                                                _featured[i].fixture.id)
+                                            ? Icons.notifications_active
+                                            : Icons.notifications,
+                                        color: authProvider.favorite.contains(
+                                          _featured[i].fixture.id,
+                                        )
+                                            ? Palette.primary
+                                            : Palette.darkerGrey,
                                       ),
-                                    ),
-                                    VerticalDivider(
-                                      color: Palette.darkerGrey,
-                                      thickness: 1,
-                                    ),
-                                  ],
-                                ),
-                                title: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          _featured[i].teams.home.name,
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          _featured[i].teams.away.name,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          '${_featured[i].goals.home ?? ''}',
-                                        ),
-                                        Text(
-                                          '${_featured[i].goals.away ?? ''}',
-                                        ),
-                                      ],
-                                    ),
-                                    VerticalDivider(
-                                      color: Palette.darkerGrey,
-                                      thickness: 1,
-                                    ),
-                                    Consumer<AuthProvider>(
-                                      builder: (context, person, child) {
-                                        return IconButton(
-                                          icon: Icon(
-                                            authProvider.favorite.contains(
-                                                    _featured[i].fixture.id)
-                                                ? Icons.notifications_active
-                                                : Icons.notifications,
-                                            color:
-                                                authProvider.favorite.contains(
-                                              _featured[i].fixture.id,
-                                            )
-                                                    ? Palette.primary
-                                                    : Palette.darkerGrey,
-                                          ),
-                                          onPressed: () {
-                                            if (authProvider.isLoggedIn) {
-                                              if (authProvider.favorite
-                                                  .contains(_featured[i]
-                                                      .fixture
-                                                      .id)) {
-                                                Provider.of<AuthProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .removeFromFovorite(
-                                                        authProvider.id,
-                                                        _featured[i]
-                                                            .fixture
-                                                            .id);
-                                              } else {
-                                                Provider.of<AuthProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .addToFovorite(
-                                                        authProvider.id,
-                                                        _featured[i]
-                                                            .fixture
-                                                            .id);
-                                              }
-                                            } else {
-                                              Navigator.pushNamed(
-                                                context,
-                                                '/login',
-                                              );
-                                            }
-                                          },
-                                        );
+                                      onPressed: () {
+                                        if (authProvider.isLoggedIn) {
+                                          if (authProvider.favorite.contains(
+                                              _featured[i].fixture.id)) {
+                                            Provider.of<AuthProvider>(context,
+                                                    listen: false)
+                                                .removeFromFovorite(
+                                                    authProvider.id,
+                                                    _featured[i].fixture.id);
+                                          } else {
+                                            Provider.of<AuthProvider>(context,
+                                                    listen: false)
+                                                .addToFovorite(authProvider.id,
+                                                    _featured[i].fixture.id);
+                                          }
+                                        } else {
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/login',
+                                          );
+                                        }
                                       },
-                                    ),
-                                  ],
+                                    );
+                                  },
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                        Divider(thickness: .6),
-                      ],
+                        ],
+                      ),
                     ),
                     onTap: () {
                       Provider.of<FixtureDetailsProvider>(context,

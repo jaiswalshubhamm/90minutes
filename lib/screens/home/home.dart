@@ -4,7 +4,6 @@ import '../../config/palette.dart';
 import '../../providers/fixturesDetailsProvider.dart';
 import '../../providers/authProvider.dart';
 import '../../providers/notification.dart';
-import '../../providers/themeProvider.dart';
 import '../../widgets/drawer.dart';
 import 'widgets/leagues.dart';
 import 'widgets/fixtures.dart';
@@ -72,10 +71,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         appBar: AppBar(
           title: Text(
             "90 MINUTES",
-            style: TextStyle(color: Palette.white),
           ),
-          backgroundColor: Palette.primary,
-          elevation: 20.0,
           actions: [
             if (_tcontroller.index == 1)
               Switch(
@@ -98,9 +94,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ],
           bottom: TabBar(
             controller: _tcontroller,
-            labelColor: Provider.of<ThemeProvider>(context).isDarkMode
-                ? Palette.white
-                : Palette.black,
+            indicatorWeight: 4.0,
+            indicatorColor: Palette.white,
             tabs: [
               Tab(text: "LEAUGES"),
               Tab(text: "MATCHES"),

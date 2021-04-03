@@ -5,11 +5,6 @@ import '../../models/players.dart' as player;
 import '../../config/palette.dart';
 import '../../widgets/customText.dart';
 import 'widget/details.dart';
-// import 'widgets/matches.dart';
-// import 'widgets/standings/standings.dart';
-// import 'widgets/statistics.dart';
-import 'package:nintyminutesflutter/screens/home/widgets/favorites.dart';
-
 import 'widget/matches.dart';
 import 'widget/statistics.dart';
 
@@ -21,7 +16,6 @@ class PlayerScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: Palette.white,
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [

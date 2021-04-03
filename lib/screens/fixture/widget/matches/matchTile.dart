@@ -71,17 +71,19 @@ class MatchTile extends StatelessWidget {
                   title: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            matches[i].teams.home.name,
-                          ),
-                          Text(
-                            matches[i].teams.away.name,
-                          ),
-                        ],
+                      Flexible(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              matches[i].teams.home.name,
+                            ),
+                            Text(
+                              matches[i].teams.away.name,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

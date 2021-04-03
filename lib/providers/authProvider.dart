@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:nintyminutesflutter/providers/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -17,6 +18,7 @@ class AuthProvider with ChangeNotifier {
   List _favorite = [];
   FixturesService _fixtureService;
   List<fixture.Response> _favoriteMatches = [];
+  NotificationProvider notification = NotificationProvider();
 
   List<fixture.Response> get favoriteMatches => _favoriteMatches;
 
@@ -158,6 +160,7 @@ class AuthProvider with ChangeNotifier {
       final response = await http.post(Uri.parse(url));
       if (response.statusCode == 200) {
         _favorite.remove(fixtureId);
+        notification.cancelNotification(fixtureId);
         _favoriteMatches
             .removeWhere((element) => element.fixture.id == fixtureId);
       }
@@ -192,6 +195,11 @@ class AuthProvider with ChangeNotifier {
     try {
       fixture.Fixtures favFixture =
           await _fixtureService.fetchFixtures(_params);
+      notification.zonedScheduledNotification(
+          favFixture.response[0].fixture.id,
+          favFixture.response[0].teams.home.name,
+          favFixture.response[0].teams.away.name,
+          favFixture.response[0].fixture.date);
       _favoriteMatches.add(favFixture.response[0]);
     } catch (e) {
       print(e);
