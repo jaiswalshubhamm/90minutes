@@ -1,16 +1,11 @@
 class Fixtures {
   String get;
-  int results;
-  Paging paging;
   List<Response> response;
 
-  Fixtures({this.get, this.results, this.paging, this.response});
+  Fixtures({this.get, this.response});
 
   Fixtures.fromJson(Map<String, dynamic> json) {
     get = json['get'];
-    results = json['results'];
-    paging =
-        json['paging'] != null ? new Paging.fromJson(json['paging']) : null;
     if (json['response'] != null) {
       response = <Response>[];
       json['response'].forEach((v) {
@@ -22,32 +17,9 @@ class Fixtures {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['get'] = this.get;
-    data['results'] = this.results;
-    if (this.paging != null) {
-      data['paging'] = this.paging.toJson();
-    }
     if (this.response != null) {
       data['response'] = this.response.map((v) => v.toJson()).toList();
     }
-    return data;
-  }
-}
-
-class Paging {
-  int current;
-  int total;
-
-  Paging({this.current, this.total});
-
-  Paging.fromJson(Map<String, dynamic> json) {
-    current = json['current'];
-    total = json['total'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['current'] = this.current;
-    data['total'] = this.total;
     return data;
   }
 }

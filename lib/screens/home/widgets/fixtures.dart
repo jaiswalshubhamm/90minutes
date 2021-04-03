@@ -76,18 +76,20 @@ class Fixtures extends StatelessWidget {
                         title: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  _fixtures[i].teams.home.name,
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  _fixtures[i].teams.away.name,
-                                ),
-                              ],
+                            Flexible(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _fixtures[i].teams.home.name,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    _fixtures[i].teams.away.name,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -123,11 +125,6 @@ class Fixtures extends StatelessWidget {
                                         ? Palette.primary
                                         : Palette.darkerGrey,
                                   ),
-                                  // icon: Icon(Icons.notifications,
-                                  //     color: (authProvider.favorite.contains(
-                                  //             _fixtures[i].fixture.id))
-                                  //         ? Palette.primary
-                                  //         : Palette.darkerGrey),
                                   onPressed: () {
                                     if (authProvider.isLoggedIn) {
                                       if (authProvider.favorite

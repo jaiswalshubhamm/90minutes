@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:nintyminutesflutter/models/favorite.dart';
+import '../models/favorite.dart';
+import '../models/fixtures.dart' as fixture;
+import '../services/fixtures.dart';
 import '../models/user.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   bool _isLoggedIn = false;
@@ -13,6 +15,10 @@ class AuthProvider with ChangeNotifier {
   String _email;
   String _token;
   List _favorite = [];
+  FixturesService _fixtureService;
+  List<fixture.Response> _favoriteMatches = [];
+
+  List<fixture.Response> get favoriteMatches => _favoriteMatches;
 
   bool get isLoggedIn {
     return _isLoggedIn;
@@ -40,14 +46,14 @@ class AuthProvider with ChangeNotifier {
 
   void checkIfLoggedIn() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-
     var token = localStorage.getString('token');
     if (token != null) {
       _isLoggedIn = true;
       _name = localStorage.getString('name');
       _token = localStorage.getString('token');
       _id = localStorage.getInt('id');
-      getFovorite(_id);
+      await getFavorite(_id);
+      getAllFavoriteMatch();
     }
   }
 
@@ -87,8 +93,8 @@ class AuthProvider with ChangeNotifier {
           _name = userData.success.name;
           _email = userData.success.email;
           _token = responseData['success']['token'];
-          getFovorite(_id);
-
+          await getFavorite(_id);
+          getAllFavoriteMatch();
           SharedPreferences localStorage =
               await SharedPreferences.getInstance();
           localStorage.setString('name', userData.success.name);
@@ -137,7 +143,7 @@ class AuthProvider with ChangeNotifier {
       final response = await http.post(Uri.parse(url));
       if (response.statusCode == 200) {
         _favorite.add(fixtureId);
-        print(_favorite);
+        await getFavoriteMatch(fixtureId);
       }
     } catch (error) {
       print(error);
@@ -152,6 +158,8 @@ class AuthProvider with ChangeNotifier {
       final response = await http.post(Uri.parse(url));
       if (response.statusCode == 200) {
         _favorite.remove(fixtureId);
+        _favoriteMatches
+            .removeWhere((element) => element.fixture.id == fixtureId);
       }
     } catch (error) {
       print(error);
@@ -159,7 +167,7 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getFovorite(int userId) async {
+  Future<void> getFavorite(int userId) async {
     final url = 'https://90minutes.co.za/api/getfavouritdetails/$userId';
     try {
       final response = await http.get(Uri.parse(url));
@@ -174,6 +182,26 @@ class AuthProvider with ChangeNotifier {
     } catch (error) {
       print(error);
     }
-    print(_favorite);
+  }
+
+  getFavoriteMatch(int id) async {
+    _fixtureService = FixturesService();
+    Map<String, String> _params = {
+      "id": '$id',
+    };
+    try {
+      fixture.Fixtures favFixture =
+          await _fixtureService.fetchFixtures(_params);
+      _favoriteMatches.add(favFixture.response[0]);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  getAllFavoriteMatch() async {
+    _favorite.forEach((id) {
+      getFavoriteMatch(id);
+    });
+    notifyListeners();
   }
 }

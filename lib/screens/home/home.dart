@@ -95,16 +95,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 icon: Icon(Icons.today),
                 onPressed: () => pickDate(context),
               ),
-            // if (_tcontroller.index == 2)
-            //   IconButton(
-            //     icon: Icon(Icons.delete),
-            //     onPressed: () {},
-            //   ),
-            // if (_tcontroller.index == 2)
-            //   IconButton(
-            //     icon: Icon(Icons.notification_important),
-            //     onPressed: () {},
-            //   ),
           ],
           bottom: TabBar(
             controller: _tcontroller,
@@ -126,7 +116,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           children: [
             Leagues(),
             Fixtures(),
-            favorites(),
+            Favorites(),
           ],
         ),
       ),

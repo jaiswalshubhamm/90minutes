@@ -11,6 +11,7 @@ import 'widget/details.dart';
 import 'package:nintyminutesflutter/screens/home/widgets/favorites.dart';
 
 import 'widget/matches.dart';
+import 'widget/statistics.dart';
 
 class PlayerScreen extends StatelessWidget {
   @override
@@ -33,8 +34,8 @@ class PlayerScreen extends StatelessWidget {
                   centerTitle: true,
                   title: CustomText(
                     text: (_player != null)
-                    ? _player[0].player.name
-                    : 'Player Info',
+                        ? _player[0].player.name
+                        : 'Player Info',
                     // text: _player[0].player.name,
                     bgColor: Palette.primary,
                     color: Palette.white,
@@ -75,7 +76,7 @@ class PlayerScreen extends StatelessWidget {
           body: TabBarView(
             children: [
               Details(),
-              favorites(),
+              Statistics(),
               Matches(),
             ],
           ),

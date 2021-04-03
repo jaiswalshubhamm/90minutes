@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../config/palette.dart';
-import '../../../../providers/teamProvider.dart';
-import '../../../../models/league.dart' as league;
-import '../../../../models/statistics.dart' as stats;
-import '../../../../network/apiResponse.dart';
-import '../../../../widgets/customText.dart';
-import '../../../../widgets/loading.dart';
+import '../../../config/palette.dart';
+import '../../../providers/teamProvider.dart';
+import '../../../models/league.dart' as league;
+import '../../../models/statistics.dart' as stats;
+import '../../../network/apiResponse.dart';
+import '../../../widgets/customText.dart';
+import '../../../widgets/loading.dart';
 
 class Statistics extends StatefulWidget {
   @override
