@@ -19,6 +19,8 @@ class TeamProvider with ChangeNotifier {
 
   Map<String, String> _params = {};
 
+  Map<String, String> _statisticsParams = {};
+
   TeamService _teamService;
 
   FixtureService _fixtureService;
@@ -76,6 +78,11 @@ class TeamProvider with ChangeNotifier {
     await fetchStanding();
     await checkStanding();
     notifyListeners();
+    _statisticsParams = {
+      "team": '${_team.data.response[0].team.id}',
+      "league": '${_league.data.response[0].league.id}',
+      "season": '${_league.data.response[0].seasons.last.year}'
+    };
     await fetchStatistics();
     await checkStatistics();
     notifyListeners();
@@ -98,6 +105,16 @@ class TeamProvider with ChangeNotifier {
   void setId(int id) {
     _id = id;
     _params = {"id": '$_id'};
+  }
+
+  void setLeague(int id) async {
+    _statisticsParams = {
+      "team": '${_team.data.response[0].team.id}',
+      "league": '$id',
+      "season": '${_league.data.response[0].seasons.last.year}'
+    };
+    await fetchStatistics();
+    notifyListeners();
   }
 
   fetchTeam() async {
@@ -169,11 +186,6 @@ class TeamProvider with ChangeNotifier {
   }
 
   fetchStatistics() async {
-    Map<String, String> _statisticsParams = {
-      "team": '${_team.data.response[0].team.id}',
-      "league": '${_league.data.response[0].league.id}',
-      "season": '${_league.data.response[0].seasons.last.year}'
-    };
     _statistics = ApiResponse.loading('loading... ');
     try {
       Statistics statistics =

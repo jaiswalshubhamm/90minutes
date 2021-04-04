@@ -14,7 +14,7 @@ class Statistics extends StatefulWidget {
 }
 
 class _StatisticsState extends State<Statistics> {
-  String valuee;
+  int valuee;
   @override
   Widget build(BuildContext context) {
     var teamData = Provider.of<TeamProvider>(context);
@@ -38,7 +38,7 @@ class _StatisticsState extends State<Statistics> {
                   border: Border.all(color: Palette.primary),
                 ),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
+                  child: DropdownButton<int>(
                     value: valuee,
                     elevation: 25,
                     icon: Icon(
@@ -47,8 +47,8 @@ class _StatisticsState extends State<Statistics> {
                       size: 32,
                     ),
                     items: leagues.map((map) {
-                      return DropdownMenuItem<String>(
-                        value: '${map.league.name}',
+                      return DropdownMenuItem<int>(
+                        value: map.league.id,
                         child: Row(
                           children: [
                             Image.network(
@@ -72,11 +72,11 @@ class _StatisticsState extends State<Statistics> {
                       size: 16,
                       weight: FontWeight.w600,
                     ),
-                    onChanged: (String value) {
+                    onChanged: (int value) {
                       setState(() {
                         valuee = value;
                       });
-                      // leagueDetailData.setYear(_year);
+                      teamData.setLeague(value);
                     },
                   ),
                 ),

@@ -43,7 +43,7 @@ class MyThemes {
       labelPadding: EdgeInsets.only(top: 4),
       indicatorSize: TabBarIndicatorSize.tab,
     ),
-    scaffoldBackgroundColor: Palette.darkMode,
+    scaffoldBackgroundColor: Palette.darkMode.withOpacity(.8),
     iconTheme: IconThemeData(
       color: Palette.primary,
       opacity: 0.8,
@@ -58,7 +58,7 @@ class MyThemes {
         borderRadius: BorderRadius.circular(20.0),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: Palette.darkMode.withOpacity(.7),
+      color: Palette.darkMode,
       elevation: 8,
     ),
   );
