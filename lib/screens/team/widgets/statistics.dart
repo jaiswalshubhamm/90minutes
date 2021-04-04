@@ -22,7 +22,7 @@ class _StatisticsState extends State<Statistics> {
     List<league.Response> leagues = teamData.league?.data?.response;
     if (teamData.statistics?.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
-    } else if (teamData.last10?.status == NetworkStatus.COMPLETED) {
+    } else if (teamData.statistics?.status == NetworkStatus.COMPLETED) {
       return SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -110,7 +110,7 @@ class _StatisticsState extends State<Statistics> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
+                        CustomText(text: 'Away'),
                         CustomText(text: '${statistics.fixtures.played.away}')
                       ],
                     )
@@ -143,7 +143,7 @@ class _StatisticsState extends State<Statistics> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
+                        CustomText(text: 'Away'),
                         CustomText(text: '${statistics.fixtures.wins.away}')
                       ],
                     )
@@ -176,7 +176,7 @@ class _StatisticsState extends State<Statistics> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
+                        CustomText(text: 'Away'),
                         CustomText(text: '${statistics.fixtures.draws.away}')
                       ],
                     )
@@ -209,7 +209,7 @@ class _StatisticsState extends State<Statistics> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
+                        CustomText(text: 'Away'),
                         CustomText(text: '${statistics.fixtures.loses.away}')
                       ],
                     )
@@ -229,21 +229,24 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.goals.goalsFor.total.total}')
+                        CustomText(
+                            text: '${statistics.goals.goalsFor.total.total}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.goals.goalsFor.total.home}')
+                        CustomText(
+                            text: '${statistics.goals.goalsFor.total.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.goals.goalsFor.total.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(
+                            text: '${statistics.goals.goalsFor.total.away}')
                       ],
                     )
                   ],
@@ -254,7 +257,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Average Goals For',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -262,21 +265,24 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(
+                            text: '${statistics.goals.goalsFor.average.total}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(
+                            text: '${statistics.goals.goalsFor.average.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(
+                            text: '${statistics.goals.goalsFor.average.away}')
                       ],
                     )
                   ],
@@ -287,7 +293,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Goals Against',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -295,21 +301,24 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(
+                            text: '${statistics.goals.against.total.total}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(
+                            text: '${statistics.goals.against.total.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(
+                            text: '${statistics.goals.against.total.away}')
                       ],
                     )
                   ],
@@ -320,7 +329,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Average Goals Against',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -328,21 +337,24 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(
+                            text: '${statistics.goals.against.average.total}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(
+                            text: '${statistics.goals.against.average.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(
+                            text: '${statistics.goals.against.average.away}')
                       ],
                     )
                   ],
@@ -353,29 +365,29 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Biggest Streak',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: 'Wins'),
+                        CustomText(text: '${statistics.biggest.streak.wins}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: 'Draws'),
+                        CustomText(text: '${statistics.biggest.streak.draws}'),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Loses'),
+                        CustomText(text: '${statistics.biggest.streak.loses}')
                       ],
                     )
                   ],
@@ -386,29 +398,22 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Biggest Wins',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: statistics.biggest.wins.home),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(text: statistics.biggest.wins.away),
                       ],
                     )
                   ],
@@ -419,29 +424,22 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Biggest Loses',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: statistics.biggest.loses.home),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(text: statistics.biggest.loses.away),
                       ],
                     )
                   ],
@@ -452,29 +450,24 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Biggest Goals For',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(
+                            text: '${statistics.biggest.goals.goalsFor.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(
+                            text: '${statistics.biggest.goals.goalsFor.away}')
                       ],
                     )
                   ],
@@ -485,29 +478,24 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Biggest Goals Against',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(
+                            text: '${statistics.biggest.goals.against.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(
+                            text: '${statistics.biggest.goals.against.away}')
                       ],
                     )
                   ],
@@ -518,7 +506,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Clean Sheet',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -526,21 +514,21 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: '${statistics.cleanSheet.total}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: '${statistics.cleanSheet.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(text: '${statistics.cleanSheet.away}')
                       ],
                     )
                   ],
@@ -551,7 +539,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Failed To Score',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -559,54 +547,21 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: '${statistics.failedToScore.total}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: '${statistics.failedToScore.home}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Away'),
+                        CustomText(text: '${statistics.failedToScore.away}')
                       ],
                     )
                   ],
@@ -616,10 +571,10 @@ class _StatisticsState extends State<Statistics> {
           ),
         ),
       );
-    } else if (teamData.last10?.status == NetworkStatus.ERROR) {
-      return Text("Error : ${teamData.last10.message}");
+    } else if (teamData.statistics?.status == NetworkStatus.ERROR) {
+      return Text("Error : ${teamData.statistics.message}");
     } else {
-      return Text("${teamData.last10.message}");
+      return Text("${teamData.statistics.message}");
     }
   }
 }

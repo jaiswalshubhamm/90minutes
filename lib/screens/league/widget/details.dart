@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nintyminutesflutter/providers/authProvider.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
+import '../../../providers/authProvider.dart';
 import '../../../providers/fixtureProvider.dart';
 import '../../../providers/oddProvider.dart';
 import '../../../providers/leagueProvider.dart';
@@ -129,6 +129,10 @@ class Details extends StatelessWidget {
                                 ),
                               ],
                             ),
+                          ),
+                          Divider(
+                            color: Palette.darkerGrey,
+                            thickness: .5,
                           ),
                           ListTile(
                             leading: Row(

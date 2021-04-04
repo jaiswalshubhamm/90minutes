@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../../providers/playerProvider.dart';
 import '../../models/players.dart' as player;
 import '../../config/palette.dart';
-import '../../widgets/customText.dart';
 import 'widget/details.dart';
 import 'widget/matches.dart';
 import 'widget/statistics.dart';
@@ -22,22 +21,12 @@ class PlayerScreen extends StatelessWidget {
               SliverAppBar(
                 pinned: true,
                 expandedHeight: 116,
-                elevation: 20.0,
-                backgroundColor: Palette.primary,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: CustomText(
-                    text: (_player != null)
-                        ? _player[0].player.name
-                        : 'Player Info',
-                    // text: _player[0].player.name,
-                    bgColor: Palette.primary,
-                    color: Palette.white,
-                    weight: FontWeight.w600,
-                    size: 14,
+                  title: Text(
+                    (_player != null) ? _player[0].player.name : 'Player Info',
                   ),
                   background: Container(
-                    color: Palette.primary,
                     child: Center(
                       child: CircleAvatar(
                         radius: 32.0,
@@ -54,13 +43,13 @@ class PlayerScreen extends StatelessWidget {
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
                   TabBar(
+                    indicatorWeight: 4.0,
                     indicatorColor: Palette.white,
                     tabs: [
                       Tab(text: "DETAILS"),
                       Tab(text: "STATISTICS"),
                       Tab(text: "MATCHES"),
                     ],
-                    unselectedLabelColor: Palette.lightGrey,
                   ),
                 ),
                 pinned: true,

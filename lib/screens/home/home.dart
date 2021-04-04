@@ -26,7 +26,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       setState(() {});
     });
     Provider.of<AuthProvider>(context, listen: false).checkIfLoggedIn();
-    Provider.of<NotificationProvider>(context, listen: false).initialize();
+    Provider.of<NotificationProvider>(context, listen: false)
+        .initialize(context);
     super.initState();
   }
 
@@ -57,10 +58,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   String getText(DateTime date) {
     String month = '${date.month}';
+    String day = '${date.day}';
     if (month.length < 2) {
       month = '0$month';
     }
-    return '${date.year}-$month-${date.day}';
+    if (day.length < 2) {
+      day = '0$day';
+    }
+    return '${date.year}-$month-$day';
   }
 
   @override

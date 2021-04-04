@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../config/palette.dart';
-import '../../../providers/teamProvider.dart';
-import '../../../models/league.dart' as league;
-import '../../../models/statistics.dart' as stats;
+import '../../../providers/playerProvider.dart';
+import '../../../models/players.dart' as player;
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
 import '../../../widgets/loading.dart';
@@ -14,15 +13,15 @@ class Statistics extends StatefulWidget {
 }
 
 class _StatisticsState extends State<Statistics> {
-  String valuee;
+  int i = 0;
   @override
   Widget build(BuildContext context) {
-    var teamData = Provider.of<TeamProvider>(context);
-    stats.Response statistics = teamData.statistics?.data?.response;
-    List<league.Response> leagues = teamData.league?.data?.response;
-    if (teamData.statistics?.status != NetworkStatus.COMPLETED) {
+    var playerData = Provider.of<PlayerProvider>(context);
+    List<player.Statistic> statistics =
+        playerData.players?.data?.response[0].statistics;
+    if (playerData.players?.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
-    } else if (teamData.last10?.status == NetworkStatus.COMPLETED) {
+    } else if (playerData.players?.status == NetworkStatus.COMPLETED) {
       return SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -38,21 +37,22 @@ class _StatisticsState extends State<Statistics> {
                   border: Border.all(color: Palette.primary),
                 ),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: valuee,
+                  child: DropdownButton<int>(
+                    value: i,
                     elevation: 25,
                     icon: Icon(
                       Icons.arrow_drop_down,
                       color: Palette.primary,
                       size: 32,
                     ),
-                    items: leagues.map((map) {
-                      return DropdownMenuItem<String>(
-                        value: '${map.league.name}',
+                    items: statistics.map((map) {
+                      return DropdownMenuItem<int>(
+                        value: statistics.indexOf(map),
                         child: Row(
                           children: [
                             Image.network(
-                              map.league.logo,
+                              map.league.logo ??
+                                  'https://media.api-sports.io/football/leagues/340.png',
                               height: 20,
                             ),
                             SizedBox(
@@ -67,16 +67,15 @@ class _StatisticsState extends State<Statistics> {
                       );
                     }).toList(),
                     hint: CustomText(
-                      text: '${leagues[0].league.name} ',
+                      text: '${statistics[0].league.name} ',
                       color: Palette.primary,
                       size: 16,
                       weight: FontWeight.w600,
                     ),
-                    onChanged: (String value) {
+                    onChanged: (int value) {
                       setState(() {
-                        valuee = value;
+                        i = value;
                       });
-                      // leagueDetailData.setYear(_year);
                     },
                   ),
                 ),
@@ -96,55 +95,39 @@ class _StatisticsState extends State<Statistics> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: 'Total Played'),
+                        CustomText(text: '${statistics[i].games.appearences}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: 'Lineups'),
+                        CustomText(text: '${statistics[i].games.lineups}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches Wins',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.wins.total}')
+                        CustomText(text: 'Minutes'),
+                        CustomText(text: '${statistics[i].games.minutes}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.wins.home}')
+                        CustomText(text: 'Position'),
+                        CustomText(text: statistics[i].games.position)
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.wins.away}')
+                        CustomText(text: 'Ratings'),
+                        CustomText(
+                          text: statistics[i].games.rating ??
+                              statistics[i].games.rating.substring(0, 4),
+                        ),
                       ],
                     )
                   ],
@@ -155,29 +138,30 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches Draws',
+                      text: 'Subtitutes',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.draws.total}')
+                        CustomText(text: 'In'),
+                        CustomText(
+                            text: '${statistics[i].substitutes.substitutesIn}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.draws.home}')
+                        CustomText(text: 'Out'),
+                        CustomText(text: '${statistics[i].substitutes.out}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.draws.away}')
+                        CustomText(text: 'Bench'),
+                        CustomText(text: '${statistics[i].substitutes.bench}')
                       ],
                     )
                   ],
@@ -188,7 +172,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches Loses',
+                      text: 'Shots',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -196,21 +180,55 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.loses.total}')
+                        CustomText(text: '${statistics[i].shots.total ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.loses.home}')
+                        CustomText(text: 'On'),
+                        CustomText(text: '${statistics[i].shots.on ?? ''}')
                       ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: 'Goals',
+                      size: 20,
+                      color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.loses.away}')
+                        CustomText(text: '${statistics[i].goals.total ?? ''}')
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Conceded'),
+                        CustomText(
+                            text: '${statistics[i].goals.conceded ?? ''}'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Assist'),
+                        CustomText(text: '${statistics[i].goals.assists ?? ''}')
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Saves'),
+                        CustomText(text: '${statistics[i].goals.saves ?? ''}')
                       ],
                     )
                   ],
@@ -221,7 +239,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Goals For',
+                      text: 'Passes',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -229,21 +247,22 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.goals.goalsFor.total.total}')
+                        CustomText(text: '${statistics[i].passes.total ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.goals.goalsFor.total.home}')
+                        CustomText(text: 'Key'),
+                        CustomText(text: '${statistics[i].passes.key ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.goals.goalsFor.total.away}')
+                        CustomText(text: 'Accuracy'),
+                        CustomText(
+                            text: '${statistics[i].passes.accuracy ?? ''}')
                       ],
                     )
                   ],
@@ -254,7 +273,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Tackles',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -262,21 +281,24 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: '${statistics[i].tackles.total ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: 'Blocks'),
+                        CustomText(
+                            text: '${statistics[i].tackles.blocks ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Interceptions'),
+                        CustomText(
+                            text:
+                                '${statistics[i].tackles.interceptions ?? ''}')
                       ],
                     )
                   ],
@@ -287,7 +309,7 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Duels',
                       size: 20,
                       color: Palette.primary,
                     ),
@@ -295,21 +317,49 @@ class _StatisticsState extends State<Statistics> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: '${statistics[i].duels.total ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: 'Won'),
+                        CustomText(text: '${statistics[i].duels.won ?? ''}')
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: 'Dribles',
+                      size: 20,
+                      color: Palette.primary,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Attempts'),
+                        CustomText(
+                            text: '${statistics[i].dribbles.attempts ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Success'),
+                        CustomText(
+                            text: '${statistics[i].dribbles.success ?? ''}')
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Past'),
+                        CustomText(text: '${statistics[i].dribbles.past ?? ''}')
                       ],
                     )
                   ],
@@ -320,29 +370,57 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Foules',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: 'Drawn'),
+                        CustomText(text: '${statistics[i].fouls.drawn ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: 'Commited'),
+                        CustomText(
+                            text: '${statistics[i].fouls.committed ?? ''}')
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: 'Cards',
+                      size: 20,
+                      color: Palette.primary,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Yellow'),
+                        CustomText(text: '${statistics[i].cards.yellow ?? ''}')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Yellow Red'),
+                        CustomText(
+                            text: '${statistics[i].cards.yellowred ?? ''}')
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: 'Red'),
+                        CustomText(text: '${statistics[i].cards.red ?? ''}')
                       ],
                     )
                   ],
@@ -353,260 +431,47 @@ class _StatisticsState extends State<Statistics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Matches',
+                      text: 'Penalty',
                       size: 20,
                       color: Palette.primary,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: 'Won'),
+                        CustomText(text: '${statistics[i].penalty.won ?? ''}'),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: 'Comitted'),
+                        CustomText(
+                            text: '${statistics[i].penalty.commited ?? ''}'),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
+                        CustomText(text: 'Scored'),
+                        CustomText(
+                            text: '${statistics[i].penalty.scored ?? ''}'),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
+                        CustomText(text: 'Missed'),
+                        CustomText(
+                            text: '${statistics[i].penalty.missed ?? ''}'),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.total}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Home'),
-                        CustomText(text: '${statistics.fixtures.played.home}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics.fixtures.played.away}')
+                        CustomText(text: 'Saved'),
+                        CustomText(
+                            text: '${statistics[i].penalty.saved ?? ''}'),
                       ],
                     )
                   ],
@@ -616,10 +481,10 @@ class _StatisticsState extends State<Statistics> {
           ),
         ),
       );
-    } else if (teamData.last10?.status == NetworkStatus.ERROR) {
-      return Text("Error : ${teamData.last10.message}");
+    } else if (playerData.players?.status == NetworkStatus.ERROR) {
+      return Text("Error : ${playerData.players.message}");
     } else {
-      return Text("${teamData.last10.message}");
+      return Text("${playerData.players.message}");
     }
   }
 }

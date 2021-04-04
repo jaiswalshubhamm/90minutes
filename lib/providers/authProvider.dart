@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:nintyminutesflutter/providers/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +7,7 @@ import '../models/favorite.dart';
 import '../models/fixtures.dart' as fixture;
 import '../services/fixtures.dart';
 import '../models/user.dart';
+import 'notification.dart';
 
 class AuthProvider with ChangeNotifier {
   bool _isLoggedIn = false;

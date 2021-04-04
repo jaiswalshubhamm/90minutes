@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final odd = oddFromJson(jsonString);
-
 import 'dart:convert';
 
 Odd oddFromJson(String str) => Odd.fromJson(json.decode(str));

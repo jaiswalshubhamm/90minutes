@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nintyminutesflutter/config/palette.dart';
+import '../../../config/palette.dart';
 
 class PasswordFieldWidget extends StatefulWidget {
   final TextEditingController controller;
