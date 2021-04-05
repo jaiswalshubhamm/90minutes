@@ -13,7 +13,6 @@ import '../../../widgets/loading.dart';
 class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     var fixtureDetailData = Provider.of<FixtureDetailsProvider>(context);
     var oddData = Provider.of<OddProvider>(context);
 
@@ -23,172 +22,163 @@ class Details extends StatelessWidget {
       return Center(child: Loading());
     } else if (fixtureDetailData.fixture.status == NetworkStatus.COMPLETED &&
         oddData.odd.status == NetworkStatus.COMPLETED) {
-      return SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Row(
-              children: [
-                SizedBox(width: 20),
-                Image.network(
-                  _fixture[0].league.logo ??
-                      "https://media.api-sports.io/football/leagues/4.png",
-                  height: 30,
-                  width: 30,
-                ),
-                SizedBox(width: 10),
-                CustomText(
-                  text:
-                      '${_fixture[0].league.country},  ${_fixture[0].league.name},  ${_fixture[0].league.round}',
-                  size: 14,
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                SizedBox(width: 20),
-                Flexible(
-                  child: CustomText(
-                    text:
-                        '${_fixture[0].teams.home.name} - ${_fixture[0].teams.away.name}',
-                    size: 20,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  child: Image.network(
-                    _fixture[0].teams.home.logo,
-                    width: 100,
-                  ),
-                  onTap: () {
-                    Provider.of<TeamProvider>(context, listen: false)
-                        .setId(_fixture[0].teams.home.id);
-                    Navigator.pushNamed(
-                      context,
-                      '/team',
-                    );
-                  },
-                ),
-                CustomText(
-                  text:
-                      '${_fixture[0].score.fulltime.home ?? '-'}   --   ${_fixture[0].score.fulltime.away ?? '-'}',
-                  size: 24,
-                ),
-                GestureDetector(
-                  child: Image.network(
-                    _fixture[0].teams.away.logo,
-                    width: 100,
-                  ),
-                  onTap: () {
-                    Provider.of<TeamProvider>(context, listen: false)
-                        .setId(_fixture[0].teams.away.id);
-                    Navigator.pushNamed(
-                      context,
-                      '/team',
-                    );
-                  },
-                ),
-              ],
-            ),
-            Center(
-              child: CustomText(text: 'Full Time', size: 10),
-            ),
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 5),
-                Expanded(
-                  child: Container(
-                    height: 25,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Palette.primary,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                      ),
-                    ),
-                    child: CustomText(
-                      text: 'bet365',
-                      size: 16,
-                      bgColor: Palette.primary,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 25,
-                    alignment: Alignment.center,
-                    color: Palette.darkerGrey,
-                    child: CustomText(
-                      text: (_odd.length != 0)
-                          ? _odd[0].bookmakers[0].bets[0].values[0].odd
-                          : '--',
-                      size: 20,
-                      bgColor: Palette.darkerGrey,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 25,
-                    alignment: Alignment.center,
-                    color: Palette.darkerGrey,
-                    child: CustomText(
-                      text: (_odd.length != 0)
-                          ? _odd[0].bookmakers[0].bets[0].values[1].odd
-                          : '--',
-                      size: 20,
-                      bgColor: Palette.darkerGrey,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 25,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Palette.darkerGrey,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                      ),
-                    ),
-                    child: CustomText(
-                      text: (_odd.length != 0)
-                          ? _odd[0].bookmakers[0].bets[0].values[2].odd
-                          : '--',
-                      size: 20,
-                      bgColor: Palette.darkerGrey,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 5),
-              ],
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 15),
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      CustomText(
-                        text: 'Venue',
-                        size: 20,
-                        weight: FontWeight.bold,
-                      ),
-                    ],
+                  Image.network(
+                    _fixture[0].league.logo ??
+                        "https://media.api-sports.io/football/leagues/4.png",
+                    height: 25,
+                    width: 25,
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(width: 12),
+                  Flexible(
+                    child: CustomText(
+                      text:
+                          '${_fixture[0].league.country},  ${_fixture[0].league.name},  ${_fixture[0].league.round}',
+                      size: 15,
+                      // weight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 24),
+              CustomText(
+                text:
+                    '${_fixture[0].teams.home.name} - ${_fixture[0].teams.away.name}',
+                size: 20,
+                weight: FontWeight.w700,
+              ),
+              SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    child: Image.network(
+                      _fixture[0].teams.home.logo,
+                      width: 80,
+                    ),
+                    onTap: () {
+                      Provider.of<TeamProvider>(context, listen: false)
+                          .setId(_fixture[0].teams.home.id);
+                      Navigator.pushNamed(
+                        context,
+                        '/team',
+                      );
+                    },
+                  ),
+                  CustomText(
+                    text:
+                        '${_fixture[0].score.fulltime.home ?? '-'}   -   ${_fixture[0].score.fulltime.away ?? '-'}',
+                    size: 24,
+                  ),
+                  GestureDetector(
+                    child: Image.network(
+                      _fixture[0].teams.away.logo,
+                      width: 80,
+                    ),
+                    onTap: () {
+                      Provider.of<TeamProvider>(context, listen: false)
+                          .setId(_fixture[0].teams.away.id);
+                      Navigator.pushNamed(
+                        context,
+                        '/team',
+                      );
+                    },
+                  ),
+                ],
+              ),
+              Center(
+                child: CustomText(text: 'Full Time', size: 10),
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Palette.primary,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          bottomLeft: Radius.circular(5),
+                        ),
+                      ),
+                      child: CustomText(
+                        text: 'bet365',
+                        size: 16,
+                        bgColor: Palette.primary,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      color: Palette.darkerGrey,
+                      child: CustomText(
+                        text: (_odd.length != 0)
+                            ? _odd[0].bookmakers[0].bets[0].values[0].odd
+                            : '--',
+                        size: 20,
+                        bgColor: Palette.darkerGrey,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      color: Palette.darkerGrey,
+                      child: CustomText(
+                        text: (_odd.length != 0)
+                            ? _odd[0].bookmakers[0].bets[0].values[1].odd
+                            : '--',
+                        size: 20,
+                        bgColor: Palette.darkerGrey,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Palette.darkerGrey,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(5),
+                          bottomRight: Radius.circular(5),
+                        ),
+                      ),
+                      child: CustomText(
+                        text: (_odd.length != 0)
+                            ? _odd[0].bookmakers[0].bets[0].values[2].odd
+                            : '--',
+                        size: 20,
+                        bgColor: Palette.darkerGrey,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 36),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    text: 'Venue',
+                    size: 20,
+                    weight: FontWeight.bold,
+                    color: Palette.primary,
+                  ),
+                  SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -202,7 +192,7 @@ class Details extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 6),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -216,17 +206,14 @@ class Details extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
-                  Image.network(
-                    (_fixture[0].fixture.venue.id != null)
-                        ? 'https://media.api-sports.io/football/venues/${_fixture[0].fixture.venue.id}.png'
-                        : 'https://media.api-sports.io/football/leagues/304.png',
-                    width: (screenSize.width - 40),
-                  ),
+                  SizedBox(height: 6),
+                  Image.network((_fixture[0].fixture.venue.id != null)
+                      ? 'https://media.api-sports.io/football/venues/${_fixture[0].fixture.venue.id}.png'
+                      : 'https://media.api-sports.io/football/leagues/304.png'),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     } else if (fixtureDetailData.fixture.status == NetworkStatus.ERROR) {

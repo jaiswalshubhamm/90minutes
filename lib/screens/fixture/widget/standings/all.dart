@@ -13,12 +13,13 @@ class AllStanding extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: CustomText(
+        // Padding(
+          // padding: const EdgeInsets.only(left: 24),
+          // child:
+           CustomText(
             text: standings[0].group,
             weight: FontWeight.w700,
-          ),
+          // ),
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,

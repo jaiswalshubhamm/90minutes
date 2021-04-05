@@ -17,10 +17,11 @@ class Leagues extends StatelessWidget {
       return Center(child: Loading());
     } else if (leaguesData.leagues.status == NetworkStatus.COMPLETED) {
       return ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(vertical: 10),
         itemBuilder: (context, i) {
           return Card(
             child: ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

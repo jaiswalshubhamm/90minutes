@@ -19,22 +19,18 @@ class Lineup extends StatelessWidget {
       return SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: 30,
+              height: 35,
               color: Palette.secondary,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
-                    child: CustomText(
-                      bgColor: Palette.secondary,
-                      text: _fixture[0].teams.away.name,
-                      color: Palette.white,
-                    ),
-                  ),
-                ],
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              child: CustomText(
+                bgColor: Palette.secondary,
+                text: _fixture[0].teams.away.name,
+                color: Palette.white,
+                weight: FontWeight.w700,
               ),
             ),
             Container(
@@ -50,7 +46,7 @@ class Lineup extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: 18,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +60,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 16,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -96,7 +92,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 16,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -116,7 +112,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 16,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -142,7 +138,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 16,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -157,7 +153,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +168,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 18,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -198,7 +194,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 18,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -218,7 +214,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 28,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -250,7 +246,7 @@ class Lineup extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 9,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -267,111 +263,132 @@ class Lineup extends StatelessWidget {
               ),
             ),
             Container(
-              height: 40,
+              height: 35,
               color: Palette.secondary,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
-                    child: CustomText(
-                      bgColor: Palette.secondary,
-                      text: _fixture[0].teams.home.name,
-                      color: Palette.white,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              child: CustomText(
+                bgColor: Palette.secondary,
+                text: _fixture[0].teams.home.name,
+                color: Palette.white,
+                weight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 12),
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.symmetric(horizontal: 24),
+              leading: Image.network(
+                _fixture[0].lineups[0].team.logo,
+                height: 30,
+              ),
+              title: CustomText(
+                text: _fixture[0].lineups[0].team.name,
+                weight: FontWeight.w700,
+                color: Palette.primary,
+              ),
+            ),
+            // ListTile(
+            //   dense: true,
+            //   // contentPadding: EdgeInsets.zero,
+            //   leading: CustomText(
+            //     text: 'Coach',
+            //     size: 20,
+            //   ),
+            //   title: CustomText(
+            //     text: _fixture[0].lineups[0].coach.name,
+            //     size: 14,
+            //   ),
+            // ),
+            DataTable(
+              dataRowHeight: 36,
+              columns: <DataColumn>[
+                DataColumn(
+                  label: CustomText(
+                    text: 'Number',
+                    color: Palette.primary,
+                  ),
+                ),
+                DataColumn(
+                  label: CustomText(
+                    text: 'Team',
+                    color: Palette.primary,
+                  ),
+                ),
+              ],
+              rows: _fixture[0]
+                  .lineups[0]
+                  .startXi
+                  .map(
+                    (player) => DataRow(
+                      cells: [
+                        DataCell(
+                          CustomText(text: '${player.player.number}'),
+                        ),
+                        DataCell(
+                          Text(player.player.name),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 15),
-            Card(
-              elevation: 5.0,
-              child: ListTile(
-                leading: Image.network(
-                  _fixture[0].lineups[0].team.logo,
-                  height: 80,
-                ),
-                title: CustomText(
-                  text: _fixture[0].lineups[0].team.name,
-                  size: 20,
-                ),
-              ),
+                  )
+                  .toList(),
             ),
             ListTile(
-              leading: CustomText(
-                text: 'Coach',
-                size: 20,
+              dense: true,
+              contentPadding: EdgeInsets.symmetric(horizontal: 24),
+              leading: Image.network(
+                _fixture[0].lineups[1].team.logo,
+                height: 30,
               ),
               title: CustomText(
-                text: _fixture[0].lineups[0].coach.name,
-                size: 14,
+                text: _fixture[0].lineups[1].team.name,
+                weight: FontWeight.w700,
+                color: Palette.primary,
               ),
             ),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemExtent: 25,
-              itemBuilder: (context, i) {
-                return ListTile(
-                  leading: CustomText(
-                    text: '${_fixture[0].lineups[0].startXi[i].player.number}',
-                    size: 20,
+            // ListTile(
+            //   dense: true,
+            //   leading: CustomText(
+            //     text: 'Coach',
+            //     size: 20,
+            //   ),
+            //   title: CustomText(
+            //     text: _fixture[0].lineups[1].coach.name,
+            //     size: 14,
+            //   ),
+            // ),
+            DataTable(
+              dataRowHeight: 36,
+              columns: <DataColumn>[
+                DataColumn(
+                  label: CustomText(
+                    text: 'Number',
+                    color: Palette.primary,
                   ),
-                  title: CustomText(
-                    text: _fixture[0].lineups[0].startXi[i].player.name,
-                    size: 14,
-                  ),
-                  onTap: () {},
-                  // ),
-                );
-              },
-              itemCount: _fixture[0].lineups[0].startXi.length,
-            ),
-            SizedBox(height: 15),
-            Card(
-              elevation: 5.0,
-              child: ListTile(
-                leading: Image.network(
-                  _fixture[0].lineups[1].team.logo,
-                  height: 80,
                 ),
-                title: CustomText(
-                  text: _fixture[0].lineups[1].team.name,
-                  size: 20,
+                DataColumn(
+                  label: CustomText(
+                    text: 'Team',
+                    color: Palette.primary,
+                  ),
                 ),
-              ),
-            ),
-            ListTile(
-              leading: CustomText(
-                text: 'Coach',
-                size: 20,
-              ),
-              title: CustomText(
-                text: _fixture[0].lineups[1].coach.name,
-                size: 14,
-              ),
-            ),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemExtent: 25,
-              itemBuilder: (context, i) {
-                return ListTile(
-                  leading: CustomText(
-                    text: '${_fixture[0].lineups[1].startXi[i].player.number}',
-                    size: 20,
-                  ),
-                  title: CustomText(
-                    text: _fixture[0].lineups[1].startXi[i].player.name,
-                    size: 14,
-                  ),
-                  onTap: () {},
-                  // ),
-                );
-              },
-              itemCount: _fixture[0].lineups[1].startXi.length,
+              ],
+              rows: _fixture[0]
+                  .lineups[1]
+                  .startXi
+                  .map(
+                    (player) => DataRow(
+                      cells: [
+                        DataCell(
+                          CustomText(text: '${player.player.number}'),
+                        ),
+                        DataCell(
+                          Text(player.player.name),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
             ),
             SizedBox(height: 15),
           ],

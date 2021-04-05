@@ -21,140 +21,145 @@ class Fixtures extends StatelessWidget {
       return Center(child: Loading());
     } else if (fixturesData.fixtures.status == NetworkStatus.COMPLETED) {
       return ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(vertical: 10),
         itemBuilder: (context, i) {
           return GestureDetector(
             child: Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Image.network(
-                      _fixtures[i].league.logo ??
-                          "https://media.api-sports.io/football/leagues/4.png",
-                      height: 30,
-                      width: 30,
-                    ),
-                    title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: _fixtures[i].league.country,
-                                size: 12,
-                              ),
-                              CustomText(
-                                text: _fixtures[i].league.name,
-                                weight: FontWeight.bold,
-                                color: Palette.primary,
-                              ),
-                            ],
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(
+                  children: [
+                    ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      leading: Image.network(
+                        _fixtures[i].league.logo ??
+                            "https://media.api-sports.io/football/leagues/4.png",
+                        height: 30,
+                        width: 30,
+                      ),
+                      title: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: _fixtures[i].league.country,
+                                  size: 12,
+                                ),
+                                CustomText(
+                                  text: _fixtures[i].league.name,
+                                  weight: FontWeight.bold,
+                                  color: Palette.primary,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Divider(
-                    color: Palette.darkerGrey,
-                    thickness: .5,
-                  ),
-                  ListTile(
-                    leading: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Center(
-                          child: Text(
+                    Divider(
+                      color: Palette.darkerGrey,
+                      thickness: .5,
+                    ),
+                    ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      leading: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
                             _fixtures[i].fixture.date.substring(11, 16),
                           ),
-                        ),
-                        VerticalDivider(
-                          color: Palette.darkerGrey,
-                          thickness: 1,
-                        ),
-                      ],
-                    ),
-                    title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: Column(
+                          VerticalDivider(
+                            color: Palette.darkerGrey,
+                            thickness: 1,
+                          ),
+                        ],
+                      ),
+                      title: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _fixtures[i].teams.home.name,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  _fixtures[i].teams.away.name,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _fixtures[i].teams.home.name,
+                                '${_fixtures[i].goals.home ?? ''}',
                               ),
-                              SizedBox(height: 10),
                               Text(
-                                _fixtures[i].teams.away.name,
+                                '${_fixtures[i].goals.away ?? ''}',
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '${_fixtures[i].goals.home ?? ''}',
-                            ),
-                            Text(
-                              '${_fixtures[i].goals.away ?? ''}',
-                            ),
-                          ],
-                        ),
-                        VerticalDivider(
-                          color: Palette.darkerGrey,
-                          thickness: 1,
-                        ),
-                        Consumer<AuthProvider>(
-                          builder: (context, person, child) {
-                            return IconButton(
-                              icon: Icon(
-                                authProvider.favorite
-                                        .contains(_fixtures[i].fixture.id)
-                                    ? Icons.notifications_active
-                                    : Icons.notifications,
-                                color: authProvider.favorite.contains(
-                                  _fixtures[i].fixture.id,
-                                )
-                                    ? Palette.primary
-                                    : Palette.darkerGrey,
-                              ),
-                              onPressed: () {
-                                if (authProvider.isLoggedIn) {
-                                  if (authProvider.favorite
-                                      .contains(_fixtures[i].fixture.id)) {
-                                    Provider.of<AuthProvider>(context,
-                                            listen: false)
-                                        .removeFromFovorite(authProvider.id,
-                                            _fixtures[i].fixture.id);
+                          VerticalDivider(
+                            color: Palette.darkerGrey,
+                            thickness: 1,
+                          ),
+                          Consumer<AuthProvider>(
+                            builder: (context, person, child) {
+                              return IconButton(
+                                padding: EdgeInsets.symmetric(horizontal: 2),
+                                constraints: BoxConstraints(),
+                                icon: Icon(
+                                  authProvider.favorite
+                                          .contains(_fixtures[i].fixture.id)
+                                      ? Icons.notifications_active
+                                      : Icons.notifications,
+                                  color: authProvider.favorite.contains(
+                                    _fixtures[i].fixture.id,
+                                  )
+                                      ? Palette.primary
+                                      : Palette.darkerGrey,
+                                ),
+                                onPressed: () {
+                                  if (authProvider.isLoggedIn) {
+                                    if (authProvider.favorite
+                                        .contains(_fixtures[i].fixture.id)) {
+                                      Provider.of<AuthProvider>(context,
+                                              listen: false)
+                                          .removeFromFovorite(authProvider.id,
+                                              _fixtures[i].fixture.id);
+                                    } else {
+                                      Provider.of<AuthProvider>(context,
+                                              listen: false)
+                                          .addToFovorite(authProvider.id,
+                                              _fixtures[i].fixture.id);
+                                    }
                                   } else {
-                                    Provider.of<AuthProvider>(context,
-                                            listen: false)
-                                        .addToFovorite(authProvider.id,
-                                            _fixtures[i].fixture.id);
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/login',
+                                    );
                                   }
-                                } else {
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/login',
-                                  );
-                                }
-                              },
-                            );
-                          },
-                        ),
-                      ],
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             onTap: () {

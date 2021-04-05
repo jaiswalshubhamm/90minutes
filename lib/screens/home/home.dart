@@ -111,13 +111,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         drawer: Drawer(
           child: MenuDrawer(),
         ),
-        body: TabBarView(
-          controller: _tcontroller,
-          children: [
-            Leagues(),
-            Fixtures(),
-            Favorites(),
-          ],
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: TabBarView(
+            controller: _tcontroller,
+            children: [
+              Leagues(),
+              Fixtures(),
+              Favorites(),
+            ],
+          ),
         ),
       ),
     );

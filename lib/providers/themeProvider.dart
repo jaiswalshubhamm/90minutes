@@ -43,7 +43,7 @@ class MyThemes {
       labelPadding: EdgeInsets.only(top: 4),
       indicatorSize: TabBarIndicatorSize.tab,
     ),
-    scaffoldBackgroundColor: Palette.darkMode.withOpacity(.8),
+    scaffoldBackgroundColor: Palette.darkMode.withOpacity(.6),
     iconTheme: IconThemeData(
       color: Palette.primary,
       opacity: 0.8,
@@ -55,11 +55,11 @@ class MyThemes {
     ),
     cardTheme: CardTheme(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(4.0),
       ),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      elevation: 5,
       color: Palette.darkMode,
-      elevation: 8,
+      margin: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
     ),
   );
 
@@ -94,10 +94,11 @@ class MyThemes {
     ),
     cardTheme: CardTheme(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(4.0),
       ),
-      elevation: 8,
+      elevation: 5,
       color: Palette.lightGrey,
+      margin: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
     ),
   );
 }
