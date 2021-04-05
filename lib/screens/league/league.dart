@@ -33,48 +33,59 @@ class _LeagueScreenState extends State<LeagueScreen> {
             length: leagueDetailData.tabControllerLength,
             child: Scaffold(
               appBar: AppBar(
-                title: (leagueDetailData.league.data?.response != null)
-                    ? DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          iconEnabledColor: Colors.black,
-                          value: _year,
-                          elevation: 5,
-                          icon: Icon(
-                            Icons.arrow_drop_down,
-                            color: Palette.white,
-                          ),
-                          iconSize: 20,
-                          items: leagueDetailData
-                              .league.data?.response[0].seasons
-                              .map((map) {
-                            return DropdownMenuItem<String>(
-                              value: '${map.year}',
-                              child: Container(
-                                color: Palette.white,
+                title: Container(
+                  height: 36,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: Palette.lightGrey,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Palette.darkMode, width: .6),
+                  ),
+                  child: (leagueDetailData.league.data?.response != null)
+                      ? DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            dropdownColor: Palette.lightGrey,
+                            value: _year,
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Palette.primary,
+                            ),
+                            iconSize: 24,
+                            items: leagueDetailData
+                                .league.data?.response[0].seasons
+                                .map((map) {
+                              return DropdownMenuItem<String>(
+                                value: '${map.year}',
                                 child: CustomText(
                                   text: '${map.year} ',
-                                  color: Palette.white,
+                                  color: Palette.primary,
+                                  weight: FontWeight.w700,
                                   size: 20,
-                                  bgColor: Palette.primary,
                                 ),
-                              ),
-                            );
-                          }).toList(),
-                          hint: CustomText(
-                            text:
-                                '${leagueDetailData.league.data?.response[0].seasons.last.year}',
-                            color: Palette.white,
-                            weight: FontWeight.w700,
+                              );
+                            }).toList(),
+                            hint: CustomText(
+                              text:
+                                  '${leagueDetailData.league.data?.response[0].seasons.last.year}',
+                              color: Palette.primary,
+                              weight: FontWeight.w700,
+                              size: 20,
+                            ),
+                            onChanged: (String value) {
+                              setState(() {
+                                _year = value;
+                              });
+                              leagueDetailData.setYear(_year);
+                            },
                           ),
-                          onChanged: (String value) {
-                            setState(() {
-                              _year = value;
-                            });
-                            leagueDetailData.setYear(_year);
-                          },
+                        )
+                      : CustomText(
+                          text: '2020',
+                          color: Palette.primary,
+                          size: 20,
+                          weight: FontWeight.w700,
                         ),
-                      )
-                    : Text('2020'),
+                ),
                 bottom: TabBar(
                   isScrollable: true,
                   labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -88,13 +99,16 @@ class _LeagueScreenState extends State<LeagueScreen> {
                   ],
                 ),
               ),
-              body: TabBarView(
-                children: [
-                  Details(),
-                  if (leagueDetailData.isStanding) Standings(),
-                  if (leagueDetailData.isTopPlayers) TopPlayer(),
-                  Matches(),
-                ],
+              body: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: TabBarView(
+                  children: [
+                    Details(),
+                    if (leagueDetailData.isStanding) Standings(),
+                    if (leagueDetailData.isTopPlayers) TopPlayer(),
+                    Matches(),
+                  ],
+                ),
               ),
             ),
           );

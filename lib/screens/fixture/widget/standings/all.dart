@@ -13,18 +13,13 @@ class AllStanding extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 10),
-        // Padding(
-          // padding: const EdgeInsets.only(left: 24),
-          // child:
-           CustomText(
-            text: standings[0].group,
-            weight: FontWeight.w700,
-          // ),
+        CustomText(
+          text: standings[0].group,
+          weight: FontWeight.w700,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
-            columnSpacing: 15,
             columns: <DataColumn>[
               DataColumn(
                 label: CustomText(
@@ -86,7 +81,7 @@ class AllStanding extends StatelessWidget {
                   (team) => DataRow(
                     cells: [
                       DataCell(
-                        CustomText(text: '${standings.indexOf(team)}'),
+                        CustomText(text: '${standings.indexOf(team) + 1}'),
                       ),
                       DataCell(
                         Row(
@@ -113,7 +108,8 @@ class AllStanding extends StatelessWidget {
                         Text('${team.all.lose}'),
                       ),
                       DataCell(
-                        Text('${team.all.goals.against} : ${team.all.goals.goalsFor}'),
+                        Text(
+                            '${team.all.goals.against} : ${team.all.goals.goalsFor}'),
                       ),
                       (team.form != null)
                           ? DataCell(
@@ -131,13 +127,15 @@ class AllStanding extends StatelessWidget {
                                                     .substring(i, i + 1) ==
                                                 'D')
                                             ? Palette.darkerGrey
-                                            : (team.form.substring(i, i + 1) == 'L')
+                                            : (team.form.substring(i, i + 1) ==
+                                                    'L')
                                                 ? Palette.lose
                                                 : Palette.primary,
                                         child: Center(
                                           child: Text(
                                             team.form.substring(i, i + 1),
-                                            style: TextStyle(color: Palette.white),
+                                            style:
+                                                TextStyle(color: Palette.white),
                                           ),
                                         ),
                                       ),

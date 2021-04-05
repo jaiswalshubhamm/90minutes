@@ -100,5 +100,10 @@ class MyThemes {
       color: Palette.lightGrey,
       margin: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
     ),
+    dataTableTheme: DataTableThemeData(
+      columnSpacing: 20,
+      headingRowHeight: 52,
+      horizontalMargin: 10,
+    ),
   );
 }

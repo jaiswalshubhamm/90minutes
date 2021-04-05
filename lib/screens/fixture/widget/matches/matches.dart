@@ -30,17 +30,16 @@ class _MatchesState extends State<Matches> {
       return Center(child: Loading());
     } else if (fixtureDetailData.homeLast5?.status == NetworkStatus.COMPLETED &&
         fixtureDetailData.awayLast5?.status == NetworkStatus.COMPLETED) {
-      return SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: CustomText(
                   text: 'Home',
                   color: Palette.primary,
@@ -48,18 +47,14 @@ class _MatchesState extends State<Matches> {
                   weight: FontWeight.bold,
                 ),
               ),
-            ),
-            MatchTile(
-              matches: homeLast5,
-              authProvider: authProvider,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
+              if (homeLast5 != null)
+                MatchTile(
+                  matches: homeLast5,
+                  authProvider: authProvider,
+                ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: CustomText(
                   text: 'Away',
                   color: Palette.primary,
@@ -67,18 +62,16 @@ class _MatchesState extends State<Matches> {
                   weight: FontWeight.bold,
                 ),
               ),
-            ),
-            MatchTile(
-              matches: awayLast5,
-              authProvider: authProvider,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
+              if (awayLast5 != null)
+                MatchTile(
+                  matches: awayLast5,
+                  authProvider: authProvider,
+                ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: CustomText(
                   text: 'H2H',
                   color: Palette.primary,
@@ -86,13 +79,13 @@ class _MatchesState extends State<Matches> {
                   weight: FontWeight.bold,
                 ),
               ),
-            ),
-            if (h2h != null)
-              MatchTile(
-                matches: h2h,
-                authProvider: authProvider,
-              ),
-          ],
+              if (h2h != null)
+                MatchTile(
+                  matches: h2h,
+                  authProvider: authProvider,
+                ),
+            ],
+          ),
         ),
       );
     } else if (fixtureDetailData.homeLast5?.status == NetworkStatus.ERROR &&

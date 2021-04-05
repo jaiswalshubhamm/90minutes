@@ -274,7 +274,7 @@ class Lineup extends StatelessWidget {
                 weight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 20),
             ListTile(
               dense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 24),
@@ -286,6 +286,7 @@ class Lineup extends StatelessWidget {
                 text: _fixture[0].lineups[0].team.name,
                 weight: FontWeight.w700,
                 color: Palette.primary,
+                size: 20,
               ),
             ),
             // ListTile(
@@ -301,11 +302,12 @@ class Lineup extends StatelessWidget {
             //   ),
             // ),
             DataTable(
-              dataRowHeight: 36,
+              horizontalMargin: 32,
+              dataRowHeight: 40,
               columns: <DataColumn>[
                 DataColumn(
                   label: CustomText(
-                    text: 'Number',
+                    text: '#',
                     color: Palette.primary,
                   ),
                 ),
@@ -333,6 +335,7 @@ class Lineup extends StatelessWidget {
                   )
                   .toList(),
             ),
+            SizedBox(height: 16),
             ListTile(
               dense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 24),
@@ -344,6 +347,7 @@ class Lineup extends StatelessWidget {
                 text: _fixture[0].lineups[1].team.name,
                 weight: FontWeight.w700,
                 color: Palette.primary,
+                size: 20,
               ),
             ),
             // ListTile(
@@ -358,11 +362,12 @@ class Lineup extends StatelessWidget {
             //   ),
             // ),
             DataTable(
-              dataRowHeight: 36,
+              horizontalMargin: 32,
+              dataRowHeight: 40,
               columns: <DataColumn>[
                 DataColumn(
                   label: CustomText(
-                    text: 'Number',
+                    text: '#',
                     color: Palette.primary,
                   ),
                 ),

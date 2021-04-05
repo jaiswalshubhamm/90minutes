@@ -139,7 +139,7 @@ class _StandingsState extends State<Standings> {
               SizedBox(height: 8),
               ListTile(
                 dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                contentPadding: EdgeInsets.zero,
                 leading: Image.network(
                   _standing[0].league.logo,
                   height: 30,
@@ -148,6 +148,7 @@ class _StandingsState extends State<Standings> {
                   text:
                       '${_standing[0].league.name},  ${_standing[0].league.country} ${_standing[0].league.season}',
                   size: 18,
+                  weight: FontWeight.w700,
                 ),
               ),
               Divider(
