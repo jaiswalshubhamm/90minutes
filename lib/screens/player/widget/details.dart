@@ -199,48 +199,49 @@ class Details extends StatelessWidget {
               weight: FontWeight.w600,
             ),
             if (_transfer != null)
-              ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(vertical: 4),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemBuilder: (context, i) {
-                  return Card(
-                    color: Palette.lightGrey,
-                    child: ListTile(
-                      leading: Image.network(
-                        _transfer[0].transfers[i].teams.teamsIn.logo ??
-                            "https://media.api-sports.io/football/leagues/4.png",
-                        height: 30,
-                        width: 30,
+              if (_transfer.length > 0)
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, i) {
+                    return Card(
+                      color: Palette.lightGrey,
+                      child: ListTile(
+                        leading: Image.network(
+                          _transfer[0].transfers[i].teams.teamsIn.logo ??
+                              "https://media.api-sports.io/football/leagues/4.png",
+                          height: 30,
+                          width: 30,
+                        ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              text:
+                                  '${_transfer[0].transfers[i].teams.out.name}-${_transfer[0].transfers[i].teams.teamsIn.name}',
+                              bgColor: Palette.lightGrey,
+                              weight: FontWeight.bold,
+                            ),
+                            SizedBox(height: 4),
+                            CustomText(
+                              text: '${_transfer[0].transfers[i].date}'
+                                  .substring(0, 10),
+                              bgColor: Palette.lightGrey,
+                            ),
+                          ],
+                        ),
+                        trailing: CustomText(
+                          text: _transfer[0].transfers[i].type,
+                          weight: FontWeight.bold,
+                          color: Palette.primary,
+                        ),
                       ),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            text:
-                                '${_transfer[0].transfers[i].teams.out.name}-${_transfer[0].transfers[i].teams.teamsIn.name}',
-                            bgColor: Palette.lightGrey,
-                            weight: FontWeight.bold,
-                          ),
-                          SizedBox(height: 4),
-                          CustomText(
-                            text: '${_transfer[0].transfers[i].date}'
-                                .substring(0, 10),
-                            bgColor: Palette.lightGrey,
-                          ),
-                        ],
-                      ),
-                      trailing: CustomText(
-                        text: _transfer[0].transfers[i].type,
-                        weight: FontWeight.bold,
-                        color: Palette.primary,
-                      ),
-                    ),
-                  );
-                },
-                itemCount: _transfer[0].transfers.length,
-              ),
+                    );
+                  },
+                  itemCount: _transfer[0].transfers.length,
+                ),
             SizedBox(height: 15),
             CustomText(
               text: 'Trophies',

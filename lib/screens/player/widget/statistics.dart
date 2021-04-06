@@ -17,87 +17,23 @@ class _StatisticsState extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
     var playerData = Provider.of<PlayerProvider>(context);
-    List<player.Statistic> statistics =
-        playerData.players?.data?.response[0].statistics;
+    List<player.Response> _player = playerData.players.data?.response;
     if (playerData.players?.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
     } else if (playerData.players?.status == NetworkStatus.COMPLETED) {
-      return SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 15),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columns: <DataColumn>[
-                    DataColumn(label: Text('Matches')),
-                    DataColumn(label: Text('')),
-                  ],
-                  rows: <DataRow>[
-                    DataRow(
-                      cells: [
-                        DataCell(Text('Matches')),
-                        DataCell(Text('${statistics[i].games.appearences}'))
-                      ],
-                    ),
-                    DataRow(
-                      cells: [
-                        DataCell(Text('Matches')),
-                        DataCell(Text('${statistics[i].games.appearences}'))
-                      ],
-                    ),
-                    DataRow(
-                      cells: [
-                        DataCell(Text('Matches')),
-                        DataCell(Text('${statistics[i].games.appearences}'))
-                      ],
-                    ),
-                    DataRow(
-                      cells: [
-                        DataCell(Text('Matches')),
-                        DataCell(Text('${statistics[i].games.appearences}'))
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              //             Row(
-              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //               children: [
-              //                 CustomText(text: 'Minutes'),
-              //                 CustomText(text: '${statistics[i].games.minutes}')
-              //               ],
-              //             ),
-              //                 Row(
-              //                   children: [
-              //                     Image.network(
-              //                       team.team.logo,
-              //                       height: 30,
-              //                     ),
-              //                     SizedBox(width: 20),
-              //                     Text(team.team.name),
-              //                   ],
-              //                 ),
-              //               ),
-              //               DataCell(Text('${team.away.played}')),
-              //               DataCell(Text('${team.away.win}')),
-              //               DataCell(Text('${team.away.draw}')),
-              //               DataCell(Text('${team.away.lose}')),
-              //               DataCell(Text(
-              //                   '${team.away.goals.against} : ${team.away.goals.goalsFor}')),
-              //             ],
-              //           ),
-              //         )
-              //         .toList(),
-              //   ),
-              // ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Palette.primary),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Palette.primary, width: 1.4),
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<int>(
@@ -108,9 +44,9 @@ class _StatisticsState extends State<Statistics> {
                       color: Palette.primary,
                       size: 32,
                     ),
-                    items: statistics.map((map) {
+                    items: _player[0].statistics.map((map) {
                       return DropdownMenuItem<int>(
-                        value: statistics.indexOf(map),
+                        value: _player[0].statistics.indexOf(map),
                         child: Row(
                           children: [
                             Image.network(
@@ -118,21 +54,20 @@ class _StatisticsState extends State<Statistics> {
                                   'https://media.api-sports.io/football/leagues/340.png',
                               height: 20,
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            SizedBox(width: 10),
                             CustomText(
                               text: '${map.league.name} ',
                               color: Palette.primary,
+                              weight: FontWeight.w700,
+                              size: 14,
                             ),
                           ],
                         ),
                       );
                     }).toList(),
                     hint: CustomText(
-                      text: '${statistics[0].league.name} ',
+                      text: '${_player[0].statistics[0].league.name} ',
                       color: Palette.primary,
-                      size: 16,
                       weight: FontWeight.w600,
                     ),
                     onChanged: (int value) {
@@ -143,403 +78,368 @@ class _StatisticsState extends State<Statistics> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
+              SizedBox(height: 10),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Matches')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Total Played')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].games.appearences ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Lineups')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].games.lineups ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Minutes')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].games.minutes ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Position')),
+                      DataCell(
+                          Text(_player[0].statistics[i].games.position ?? ''))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Ratings')),
+                      DataCell(
+                        Text((_player[0].statistics[i].games.rating != null)
+                            ? _player[0]
+                                .statistics[i]
+                                .games
+                                .rating
+                                .substring(0, 4)
+                            : ''),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Matches',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total Played'),
-                        CustomText(text: '${statistics[i].games.appearences}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Lineups'),
-                        CustomText(text: '${statistics[i].games.lineups}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Minutes'),
-                        CustomText(text: '${statistics[i].games.minutes}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Position'),
-                        CustomText(text: statistics[i].games.position)
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Ratings'),
-                        CustomText(
-                          text: (statistics[i].games.rating != null)
-                              ? statistics[i].games.rating.substring(0, 4)
-                              : '',
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Subtitutes')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('In')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].substitutes.substitutesIn ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Out')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].substitutes.out ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Bench')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].substitutes.bench ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Subtitutes',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'In'),
-                        CustomText(
-                            text: '${statistics[i].substitutes.substitutesIn}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Out'),
-                        CustomText(text: '${statistics[i].substitutes.out}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Bench'),
-                        CustomText(text: '${statistics[i].substitutes.bench}')
-                      ],
-                    )
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Shots')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Total')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].shots.total ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('On')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].shots.on ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Shots',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics[i].shots.total ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'On'),
-                        CustomText(text: '${statistics[i].shots.on ?? ''}')
-                      ],
-                    ),
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Goals')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Total')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].goals.total ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Conceded')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].goals.conceded ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Assist')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].goals.assists ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Saves')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].goals.saves ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Goals',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics[i].goals.total ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Conceded'),
-                        CustomText(
-                            text: '${statistics[i].goals.conceded ?? ''}'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Assist'),
-                        CustomText(text: '${statistics[i].goals.assists ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Saves'),
-                        CustomText(text: '${statistics[i].goals.saves ?? ''}')
-                      ],
-                    )
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Passes')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Total')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].passes.total ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Key')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].passes.key ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Accuracy')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].passes.accuracy ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Passes',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics[i].passes.total ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Key'),
-                        CustomText(text: '${statistics[i].passes.key ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Accuracy'),
-                        CustomText(
-                            text: '${statistics[i].passes.accuracy ?? ''}')
-                      ],
-                    )
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Tackles')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Total')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].tackles.total ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Blocks')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].tackles.blocks ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Interceptions')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].tackles.interceptions ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Tackles',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics[i].tackles.total ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Blocks'),
-                        CustomText(
-                            text: '${statistics[i].tackles.blocks ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Interceptions'),
-                        CustomText(
-                            text:
-                                '${statistics[i].tackles.interceptions ?? ''}')
-                      ],
-                    )
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Duels')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Total')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].duels.total ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Won')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].duels.won ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Duels',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Total'),
-                        CustomText(text: '${statistics[i].duels.total ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Won'),
-                        CustomText(text: '${statistics[i].duels.won ?? ''}')
-                      ],
-                    ),
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Dribbles')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Attempts')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].dribbles.attempts ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Success')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].dribbles.success ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Past')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].dribbles.past ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Dribles',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Attempts'),
-                        CustomText(
-                            text: '${statistics[i].dribbles.attempts ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Success'),
-                        CustomText(
-                            text: '${statistics[i].dribbles.success ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Past'),
-                        CustomText(text: '${statistics[i].dribbles.past ?? ''}')
-                      ],
-                    )
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Fouls')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Drawn')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].fouls.drawn ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Committed')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].fouls.committed ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Foules',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Drawn'),
-                        CustomText(text: '${statistics[i].fouls.drawn ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Commited'),
-                        CustomText(
-                            text: '${statistics[i].fouls.committed ?? ''}')
-                      ],
-                    ),
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Cards')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Yellow')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].cards.yellow ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Yellow Red')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].cards.yellowred ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Red')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].cards.red ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Cards',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Yellow'),
-                        CustomText(text: '${statistics[i].cards.yellow ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Yellow Red'),
-                        CustomText(
-                            text: '${statistics[i].cards.yellowred ?? ''}')
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Red'),
-                        CustomText(text: '${statistics[i].cards.red ?? ''}')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Penalty',
-                      size: 20,
-                      color: Palette.primary,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Won'),
-                        CustomText(text: '${statistics[i].penalty.won ?? ''}'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Comitted'),
-                        CustomText(
-                            text: '${statistics[i].penalty.commited ?? ''}'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Scored'),
-                        CustomText(
-                            text: '${statistics[i].penalty.scored ?? ''}'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Missed'),
-                        CustomText(
-                            text: '${statistics[i].penalty.missed ?? ''}'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(text: 'Saved'),
-                        CustomText(
-                            text: '${statistics[i].penalty.saved ?? ''}'),
-                      ],
-                    )
-                  ],
-                ),
+              DataTable(
+                dataRowHeight: 30,
+                horizontalMargin: 5,
+                columns: <DataColumn>[
+                  DataColumn(label: Text('Penalty')),
+                  DataColumn(label: Text('')),
+                ],
+                rows: <DataRow>[
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Won')),
+                      DataCell(
+                          Text('${_player[0].statistics[i].penalty.won ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Commited')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].penalty.commited ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Scored')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].penalty.scored ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Missed')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].penalty.missed ?? ''}'))
+                    ],
+                  ),
+                  DataRow(
+                    cells: [
+                      DataCell(Text('Saved')),
+                      DataCell(Text(
+                          '${_player[0].statistics[i].penalty.saved ?? ''}'))
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

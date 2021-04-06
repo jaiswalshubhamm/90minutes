@@ -28,7 +28,6 @@ class _ConfirmPasswordFieldWidgetState
           obscureText: isHidden,
           decoration: InputDecoration(
             filled: true,
-            fillColor: Palette.lightGrey,
             hintText: 'Confirm Password',
             enabledBorder: new OutlineInputBorder(
               borderRadius: new BorderRadius.circular(25.0),

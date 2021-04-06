@@ -37,7 +37,6 @@ class _NameFieldWidgetState extends State<NameFieldWidget> {
           decoration: InputDecoration(
             hintText: 'Name',
             filled: true,
-            fillColor: Palette.lightGrey,
             enabledBorder: new OutlineInputBorder(
               borderRadius: new BorderRadius.circular(25.0),
               borderSide: BorderSide(color: Palette.darkerGrey),

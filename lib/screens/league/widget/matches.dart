@@ -87,11 +87,7 @@ class _MatchesState extends State<Matches> {
                       leading: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Center(
-                            child: Text(
-                              '${last10[i].fixture.date}'.substring(11, 16),
-                            ),
-                          ),
+                          Text('${last10[i].fixture.date}'.substring(11, 16)),
                           VerticalDivider(
                             color: Palette.darkerGrey,
                             thickness: 1,

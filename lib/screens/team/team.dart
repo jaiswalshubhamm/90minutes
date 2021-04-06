@@ -37,7 +37,7 @@ class _TeamScreenState extends State<TeamScreen> {
                   _team != null ? _team[0].team.name : 'Team Info',
                 ),
                 bottom: TabBar(
-                  isScrollable: true,                         
+                  isScrollable: true,
                   labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
                   indicatorColor: Palette.white,
                   indicatorWeight: 4.0,
@@ -49,13 +49,16 @@ class _TeamScreenState extends State<TeamScreen> {
                   ],
                 ),
               ),
-              body: TabBarView(
-                children: [
-                  Details(),
-                  Matches(),
-                  if (teamData.isStanding) Standings(),
-                  if (teamData.isStatistics) Statistics(),
-                ],
+              body: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: TabBarView(
+                  children: [
+                    Details(),
+                    Matches(),
+                    if (teamData.isStanding) Standings(),
+                    if (teamData.isStatistics) Statistics(),
+                  ],
+                ),
               ),
             ),
           );

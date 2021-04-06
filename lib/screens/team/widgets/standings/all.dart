@@ -12,83 +12,30 @@ class AllStanding extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: CustomText(
-            text: standings[0].group,
-            weight: FontWeight.w700,
-          ),
+        SizedBox(height: 15),
+        CustomText(
+          text: standings[0].group,
+          weight: FontWeight.w700,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
-            columnSpacing: 15,
             columns: <DataColumn>[
-              DataColumn(
-                label: CustomText(
-                  text: '#',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'Team',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'P',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'W',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'D',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'L',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'GOALS',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'LAST 5',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'PTS',
-                  color: Palette.primary,
-                ),
-              ),
+              DataColumn(label: Text('#')),
+              DataColumn(label: Text('Team')),
+              DataColumn(label: Text('P')),
+              DataColumn(label: Text('W')),
+              DataColumn(label: Text('D')),
+              DataColumn(label: Text('L')),
+              DataColumn(label: Text('GOALS')),
+              DataColumn(label: Text('LAST 5')),
+              DataColumn(label: Text('PTS')),
             ],
             rows: standings
                 .map(
                   (team) => DataRow(
                     cells: [
-                      DataCell(
-                        CustomText(text: '${standings.indexOf(team)}'),
-                      ),
+                      DataCell(Text('${standings.indexOf(team) + 1}')),
                       DataCell(
                         Row(
                           children: [
@@ -101,22 +48,12 @@ class AllStanding extends StatelessWidget {
                           ],
                         ),
                       ),
-                      DataCell(
-                        Text('${team.all.played}'),
-                      ),
-                      DataCell(
-                        Text('${team.all.win}'),
-                      ),
-                      DataCell(
-                        Text('${team.all.draw}'),
-                      ),
-                      DataCell(
-                        Text('${team.all.lose}'),
-                      ),
-                      DataCell(
-                        Text(
-                            '${team.all.goals.against} : ${team.all.goals.goalsFor}'),
-                      ),
+                      DataCell(Text('${team.all.played}')),
+                      DataCell(Text('${team.all.win}')),
+                      DataCell(Text('${team.all.draw}')),
+                      DataCell(Text('${team.all.lose}')),
+                      DataCell(Text(
+                          '${team.all.goals.against} : ${team.all.goals.goalsFor}')),
                       (team.form != null)
                           ? DataCell(
                               Container(

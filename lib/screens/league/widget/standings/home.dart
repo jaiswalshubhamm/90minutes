@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../config/palette.dart';
 import '../../../../widgets/customText.dart';
 
 class HomeStanding extends StatelessWidget {
@@ -27,12 +26,7 @@ class HomeStanding extends StatelessWidget {
               DataColumn(label: Text('W')),
               DataColumn(label: Text('D')),
               DataColumn(label: Text('L')),
-              DataColumn(
-                label: CustomText(
-                  text: 'GOALS',
-                  color: Palette.primary,
-                ),
-              ),
+              DataColumn(label: Text('GOALS')),
             ],
             rows: standings
                 .map(

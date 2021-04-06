@@ -38,7 +38,6 @@ class _EmailFieldWidgetState extends State<EmailFieldWidget> {
           decoration: InputDecoration(
             hintText: 'Email',
             filled: true,
-            fillColor: Palette.lightGrey,
             enabledBorder: new OutlineInputBorder(
               borderRadius: new BorderRadius.circular(25.0),
               borderSide: BorderSide(color: Palette.darkerGrey),

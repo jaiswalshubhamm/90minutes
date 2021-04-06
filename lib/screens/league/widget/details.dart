@@ -147,12 +147,8 @@ class Details extends StatelessWidget {
                               leading: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Center(
-                                    child: Text(
-                                      '${_featured[i].fixture.date}'
-                                          .substring(11, 16),
-                                    ),
-                                  ),
+                                  Text('${_featured[i].fixture.date}'
+                                      .substring(11, 16)),
                                   VerticalDivider(
                                     color: Palette.darkerGrey,
                                     thickness: 1,
