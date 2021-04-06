@@ -19,6 +19,7 @@ class _StandingsState extends State<Standings> {
   List<bool> isSelected = [true, false, false];
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     var leagueDetailData = Provider.of<LeagueDetailsProvider>(context);
     List<standing.Response> _standing =
         leagueDetailData.standing.data?.response;
@@ -29,11 +30,8 @@ class _StandingsState extends State<Standings> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 15),
             Container(
-              padding: EdgeInsets.zero,
               height: 40,
               decoration: BoxDecoration(
                 color: Palette.darkerGrey,
@@ -48,7 +46,7 @@ class _StandingsState extends State<Standings> {
                 selectedBorderColor: Palette.primary,
                 children: <Widget>[
                   Container(
-                    width: (MediaQuery.of(context).size.width - 90) / 3,
+                    width: (size.width - 90) / 3,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -57,9 +55,7 @@ class _StandingsState extends State<Standings> {
                           size: 16.0,
                           color: Palette.white,
                         ),
-                        SizedBox(
-                          width: 4.0,
-                        ),
+                        SizedBox(width: 8),
                         CustomText(
                           text: "ALL",
                           color: Palette.white,
@@ -71,49 +67,47 @@ class _StandingsState extends State<Standings> {
                     ),
                   ),
                   Container(
-                      width: (MediaQuery.of(context).size.width - 90) / 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            (isSelected[1]) ? Icons.check : Icons.clear,
-                            size: 16.0,
-                            color: Palette.white,
-                          ),
-                          SizedBox(
-                            width: 4.0,
-                          ),
-                          CustomText(
-                            text: "HOME",
-                            color: Palette.white,
-                            bgColor: (isSelected[1])
-                                ? Palette.primary
-                                : Palette.darkerGrey,
-                          ),
-                        ],
-                      )),
+                    width: (size.width - 90) / 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          (isSelected[1]) ? Icons.check : Icons.clear,
+                          size: 16.0,
+                          color: Palette.white,
+                        ),
+                        SizedBox(width: 8),
+                        CustomText(
+                          text: "HOME",
+                          color: Palette.white,
+                          bgColor: (isSelected[1])
+                              ? Palette.primary
+                              : Palette.darkerGrey,
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
-                      width: (MediaQuery.of(context).size.width - 90) / 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            (isSelected[2]) ? Icons.check : Icons.clear,
-                            size: 16.0,
-                            color: Palette.white,
-                          ),
-                          SizedBox(
-                            width: 4.0,
-                          ),
-                          CustomText(
-                            text: "AWAY",
-                            color: Palette.white,
-                            bgColor: (isSelected[2])
-                                ? Palette.primary
-                                : Palette.darkerGrey,
-                          ),
-                        ],
-                      )),
+                    width: (size.width - 90) / 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          (isSelected[2]) ? Icons.check : Icons.clear,
+                          size: 16.0,
+                          color: Palette.white,
+                        ),
+                        SizedBox(width: 8),
+                        CustomText(
+                          text: "AWAY",
+                          color: Palette.white,
+                          bgColor: (isSelected[2])
+                              ? Palette.primary
+                              : Palette.darkerGrey,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
                 onPressed: (int newIndex) {
                   setState(
@@ -130,18 +124,24 @@ class _StandingsState extends State<Standings> {
                 },
               ),
             ),
+            SizedBox(width: 8),
             ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
               leading: Image.network(
                 _standing[0].league.logo,
-                height: 40,
+                height: 30,
               ),
               title: CustomText(
-                  text:
-                      '${_standing[0].league.name},  ${_standing[0].league.country} ${_standing[0].league.season}',
-                  size: 18),
+                text:
+                    '${_standing[0].league.name},  ${_standing[0].league.country} ${_standing[0].league.season}',
+                size: 18,
+                weight: FontWeight.w700,
+              ),
             ),
             Divider(
               color: Palette.darkerGrey,
+              thickness: .5,
             ),
             if (isSelected[0])
               for (var group in _standing[0].league.standings)

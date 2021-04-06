@@ -69,10 +69,13 @@ class Details extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            CustomText(
-              text: 'Featured Match',
-              size: 20,
-              weight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: CustomText(
+                text: 'Featured Match',
+                size: 20,
+                weight: FontWeight.bold,
+              ),
             ),
             if (_featured != null)
               ListView.builder(
@@ -139,6 +142,8 @@ class Details extends StatelessWidget {
                               thickness: .5,
                             ),
                             ListTile(
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 10),
                               leading: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

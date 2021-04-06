@@ -125,8 +125,9 @@ class _StatisticsState extends State<Statistics> {
                       children: [
                         CustomText(text: 'Ratings'),
                         CustomText(
-                          text: statistics[i].games.rating ??
-                              statistics[i].games.rating.substring(0, 4),
+                          text: (statistics[i].games.rating != null)
+                              ? statistics[i].games.rating.substring(0, 4)
+                              : '',
                         ),
                       ],
                     )

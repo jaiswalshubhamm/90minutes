@@ -64,12 +64,14 @@ class _LeagueScreenState extends State<LeagueScreen> {
                                 ),
                               );
                             }).toList(),
-                            hint: CustomText(
-                              text:
-                                  '${leagueDetailData.league.data?.response[0].seasons.last.year}',
-                              color: Palette.primary,
-                              weight: FontWeight.w700,
-                              size: 20,
+                            hint: Center(
+                              child: CustomText(
+                                text:
+                                    '${leagueDetailData.league.data?.response[0].seasons.last.year}',
+                                color: Palette.primary,
+                                weight: FontWeight.w700,
+                                size: 20,
+                              ),
                             ),
                             onChanged: (String value) {
                               setState(() {

@@ -12,40 +12,33 @@ class TopPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var leagueDetailData = Provider.of<LeagueDetailsProvider>(context);
-
     List<player.Response> _players = leagueDetailData.players.data?.response;
     if (leagueDetailData.players.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
     } else if (leagueDetailData.players.status == NetworkStatus.COMPLETED) {
       return ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (context, i) {
           return Card(
             child: ListTile(
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  CustomText(
-                    text: '${i + 1}',
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Palette.white,
-                    ),
-                    child: Image.network(
+                  // CustomText(
+                  //   text: '${i + 1}',
+                  // ),
+                  // SizedBox(width: 8),
+                  CircleAvatar(
+                    radius: 24,
+                    backgroundImage: NetworkImage(
                       _players[i].player.photo ??
                           "https://media.api-sports.io/football/leagues/4.png",
-                      height: 30,
+                      // height: 30,
                     ),
                   ),
                   VerticalDivider(
                     color: Palette.darkerGrey,
-                    thickness: 1.0,
+                    thickness: .5,
                   ),
                 ],
               ),
@@ -80,7 +73,7 @@ class TopPlayer extends StatelessWidget {
               trailing: Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(4),
                   color: Palette.primary,
                 ),
                 child: CustomText(

@@ -32,9 +32,7 @@ class _StandingsState extends State<Standings> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              SizedBox(
-                height: 15,
-              ),
+              SizedBox(height: 15),
               Container(
                 height: 40,
                 decoration: BoxDecoration(
@@ -59,9 +57,7 @@ class _StandingsState extends State<Standings> {
                             size: 16.0,
                             color: Palette.white,
                           ),
-                          SizedBox(
-                            width: 8,
-                          ),
+                          SizedBox(width: 8),
                           CustomText(
                             text: "ALL",
                             color: Palette.white,

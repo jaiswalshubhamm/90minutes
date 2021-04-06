@@ -23,6 +23,7 @@ class PlayerScreen extends StatelessWidget {
                 expandedHeight: 116,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
+                  titlePadding: EdgeInsets.only(top: 20),
                   title: Text(
                     (_player != null) ? _player[0].player.name : 'Player Info',
                   ),

@@ -61,6 +61,11 @@ class MyThemes {
       color: Palette.darkMode,
       margin: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
     ),
+    dataTableTheme: DataTableThemeData(
+      columnSpacing: 20,
+      headingRowHeight: 52,
+      horizontalMargin: 10,
+    ),
   );
 
   static final lightTheme = ThemeData(
