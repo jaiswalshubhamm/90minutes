@@ -12,7 +12,7 @@ class HomeStanding extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 10),
+        SizedBox(height: 15),
         CustomText(
           text: standings[0].group,
           weight: FontWeight.w700,
@@ -21,42 +21,12 @@ class HomeStanding extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: DataTable(
             columns: <DataColumn>[
-              DataColumn(
-                label: CustomText(
-                  text: '#',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'Team',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'P',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'W',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'D',
-                  color: Palette.primary,
-                ),
-              ),
-              DataColumn(
-                label: CustomText(
-                  text: 'L',
-                  color: Palette.primary,
-                ),
-              ),
+              DataColumn(label: Text('#')),
+              DataColumn(label: Text('Team')),
+              DataColumn(label: Text('P')),
+              DataColumn(label: Text('W')),
+              DataColumn(label: Text('D')),
+              DataColumn(label: Text('L')),
               DataColumn(
                 label: CustomText(
                   text: 'GOALS',
@@ -68,9 +38,7 @@ class HomeStanding extends StatelessWidget {
                 .map(
                   (team) => DataRow(
                     cells: [
-                      DataCell(
-                        CustomText(text: '${standings.indexOf(team) + 1}'),
-                      ),
+                      DataCell(Text('${standings.indexOf(team) + 1}')),
                       DataCell(
                         Row(
                           children: [
@@ -83,22 +51,12 @@ class HomeStanding extends StatelessWidget {
                           ],
                         ),
                       ),
-                      DataCell(
-                        Text('${team.home.played}'),
-                      ),
-                      DataCell(
-                        Text('${team.home.win}'),
-                      ),
-                      DataCell(
-                        Text('${team.home.draw}'),
-                      ),
-                      DataCell(
-                        Text('${team.home.lose}'),
-                      ),
-                      DataCell(
-                        Text(
-                            '${team.home.goals.against} : ${team.home.goals.goalsFor}'),
-                      ),
+                      DataCell(Text('${team.home.played}')),
+                      DataCell(Text('${team.home.win}')),
+                      DataCell(Text('${team.home.draw}')),
+                      DataCell(Text('${team.home.lose}')),
+                      DataCell(Text(
+                          '${team.home.goals.against} : ${team.home.goals.goalsFor}')),
                     ],
                   ),
                 )

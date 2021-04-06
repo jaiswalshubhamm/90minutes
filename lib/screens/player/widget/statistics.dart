@@ -27,9 +27,72 @@ class _StatisticsState extends State<Statistics> {
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              SizedBox(
-                height: 10,
+              SizedBox(height: 15),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columns: <DataColumn>[
+                    DataColumn(label: Text('Matches')),
+                    DataColumn(label: Text('')),
+                  ],
+                  rows: <DataRow>[
+                    DataRow(
+                      cells: [
+                        DataCell(Text('Matches')),
+                        DataCell(Text('${statistics[i].games.appearences}'))
+                      ],
+                    ),
+                    DataRow(
+                      cells: [
+                        DataCell(Text('Matches')),
+                        DataCell(Text('${statistics[i].games.appearences}'))
+                      ],
+                    ),
+                    DataRow(
+                      cells: [
+                        DataCell(Text('Matches')),
+                        DataCell(Text('${statistics[i].games.appearences}'))
+                      ],
+                    ),
+                    DataRow(
+                      cells: [
+                        DataCell(Text('Matches')),
+                        DataCell(Text('${statistics[i].games.appearences}'))
+                      ],
+                    ),
+                  ],
+                ),
               ),
+              //             Row(
+              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //               children: [
+              //                 CustomText(text: 'Minutes'),
+              //                 CustomText(text: '${statistics[i].games.minutes}')
+              //               ],
+              //             ),
+              //                 Row(
+              //                   children: [
+              //                     Image.network(
+              //                       team.team.logo,
+              //                       height: 30,
+              //                     ),
+              //                     SizedBox(width: 20),
+              //                     Text(team.team.name),
+              //                   ],
+              //                 ),
+              //               ),
+              //               DataCell(Text('${team.away.played}')),
+              //               DataCell(Text('${team.away.win}')),
+              //               DataCell(Text('${team.away.draw}')),
+              //               DataCell(Text('${team.away.lose}')),
+              //               DataCell(Text(
+              //                   '${team.away.goals.against} : ${team.away.goals.goalsFor}')),
+              //             ],
+              //           ),
+              //         )
+              //         .toList(),
+              //   ),
+              // ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(

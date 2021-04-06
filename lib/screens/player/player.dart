@@ -57,12 +57,15 @@ class PlayerScreen extends StatelessWidget {
               ),
             ];
           },
-          body: TabBarView(
-            children: [
-              Details(),
-              Statistics(),
-              Matches(),
-            ],
+          body: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: TabBarView(
+              children: [
+                Details(),
+                Statistics(),
+                Matches(),
+              ],
+            ),
           ),
         ),
       ),

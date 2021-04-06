@@ -14,7 +14,6 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var playerData = Provider.of<PlayerProvider>(context);
-
     List<player.Response> _player = playerData.players.data?.response;
     List<transfer.Response> _transfer = playerData.transfers?.data?.response;
     List<trophies.Response> _trophies = playerData.trophies?.data?.response;
@@ -25,35 +24,30 @@ class Details extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 15),
             Divider(
               color: Palette.darkerGrey,
               thickness: .5,
             ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Image.network(
-                  _player[0].statistics[0].team.logo,
-                  height: 40,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                CustomText(
-                  text: '${_player[0].statistics[0].team.name}',
-                  size: 20,
-                ),
-              ],
+            ListTile(
+              dense: true,
+              leading: Image.network(
+                _player[0].statistics[0].team.logo,
+                height: 30,
+              ),
+              title: CustomText(
+                text: '${_player[0].statistics[0].team.name}',
+                size: 20,
+              ),
             ),
             Divider(
               color: Palette.darkerGrey,
               thickness: .5,
             ),
+            SizedBox(height: 12),
             Container(
               color: Palette.lightGrey,
-              height: 200,
+              height: 180,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -198,23 +192,18 @@ class Details extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: 12,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: CustomText(
-                text: 'Transfers',
-                size: 20,
-                weight: FontWeight.w600,
-              ),
+            SizedBox(height: 20),
+            CustomText(
+              text: 'Transfers',
+              size: 20,
+              weight: FontWeight.w600,
             ),
             if (_transfer != null)
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(vertical: 4),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                padding: EdgeInsets.all(14.0),
                 itemBuilder: (context, i) {
                   return Card(
                     color: Palette.lightGrey,
@@ -234,6 +223,7 @@ class Details extends StatelessWidget {
                             bgColor: Palette.lightGrey,
                             weight: FontWeight.bold,
                           ),
+                          SizedBox(height: 4),
                           CustomText(
                             text: '${_transfer[0].transfers[i].date}'
                                 .substring(0, 10),
@@ -245,84 +235,44 @@ class Details extends StatelessWidget {
                         text: _transfer[0].transfers[i].type,
                         weight: FontWeight.bold,
                         color: Palette.primary,
-                        bgColor: Palette.lightGrey,
                       ),
                     ),
                   );
                 },
                 itemCount: _transfer[0].transfers.length,
               ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: CustomText(
-                text: 'Trophies',
-                size: 24,
-                weight: FontWeight.w600,
-              ),
+            SizedBox(height: 15),
+            CustomText(
+              text: 'Trophies',
+              size: 20,
+              weight: FontWeight.w600,
             ),
             if (_trophies != null)
-              DataTable(
-                columnSpacing: 15,
-                columns: <DataColumn>[
-                  DataColumn(
-                    label: CustomText(
-                      text: '#',
-                      color: Palette.primary,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                  DataColumn(
-                    label: CustomText(
-                      text: 'Country',
-                      color: Palette.primary,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                  DataColumn(
-                    label: CustomText(
-                      text: 'League',
-                      color: Palette.primary,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                  DataColumn(
-                    label: CustomText(
-                      text: 'Season',
-                      color: Palette.primary,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                  DataColumn(
-                    label: CustomText(
-                      text: 'Place',
-                      color: Palette.primary,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-                rows: _trophies
-                    .map(
-                      (trophy) => DataRow(
-                        cells: [
-                          DataCell(
-                            CustomText(text: '${_trophies.indexOf(trophy)}'),
-                          ),
-                          DataCell(
-                            Text(trophy.league),
-                          ),
-                          DataCell(
-                            Text(trophy.country),
-                          ),
-                          DataCell(
-                            Text(trophy.season),
-                          ),
-                          DataCell(
-                            Text(trophy.place),
-                          ),
-                        ],
-                      ),
-                    )
-                    .toList(),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  dataRowHeight: 36,
+                  columns: <DataColumn>[
+                    DataColumn(label: Text('#')),
+                    DataColumn(label: Text('Country')),
+                    DataColumn(label: Text('League')),
+                    DataColumn(label: Text('Season')),
+                    DataColumn(label: Text('Place')),
+                  ],
+                  rows: _trophies
+                      .map(
+                        (trophy) => DataRow(
+                          cells: [
+                            DataCell(Text('${_trophies.indexOf(trophy) + 1}')),
+                            DataCell(Text(trophy.league)),
+                            DataCell(Text(trophy.country)),
+                            DataCell(Text(trophy.season)),
+                            DataCell(Text(trophy.place)),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
           ],
         ),

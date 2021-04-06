@@ -65,6 +65,11 @@ class MyThemes {
       columnSpacing: 20,
       headingRowHeight: 52,
       horizontalMargin: 10,
+      headingTextStyle: TextStyle(
+        color: Palette.primary,
+        fontWeight: FontWeight.w700,
+        fontSize: 18,
+      ),
     ),
   );
 
@@ -109,6 +114,11 @@ class MyThemes {
       columnSpacing: 20,
       headingRowHeight: 52,
       horizontalMargin: 10,
+      headingTextStyle: TextStyle(
+        color: Palette.primary,
+        fontWeight: FontWeight.w700,
+        fontSize: 18,
+      ),
     ),
   );
 }
