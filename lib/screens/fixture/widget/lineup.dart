@@ -303,20 +303,10 @@ class Lineup extends StatelessWidget {
             // ),
             DataTable(
               horizontalMargin: 32,
-              dataRowHeight: 40,
+              dataRowHeight: 36,
               columns: <DataColumn>[
-                DataColumn(
-                  label: CustomText(
-                    text: '#',
-                    color: Palette.primary,
-                  ),
-                ),
-                DataColumn(
-                  label: CustomText(
-                    text: 'Team',
-                    color: Palette.primary,
-                  ),
-                ),
+                DataColumn(label: Text('#')),
+                DataColumn(label: Text('Team')),
               ],
               rows: _fixture[0]
                   .lineups[0]
@@ -324,12 +314,8 @@ class Lineup extends StatelessWidget {
                   .map(
                     (player) => DataRow(
                       cells: [
-                        DataCell(
-                          CustomText(text: '${player.player.number}'),
-                        ),
-                        DataCell(
-                          Text(player.player.name),
-                        ),
+                        DataCell(Text('${player.player.number}')),
+                        DataCell(Text(player.player.name)),
                       ],
                     ),
                   )
@@ -365,18 +351,8 @@ class Lineup extends StatelessWidget {
               horizontalMargin: 32,
               dataRowHeight: 40,
               columns: <DataColumn>[
-                DataColumn(
-                  label: CustomText(
-                    text: '#',
-                    color: Palette.primary,
-                  ),
-                ),
-                DataColumn(
-                  label: CustomText(
-                    text: 'Team',
-                    color: Palette.primary,
-                  ),
-                ),
+                DataColumn(label: Text('#')),
+                DataColumn(label: Text('Team')),
               ],
               rows: _fixture[0]
                   .lineups[1]
@@ -384,12 +360,8 @@ class Lineup extends StatelessWidget {
                   .map(
                     (player) => DataRow(
                       cells: [
-                        DataCell(
-                          CustomText(text: '${player.player.number}'),
-                        ),
-                        DataCell(
-                          Text(player.player.name),
-                        ),
+                        DataCell(Text('${player.player.number}')),
+                        DataCell(Text(player.player.name)),
                       ],
                     ),
                   )

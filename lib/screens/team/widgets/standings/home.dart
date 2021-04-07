@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../widgets/customText.dart';
+import '../../../../providers/teamProvider.dart';
 
 class HomeStanding extends StatelessWidget {
   final List standings;
@@ -44,6 +46,14 @@ class HomeStanding extends StatelessWidget {
                             Text(team.team.name),
                           ],
                         ),
+                        onTap: () {
+                          Provider.of<TeamProvider>(context, listen: false)
+                              .setId(team.team.id);
+                          Navigator.pushNamed(
+                            context,
+                            '/team',
+                          );
+                        },
                       ),
                       DataCell(Text('${team.home.played}')),
                       DataCell(Text('${team.home.win}')),

@@ -74,6 +74,7 @@ class Details extends StatelessWidget {
               child: CustomText(
                 text: 'Featured Match',
                 size: 20,
+                color: Palette.primary,
                 weight: FontWeight.bold,
               ),
             ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../config/palette.dart';
-import '../../../../providers/leagueProvider.dart';
-import '../../../../models/standing.dart' as standing;
-import '../../../../network/apiResponse.dart';
-import '../../../../widgets/customText.dart';
-import '../../../../widgets/loading.dart';
-import 'all.dart';
-import 'away.dart';
-import 'home.dart';
+import '../../../config/palette.dart';
+import '../../../providers/leagueProvider.dart';
+import '../../../models/standing.dart' as standing;
+import '../../../network/apiResponse.dart';
+import '../../../widgets/customText.dart';
+import '../../../widgets/loading.dart';
+import '../../../widgets/standings/all.dart';
+import '../../../widgets/standings/away.dart';
+import '../../../widgets/standings/home.dart';
 
 class Standings extends StatefulWidget {
   @override

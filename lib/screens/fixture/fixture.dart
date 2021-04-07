@@ -6,7 +6,7 @@ import '../../config/palette.dart';
 import 'widget/details.dart';
 import 'widget/lineup.dart';
 import 'widget/matches/matches.dart';
-import 'widget/standings/standings.dart';
+import 'widget/standings.dart';
 
 class FixtureScreen extends StatefulWidget {
   final int id;

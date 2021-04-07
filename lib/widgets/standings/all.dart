@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../config/palette.dart';
-import '../../../../widgets/customText.dart';
+import 'package:provider/provider.dart';
+import '../../providers/teamProvider.dart';
+import '../../config/palette.dart';
+import '../../widgets/customText.dart';
 
 class AllStanding extends StatelessWidget {
   final List standings;
@@ -13,10 +15,8 @@ class AllStanding extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 15),
-        CustomText(
-          text: standings[0].group,
-          weight: FontWeight.w700,
-        ),
+        CustomText(text: standings[0].group, weight: FontWeight.w700),
+        SizedBox(height: 10),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
@@ -47,6 +47,14 @@ class AllStanding extends StatelessWidget {
                             Text(team.team.name),
                           ],
                         ),
+                        onTap: () {
+                          Provider.of<TeamProvider>(context, listen: false)
+                              .setId(team.team.id);
+                          Navigator.pushNamed(
+                            context,
+                            '/team',
+                          );
+                        },
                       ),
                       DataCell(Text('${team.all.played}')),
                       DataCell(Text('${team.all.win}')),

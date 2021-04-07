@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../providers/teamProvider.dart';
 import '../../../../widgets/customText.dart';
 
 class AwayStanding extends StatelessWidget {
@@ -12,10 +14,8 @@ class AwayStanding extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 15),
-        CustomText(
-          text: standings[0].group,
-          weight: FontWeight.w700,
-        ),
+        CustomText(text: standings[0].group, weight: FontWeight.w700),
+        SizedBox(height: 10),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
@@ -44,6 +44,14 @@ class AwayStanding extends StatelessWidget {
                             Text(team.team.name),
                           ],
                         ),
+                        onTap: () {
+                          Provider.of<TeamProvider>(context, listen: false)
+                              .setId(team.team.id);
+                          Navigator.pushNamed(
+                            context,
+                            '/team',
+                          );
+                        },
                       ),
                       DataCell(Text('${team.away.played}')),
                       DataCell(Text('${team.away.win}')),

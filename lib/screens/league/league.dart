@@ -4,7 +4,7 @@ import '../../providers/leagueProvider.dart';
 import '../../config/palette.dart';
 import '../../widgets/customText.dart';
 import 'widget/details.dart';
-import 'widget/standings/standings.dart';
+import 'widget/standings.dart';
 import 'widget/topPlayer.dart';
 import 'widget/matches.dart';
 

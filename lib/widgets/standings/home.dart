@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../../widgets/customText.dart';
+import 'package:provider/provider.dart';
+import '../../providers/teamProvider.dart';
+import '../../widgets/customText.dart';
 
-class AwayStanding extends StatelessWidget {
+class HomeStanding extends StatelessWidget {
   final List standings;
 
-  AwayStanding({@required this.standings});
+  HomeStanding({@required this.standings});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +14,8 @@ class AwayStanding extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 15),
-        CustomText(
-          text: standings[0].group,
-          weight: FontWeight.w700,
-        ),
+        CustomText(text: standings[0].group, weight: FontWeight.w700),
+        SizedBox(height: 10),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
@@ -44,14 +44,22 @@ class AwayStanding extends StatelessWidget {
                             Text(team.team.name),
                           ],
                         ),
+                        onTap: () {
+                          Provider.of<TeamProvider>(context, listen: false)
+                              .setId(team.team.id);
+                          Navigator.pushNamed(
+                            context,
+                            '/team',
+                          );
+                        },
                       ),
-                      DataCell(Text('${team.away.played}')),
-                      DataCell(Text('${team.away.win}')),
-                      DataCell(Text('${team.away.draw}')),
-                      DataCell(Text('${team.away.lose}')),
+                      DataCell(Text('${team.home.played}')),
+                      DataCell(Text('${team.home.win}')),
+                      DataCell(Text('${team.home.draw}')),
+                      DataCell(Text('${team.home.lose}')),
                       DataCell(
                         Text(
-                            '${team.away.goals.against} : ${team.away.goals.goalsFor}'),
+                            '${team.home.goals.against} : ${team.home.goals.goalsFor}'),
                       ),
                     ],
                   ),

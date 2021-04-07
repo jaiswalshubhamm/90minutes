@@ -23,9 +23,7 @@ class ThemeProvider with ChangeNotifier {
 class MyThemes {
   static final darkTheme = ThemeData.dark().copyWith(
     appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(
-        color: Palette.white,
-      ),
+      iconTheme: IconThemeData(color: Palette.white),
       textTheme: TextTheme(
         headline6: TextStyle(
           color: Palette.white,
@@ -63,10 +61,15 @@ class MyThemes {
     ),
     dataTableTheme: DataTableThemeData(
       columnSpacing: 20,
-      headingRowHeight: 52,
       horizontalMargin: 10,
+      headingRowHeight: 36,
+      headingRowColor:
+          MaterialStateColor.resolveWith((states) => Palette.primary),
+      dataRowColor:
+          MaterialStateColor.resolveWith((states) => Palette.darkMode),
       headingTextStyle: TextStyle(
-        color: Palette.primary,
+        // color: Palette.primary,
+        color: Palette.white,
         fontWeight: FontWeight.w700,
         fontSize: 18,
       ),
@@ -112,10 +115,14 @@ class MyThemes {
     ),
     dataTableTheme: DataTableThemeData(
       columnSpacing: 20,
-      headingRowHeight: 52,
       horizontalMargin: 10,
+      headingRowHeight: 36,
+      headingRowColor:
+          MaterialStateColor.resolveWith((states) => Palette.primary),
+      dataRowColor:
+          MaterialStateColor.resolveWith((states) => Palette.lightGrey),
       headingTextStyle: TextStyle(
-        color: Palette.primary,
+        color: Palette.white,
         fontWeight: FontWeight.w700,
         fontSize: 18,
       ),

@@ -81,12 +81,16 @@ class _StatisticsState extends State<Statistics> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 15),
               DataTable(
                 dataRowHeight: 30,
-                horizontalMargin: 5,
+              
                 columns: <DataColumn>[
-                  DataColumn(label: Text('Matches')),
+                  DataColumn(
+                      label: Text(
+                    'Matches',
+                    style: TextStyle(color: Palette.white),
+                  )),
                   DataColumn(label: Text('')),
                 ],
                 rows: <DataRow>[
