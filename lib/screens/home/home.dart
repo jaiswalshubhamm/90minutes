@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/widgets/customText.dart';
 import 'package:provider/provider.dart';
 import '../../config/palette.dart';
 import '../../providers/fixturesDetailsProvider.dart';
@@ -79,17 +80,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           actions: [
             if (_tcontroller.index == 1)
-              Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                  setState(() {
-                    isSwitched = value;
-                    Provider.of<FixturesDetailsProvider>(context, listen: false)
-                        .setLive(isSwitched);
-                  });
-                },
-                activeTrackColor: Colors.lightGreenAccent,
-                activeColor: Palette.primary,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Switch(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value;
+                        Provider.of<FixturesDetailsProvider>(context,
+                                listen: false)
+                            .setLive(isSwitched);
+                      });
+                    },
+                    activeTrackColor: Colors.lightGreenAccent,
+                    activeColor: Palette.primary,
+                  ),
+                  CustomText(text: 'Live', weight: FontWeight.w700, size: 20),
+                ],
               ),
             if (_tcontroller.index == 1)
               IconButton(

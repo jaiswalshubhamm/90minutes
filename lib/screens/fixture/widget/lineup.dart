@@ -45,217 +45,173 @@ class Lineup extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 18,
-                  ),
+                  SizedBox(height: 18),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXi[0].player.id,
-                        name: _fixture[0].lineups[0].startXi[0].player.name,
+                        player: _fixture[0].lineups[0].startXi[0].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[0].startXi[0].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXi[1].player.id,
-                        name: _fixture[0].lineups[0].startXi[1].player.name,
+                        player: _fixture[0].lineups[0].startXi[1].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[1].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXi[2].player.id,
-                        name: _fixture[0].lineups[0].startXi[2].player.name,
+                        player: _fixture[0].lineups[0].startXi[2].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[2].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXi[3].player.id,
-                        name: _fixture[0].lineups[0].startXi[3].player.name,
+                        player: _fixture[0].lineups[0].startXi[3].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[3].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXi[4].player.id,
-                        name: _fixture[0].lineups[0].startXi[4].player.name,
+                        player: _fixture[0].lineups[0].startXi[4].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[4].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXi[5].player.id,
-                        name: _fixture[0].lineups[0].startXi[5].player.name,
+                        player: _fixture[0].lineups[0].startXi[5].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[5].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXi[6].player.id,
-                        name: _fixture[0].lineups[0].startXi[6].player.name,
+                        player: _fixture[0].lineups[0].startXi[6].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[6].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXi[7].player.id,
-                        name: _fixture[0].lineups[0].startXi[7].player.name,
+                        player: _fixture[0].lineups[0].startXi[7].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[7].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXi[8].player.id,
-                        name: _fixture[0].lineups[0].startXi[8].player.name,
+                        player: _fixture[0].lineups[0].startXi[8].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[8].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[0].startXi[9].player.id,
-                        name: _fixture[0].lineups[0].startXi[9].player.name,
+                        player: _fixture[0].lineups[0].startXi[9].player,
                         image: 'assets/images/homePlayer.png',
-                        number: _fixture[0].lineups[0].startXi[9].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[0].startXi[10].player.id,
-                        name: _fixture[0].lineups[0].startXi[10].player.name,
+                        player: _fixture[0].lineups[0].startXi[10].player,
                         image: 'assets/images/homePlayer.png',
-                        number:
-                            _fixture[0].lineups[0].startXi[10].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXi[10].player.id,
-                        name: _fixture[0].lineups[1].startXi[10].player.name,
+                        player: _fixture[0].lineups[1].startXi[10].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number:
-                            _fixture[0].lineups[1].startXi[10].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 18,
-                  ),
+                  SizedBox(height: 18),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXi[9].player.id,
-                        name: _fixture[0].lineups[1].startXi[9].player.name,
+                        player: _fixture[0].lineups[1].startXi[9].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[9].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXi[8].player.id,
-                        name: _fixture[0].lineups[1].startXi[8].player.name,
+                        player: _fixture[0].lineups[1].startXi[8].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[8].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXi[7].player.id,
-                        name: _fixture[0].lineups[1].startXi[7].player.name,
+                        player: _fixture[0].lineups[1].startXi[7].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[7].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 18,
-                  ),
+                  SizedBox(height: 18),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXi[6].player.id,
-                        name: _fixture[0].lineups[1].startXi[6].player.name,
+                        player: _fixture[0].lineups[1].startXi[6].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[6].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXi[5].player.id,
-                        name: _fixture[0].lineups[1].startXi[5].player.name,
+                        player: _fixture[0].lineups[1].startXi[5].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[5].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 28,
-                  ),
+                  SizedBox(height: 28),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXi[4].player.id,
-                        name: _fixture[0].lineups[1].startXi[4].player.name,
+                        player: _fixture[0].lineups[1].startXi[4].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[4].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXi[3].player.id,
-                        name: _fixture[0].lineups[1].startXi[3].player.name,
+                        player: _fixture[0].lineups[1].startXi[3].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[3].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXi[2].player.id,
-                        name: _fixture[0].lineups[1].startXi[2].player.name,
+                        player: _fixture[0].lineups[1].startXi[2].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[2].player.number,
+                        season: _fixture[0].league.season,
                       ),
                       Player(
-                        id: _fixture[0].lineups[1].startXi[1].player.id,
-                        name: _fixture[0].lineups[1].startXi[1].player.name,
+                        player: _fixture[0].lineups[1].startXi[1].player,
                         image: 'assets/images/homeGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[1].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 9,
-                  ),
+                  SizedBox(height: 9),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Player(
-                        id: _fixture[0].lineups[1].startXi[0].player.id,
-                        name: _fixture[0].lineups[1].startXi[0].player.name,
+                        player: _fixture[0].lineups[1].startXi[0].player,
                         image: 'assets/images/awayGoalkeeper.png',
-                        number: _fixture[0].lineups[1].startXi[0].player.number,
+                        season: _fixture[0].league.season,
                       ),
                     ],
                   ),
@@ -289,18 +245,6 @@ class Lineup extends StatelessWidget {
                 size: 20,
               ),
             ),
-            // ListTile(
-            //   dense: true,
-            //   // contentPadding: EdgeInsets.zero,
-            //   leading: CustomText(
-            //     text: 'Coach',
-            //     size: 20,
-            //   ),
-            //   title: CustomText(
-            //     text: _fixture[0].lineups[0].coach.name,
-            //     size: 14,
-            //   ),
-            // ),
             DataTable(
               horizontalMargin: 32,
               dataRowHeight: 36,
@@ -336,17 +280,6 @@ class Lineup extends StatelessWidget {
                 size: 20,
               ),
             ),
-            // ListTile(
-            //   dense: true,
-            //   leading: CustomText(
-            //     text: 'Coach',
-            //     size: 20,
-            //   ),
-            //   title: CustomText(
-            //     text: _fixture[0].lineups[1].coach.name,
-            //     size: 14,
-            //   ),
-            // ),
             DataTable(
               horizontalMargin: 32,
               dataRowHeight: 40,

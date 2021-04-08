@@ -5,7 +5,7 @@ import '../../models/team.dart' as team;
 import '../../config/palette.dart';
 import 'widgets/details.dart';
 import 'widgets/matches.dart';
-import 'widgets/standings/standings.dart';
+import 'widgets/standings.dart';
 import 'widgets/statistics.dart';
 
 class TeamScreen extends StatefulWidget {

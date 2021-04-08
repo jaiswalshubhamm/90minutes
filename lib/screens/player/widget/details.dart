@@ -44,159 +44,139 @@ class Details extends StatelessWidget {
               color: Palette.darkerGrey,
               thickness: .5,
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 10),
             Container(
-              color: Palette.lightGrey,
               height: 180,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              if (_player[0].statistics[0].league.flag != null)
-                                SvgPicture.network(
-                                  _player[0].statistics[0].league.flag,
-                                  height: 16,
+              child: Card(
+                margin: EdgeInsets.symmetric(horizontal: 3),
+                elevation: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                if (_player[0].statistics[0].league.flag !=
+                                    null)
+                                  SvgPicture.network(
+                                    _player[0].statistics[0].league.flag,
+                                    height: 16,
+                                  ),
+                                CustomText(
+                                  text:
+                                      '${_player[0].statistics[0].league.country}',
+                                  size: 18,
                                 ),
-                              CustomText(
-                                text:
-                                    '${_player[0].statistics[0].league.country}',
-                                size: 18,
-                                bgColor: Palette.lightGrey,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          CustomText(
-                            text: 'Nationality',
-                            size: 14,
-                            color: Palette.darkerGrey,
-                            bgColor: Palette.lightGrey,
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              CustomText(
-                                text: '${_player[0].player.age}',
-                                size: 20,
-                                bgColor: Palette.lightGrey,
-                              ),
-                              CustomText(
-                                text: 'YRS',
-                                size: 14,
-                                bgColor: Palette.lightGrey,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          CustomText(
-                            text: '${_player[0].player.birth.date}'
-                                .substring(0, 10),
-                            size: 14,
-                            color: Palette.darkerGrey,
-                            bgColor: Palette.lightGrey,
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CustomText(
-                            text: '${_player[0].player.birth.place}',
-                            size: 14,
-                            bgColor: Palette.lightGrey,
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          CustomText(
-                            text: 'Birth Place',
-                            size: 14,
-                            color: Palette.darkerGrey,
-                            bgColor: Palette.lightGrey,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          CustomText(
-                            text: _player[0].player.height,
-                            size: 18,
-                            bgColor: Palette.lightGrey,
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          CustomText(
-                            text: 'Height',
-                            size: 14,
-                            color: Palette.darkerGrey,
-                            bgColor: Palette.lightGrey,
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CustomText(
-                            text: _player[0].player.weight,
-                            size: 20,
-                            bgColor: Palette.lightGrey,
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          CustomText(
-                            text: 'Weight',
-                            size: 14,
-                            color: Palette.darkerGrey,
-                            bgColor: Palette.lightGrey,
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CustomText(
-                            text: _player[0].statistics[0].games.position,
-                            size: 20,
-                            bgColor: Palette.lightGrey,
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          CustomText(
-                            text: 'Position',
-                            size: 14,
-                            color: Palette.darkerGrey,
-                            bgColor: Palette.lightGrey,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                              ],
+                            ),
+                            SizedBox(height: 3),
+                            CustomText(
+                              text: 'Nationality',
+                              size: 14,
+                              color: Palette.darkerGrey,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                CustomText(
+                                  text: '${_player[0].player.age}',
+                                  size: 20,
+                                ),
+                                CustomText(
+                                  text: 'YRS',
+                                  size: 14,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 3),
+                            CustomText(
+                              text: '${_player[0].player.birth.date}'
+                                  .substring(0, 10),
+                              size: 14,
+                              color: Palette.darkerGrey,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            CustomText(
+                              text: '${_player[0].player.birth.place}',
+                              size: 14,
+                            ),
+                            SizedBox(height: 3),
+                            CustomText(
+                              text: 'Birth Place',
+                              size: 14,
+                              color: Palette.darkerGrey,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            CustomText(
+                              text: _player[0].player.height,
+                              size: 18,
+                            ),
+                            SizedBox(height: 3),
+                            CustomText(
+                              text: 'Height',
+                              size: 14,
+                              color: Palette.darkerGrey,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            CustomText(
+                              text: _player[0].player.weight,
+                              size: 20,
+                            ),
+                            SizedBox(height: 3),
+                            CustomText(
+                              text: 'Weight',
+                              size: 14,
+                              color: Palette.darkerGrey,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            CustomText(
+                              text: _player[0].statistics[0].games.position,
+                              size: 20,
+                            ),
+                            SizedBox(height: 3),
+                            CustomText(
+                              text: 'Position',
+                              size: 14,
+                              color: Palette.darkerGrey,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 15),
             CustomText(
               text: 'Transfers',
               size: 20,
               weight: FontWeight.w600,
+              color: Palette.primary,
             ),
             if (_transfer != null)
               if (_transfer.length > 0)
@@ -207,7 +187,6 @@ class Details extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
                     return Card(
-                      color: Palette.lightGrey,
                       child: ListTile(
                         leading: Image.network(
                           _transfer[0].transfers[i].teams.teamsIn.logo ??
@@ -221,14 +200,12 @@ class Details extends StatelessWidget {
                             CustomText(
                               text:
                                   '${_transfer[0].transfers[i].teams.out.name}-${_transfer[0].transfers[i].teams.teamsIn.name}',
-                              bgColor: Palette.lightGrey,
                               weight: FontWeight.bold,
                             ),
                             SizedBox(height: 4),
-                            CustomText(
-                              text: '${_transfer[0].transfers[i].date}'
+                            Text(
+                              '${_transfer[0].transfers[i].date}'
                                   .substring(0, 10),
-                              bgColor: Palette.lightGrey,
                             ),
                           ],
                         ),
@@ -242,17 +219,19 @@ class Details extends StatelessWidget {
                   },
                   itemCount: _transfer[0].transfers.length,
                 ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
             CustomText(
               text: 'Trophies',
               size: 20,
               weight: FontWeight.w600,
+              color: Palette.primary,
             ),
+            SizedBox(height: 8),
             if (_trophies != null)
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
-                  dataRowHeight: 36,
+                  dataRowHeight: 40,
                   columns: <DataColumn>[
                     DataColumn(label: Text('#')),
                     DataColumn(label: Text('Country')),

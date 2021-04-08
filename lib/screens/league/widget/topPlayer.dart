@@ -24,10 +24,6 @@ class TopPlayer extends StatelessWidget {
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // CustomText(
-                  //   text: '${i + 1}',
-                  // ),
-                  // SizedBox(width: 8),
                   CircleAvatar(
                     radius: 24,
                     backgroundImage: NetworkImage(

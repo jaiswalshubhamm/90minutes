@@ -68,7 +68,6 @@ class MyThemes {
       dataRowColor:
           MaterialStateColor.resolveWith((states) => Palette.darkMode),
       headingTextStyle: TextStyle(
-        // color: Palette.primary,
         color: Palette.white,
         fontWeight: FontWeight.w700,
         fontSize: 18,

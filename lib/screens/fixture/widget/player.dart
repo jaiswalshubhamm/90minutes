@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../providers/playerProvider.dart';
 import '../../../config/palette.dart';
+import '../../../models/fixture.dart';
 import '../../../widgets/customText.dart';
 
 class Player extends StatelessWidget {
-  final int id;
-  final String name;
+  final StartXiPlayer player;
+  final int season;
   final String image;
-  final int number;
 
-  Player({@required this.id, this.name, this.image, this.number});
+  Player({@required this.player, this.season, this.image});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: GestureDetector(
         onTap: () {
-          print("player id is $id");
+          Provider.of<PlayerProvider>(context, listen: false)
+              .setPlayerParams(player.id, '$season');
+          Navigator.pushNamed(context, '/player');
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           child: Container(
             child: Column(
               children: [
@@ -35,7 +37,7 @@ class Player extends StatelessWidget {
                   ),
                   child: Center(
                     child: CustomText(
-                      text: "$number" ?? "1",
+                      text: "${player.number}" ?? "1",
                       color: Palette.white,
                       size: 8,
                       bgColor: Palette.transparent,
@@ -43,7 +45,7 @@ class Player extends StatelessWidget {
                   ),
                 ),
                 CustomText(
-                  text: name ?? "Player $id",
+                  text: player.name ?? "Player ${player.id}",
                   weight: FontWeight.bold,
                   size: 10,
                   bgColor: Palette.transparent,

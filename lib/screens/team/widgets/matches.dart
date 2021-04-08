@@ -99,17 +99,19 @@ class _MatchesState extends State<Matches> {
                       title: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                last10[i].teams.home.name,
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                last10[i].teams.away.name,
-                              ),
-                            ],
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  last10[i].teams.home.name,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  last10[i].teams.away.name,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
