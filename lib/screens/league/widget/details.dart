@@ -183,11 +183,49 @@ class Details extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        '${_featured[i].goals.home ?? ''}',
+                                      CustomText(
+                                        text:
+                                            '${_featured[i].goals.home ?? ''}',
+                                        color:
+                                            (_featured[i]
+                                                            .fixture
+                                                            .status
+                                                            .short ==
+                                                        '2H' ||
+                                                    _featured[i]
+                                                            .fixture
+                                                            .status
+                                                            .short ==
+                                                        'HT' ||
+                                                    _featured[i]
+                                                            .fixture
+                                                            .status
+                                                            .short ==
+                                                        '1H')
+                                                ? Palette.lose
+                                                : Palette.black,
                                       ),
-                                      Text(
-                                        '${_featured[i].goals.away ?? ''}',
+                                      CustomText(
+                                        text:
+                                            '${_featured[i].goals.away ?? ''}',
+                                        color:
+                                            (_featured[i]
+                                                            .fixture
+                                                            .status
+                                                            .short ==
+                                                        '2H' ||
+                                                    _featured[i]
+                                                            .fixture
+                                                            .status
+                                                            .short ==
+                                                        'HT' ||
+                                                    _featured[i]
+                                                            .fixture
+                                                            .status
+                                                            .short ==
+                                                        '1H')
+                                                ? Palette.lose
+                                                : Palette.black,
                                       ),
                                     ],
                                   ),

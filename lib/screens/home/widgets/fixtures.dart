@@ -5,6 +5,7 @@ import '../../../providers/fixturesDetailsProvider.dart';
 import '../../../providers/fixtureProvider.dart';
 import '../../../providers/oddProvider.dart';
 import '../../../providers/authProvider.dart';
+import '../../../providers/notification.dart';
 import '../../../models/fixtures.dart';
 import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
@@ -113,7 +114,17 @@ class Fixtures extends StatelessWidget {
                                       text: '${_fixtures[i].goals.home ?? ''}',
                                       color:
                                           (_fixtures[i].fixture.status.short ==
-                                                  'FT')
+                                                      '2H' ||
+                                                  _fixtures[i]
+                                                          .fixture
+                                                          .status
+                                                          .short ==
+                                                      'HT' ||
+                                                  _fixtures[i]
+                                                          .fixture
+                                                          .status
+                                                          .short ==
+                                                      '1H')
                                               ? Palette.lose
                                               : Palette.black,
                                     ),
@@ -121,7 +132,17 @@ class Fixtures extends StatelessWidget {
                                       text: '${_fixtures[i].goals.away ?? ''}',
                                       color:
                                           (_fixtures[i].fixture.status.short ==
-                                                  'FT')
+                                                      '2H' ||
+                                                  _fixtures[i]
+                                                          .fixture
+                                                          .status
+                                                          .short ==
+                                                      'HT' ||
+                                                  _fixtures[i]
+                                                          .fixture
+                                                          .status
+                                                          .short ==
+                                                      '1H')
                                               ? Palette.lose
                                               : Palette.black,
                                     ),
@@ -164,9 +185,14 @@ class Fixtures extends StatelessWidget {
                                                     _fixtures[i].fixture.id);
                                           }
                                         } else {
-                                          Navigator.pushNamed(
-                                            context,
-                                            '/login',
+                                          Provider.of<NotificationProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .zonedScheduledNotification(
+                                            _fixtures[i].fixture.id,
+                                            _fixtures[i].teams.home.name,
+                                            _fixtures[i].teams.away.name,
+                                            _fixtures[i].fixture.timezone,
                                           );
                                         }
                                       },

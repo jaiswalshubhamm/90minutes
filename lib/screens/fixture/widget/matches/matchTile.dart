@@ -99,11 +99,21 @@ class MatchTile extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
-                              '${matches[i].goals.home ?? ''}',
+                            CustomText(
+                              text: '${matches[i].goals.home ?? ''}',
+                              color: (matches[i].fixture.status.short == '2H' ||
+                                      matches[i].fixture.status.short == 'HT' ||
+                                      matches[i].fixture.status.short == '1H')
+                                  ? Palette.lose
+                                  : Palette.black,
                             ),
-                            Text(
-                              '${matches[i].goals.away ?? ''}',
+                            CustomText(
+                              text: '${matches[i].goals.away ?? ''}',
+                              color: (matches[i].fixture.status.short == '2H' ||
+                                      matches[i].fixture.status.short == 'HT' ||
+                                      matches[i].fixture.status.short == '1H')
+                                  ? Palette.lose
+                                  : Palette.black,
                             ),
                           ],
                         ),

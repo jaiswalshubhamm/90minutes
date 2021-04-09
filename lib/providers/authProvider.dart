@@ -196,10 +196,11 @@ class AuthProvider with ChangeNotifier {
       fixture.Fixtures favFixture =
           await _fixtureService.fetchFixtures(_params);
       notification.zonedScheduledNotification(
-          favFixture.response[0].fixture.id,
-          favFixture.response[0].teams.home.name,
-          favFixture.response[0].teams.away.name,
-          favFixture.response[0].fixture.date);
+        favFixture.response[0].fixture.id,
+        favFixture.response[0].teams.home.name,
+        favFixture.response[0].teams.away.name,
+        favFixture.response[0].fixture.date,
+      );
       _favoriteMatches.add(favFixture.response[0]);
     } catch (e) {
       print(e);

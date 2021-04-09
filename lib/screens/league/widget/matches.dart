@@ -11,12 +11,7 @@ import '../../../network/apiResponse.dart';
 import '../../../widgets/customText.dart';
 import '../../../widgets/loading.dart';
 
-class Matches extends StatefulWidget {
-  @override
-  _MatchesState createState() => _MatchesState();
-}
-
-class _MatchesState extends State<Matches> {
+class Matches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context);
@@ -119,11 +114,27 @@ class _MatchesState extends State<Matches> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text(
-                                '${last10[i].goals.home ?? ''}',
+                              CustomText(
+                                text: '${last10[i].goals.home ?? ''}',
+                                color:
+                                    (last10[i].fixture.status.short == '2H' ||
+                                            last10[i].fixture.status.short ==
+                                                'HT' ||
+                                            last10[i].fixture.status.short ==
+                                                '1H')
+                                        ? Palette.lose
+                                        : Palette.black,
                               ),
-                              Text(
-                                '${last10[i].goals.away ?? ''}',
+                              CustomText(
+                                text: '${last10[i].goals.away ?? ''}',
+                                color:
+                                    (last10[i].fixture.status.short == '2H' ||
+                                            last10[i].fixture.status.short ==
+                                                'HT' ||
+                                            last10[i].fixture.status.short ==
+                                                '1H')
+                                        ? Palette.lose
+                                        : Palette.black,
                               ),
                             ],
                           ),

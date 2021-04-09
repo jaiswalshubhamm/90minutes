@@ -15,6 +15,7 @@ class LeagueDetailsProvider with ChangeNotifier {
   bool isTopPlayers;
   int _id;
   String _year;
+  List<String> already = [];
 
   Map<String, String> _params = {};
 
@@ -54,6 +55,7 @@ class LeagueDetailsProvider with ChangeNotifier {
   }
 
   void call() async {
+    already = [];
     tabControllerLength = 2;
     isStanding = false;
     isTopPlayers = false;
@@ -76,14 +78,20 @@ class LeagueDetailsProvider with ChangeNotifier {
 
   Future<void> checkStanding() async {
     if (_standing.data.response.length > 0) {
-      tabControllerLength = tabControllerLength + 1;
+      if (!already.contains("standing")) {
+        already.add("standing");
+        tabControllerLength = tabControllerLength + 1;
+      }
       isStanding = true;
     }
   }
 
   Future<void> checkTopPlayers() async {
     if (_players.data.response.length > 0) {
-      tabControllerLength = tabControllerLength + 1;
+      if (!already.contains("topPlayer")) {
+        already.add("topPlayer");
+        tabControllerLength = tabControllerLength + 1;
+      }
       isTopPlayers = true;
     }
   }

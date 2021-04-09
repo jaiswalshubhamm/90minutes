@@ -5,8 +5,9 @@ import '../../providers/authProvider.dart';
 import '../../config/palette.dart';
 import 'widget/details.dart';
 import 'widget/lineup.dart';
-import 'widget/matches/matches.dart';
 import 'widget/standings.dart';
+import 'widget/matches/matches.dart';
+import 'widget/matches/h2h.dart';
 
 class FixtureScreen extends StatefulWidget {
   final int id;
@@ -85,6 +86,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                     if (fixtureDetailData.isLineup) Tab(text: "LINEUPS"),
                     if (fixtureDetailData.isStanding) Tab(text: "STANDINGS"),
                     Tab(text: "MATCHES"),
+                    Tab(text: "H2H"),
                   ],
                 ),
               ),
@@ -94,6 +96,7 @@ class _FixtureScreenState extends State<FixtureScreen> {
                   if (fixtureDetailData.isLineup) Lineup(),
                   if (fixtureDetailData.isStanding) Standings(),
                   Matches(),
+                  H2H(),
                 ],
               ),
             ),

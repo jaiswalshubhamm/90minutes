@@ -16,6 +16,7 @@ class TeamProvider with ChangeNotifier {
   bool isStanding;
   bool isStatistics;
   int _id;
+  List<String> already = [];
 
   Map<String, String> _params = {};
 
@@ -64,6 +65,7 @@ class TeamProvider with ChangeNotifier {
   }
 
   void call() async {
+    already = [];
     tabControllerLength = 2;
     isStanding = false;
     isStatistics = false;
@@ -90,14 +92,20 @@ class TeamProvider with ChangeNotifier {
 
   Future<void> checkStanding() async {
     if (_standing.data.response.length > 0) {
-      tabControllerLength = tabControllerLength + 1;
+      if (!already.contains("standing")) {
+        already.add("standing");
+        tabControllerLength = tabControllerLength + 1;
+      }
       isStanding = true;
     }
   }
 
   Future<void> checkStatistics() async {
     if (_statistics.data.response != null) {
-      tabControllerLength = tabControllerLength + 1;
+      if (!already.contains("statistics")) {
+        already.add("statistics");
+        tabControllerLength = tabControllerLength + 1;
+      }
       isStatistics = true;
     }
   }

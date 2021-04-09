@@ -9,15 +9,12 @@ import '../../../../widgets/customText.dart';
 import '../../../../widgets/loading.dart';
 import 'matchTile.dart';
 
-class Matches extends StatelessWidget {
+class H2H extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context);
     var fixtureDetailData = Provider.of<FixtureDetailsProvider>(context);
-    List<fixture.Response> homeLast5 =
-        fixtureDetailData.homeLast5?.data?.response;
-    List<fixture.Response> awayLast5 =
-        fixtureDetailData.awayLast5?.data?.response;
+    List<fixture.Response> h2h = fixtureDetailData.h2h?.data?.response;
     if (fixtureDetailData.homeLast5?.status != NetworkStatus.COMPLETED ||
         fixtureDetailData.fixture.status != NetworkStatus.COMPLETED ||
         fixtureDetailData.awayLast5.status != NetworkStatus.COMPLETED) {
@@ -35,26 +32,14 @@ class Matches extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: CustomText(
-                  text: 'Home',
+                  text: 'H2H',
                   color: Palette.primary,
                   size: 24,
                   weight: FontWeight.bold,
                 ),
               ),
-              if (homeLast5 != null)
-                MatchTile(matches: homeLast5, authProvider: authProvider),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: CustomText(
-                  text: 'Away',
-                  color: Palette.primary,
-                  size: 24,
-                  weight: FontWeight.bold,
-                ),
-              ),
-              if (awayLast5 != null)
-                MatchTile(matches: awayLast5, authProvider: authProvider),
+              if (h2h != null)
+                MatchTile(matches: h2h, authProvider: authProvider),
             ],
           ),
         ),

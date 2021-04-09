@@ -120,11 +120,27 @@ class _MatchesState extends State<Matches> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text(
-                                '${last10[i].goals.home ?? ''}',
+                              CustomText(
+                                text: '${last10[i].goals.home ?? ''}',
+                                color:
+                                    (last10[i].fixture.status.short == '2H' ||
+                                            last10[i].fixture.status.short ==
+                                                'HT' ||
+                                            last10[i].fixture.status.short ==
+                                                '1H')
+                                        ? Palette.lose
+                                        : Palette.black,
                               ),
-                              Text(
-                                '${last10[i].goals.away ?? ''}',
+                              CustomText(
+                                text: '${last10[i].goals.away ?? ''}',
+                                color:
+                                    (last10[i].fixture.status.short == '2H' ||
+                                            last10[i].fixture.status.short ==
+                                                'HT' ||
+                                            last10[i].fixture.status.short ==
+                                                '1H')
+                                        ? Palette.lose
+                                        : Palette.black,
                               ),
                             ],
                           ),

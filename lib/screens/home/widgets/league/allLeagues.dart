@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:nintyminutesflutter/network/apiResponse.dart';
+import 'package:nintyminutesflutter/widgets/loading.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/leagueDetailsProvider.dart';
-import '../../../providers/leagueProvider.dart';
-import '../../../models/leaugeModel.dart';
-import '../../../network/apiResponse.dart';
-import '../../../widgets/loading.dart';
-import '../../../widgets/customText.dart';
+import '../../../../providers/leagueDetailsProvider.dart';
+import '../../../../providers/leagueProvider.dart';
+import '../../../../models/leaugeModel.dart';
+import '../../../../widgets/customText.dart';
 
-class Leagues extends StatelessWidget {
+class AllLeagues extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var leaguesData = Provider.of<LeaguesDetailsProvider>(context);
     List<Response> _leagues = leaguesData.leagues.data?.response;
-
     if (leaguesData.leagues.status != NetworkStatus.COMPLETED) {
       return Center(child: Loading());
     } else if (leaguesData.leagues.status == NetworkStatus.COMPLETED) {
       return ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(vertical: 10),
         itemBuilder: (context, i) {
           return Card(

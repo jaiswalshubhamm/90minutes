@@ -11,12 +11,6 @@ class MenuDrawer extends StatefulWidget {
 }
 
 class _MenuDrawerState extends State<MenuDrawer> {
-  // bool isAuth = false;
-  // @override
-  // void initState() {
-  //   _checkIfLoggedIn();
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +53,17 @@ class _MenuDrawerState extends State<MenuDrawer> {
               Navigator.of(context).pushReplacementNamed('/home');
             },
           ),
-          ListTile(
-            leading: Icon(Icons.feedback),
-            title: CustomText(
-              text: 'Feedback',
-              size: 18,
-              weight: FontWeight.w700,
-            ),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed('/feedback');
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.feedback),
+          //   title: CustomText(
+          //     text: 'Feedback',
+          //     size: 18,
+          //     weight: FontWeight.w700,
+          //   ),
+          //   onTap: () {
+          //     Navigator.of(context).pushReplacementNamed('/feedback');
+          //   },
+          // ),
           if (!(authData.isLoggedIn))
             ListTile(
               leading: Icon(Icons.login),

@@ -105,13 +105,3 @@ class _FormWidgetLoginState extends State<FormWidgetLogin> {
     );
   }
 }
-
-//   void login() {
-//     final form = formKey.currentState!;
-
-//     if (form.validate()) {
-//       TextInput.finishAutofillContext();
-//       final email = emailController.text;
-
-//     
-//   }

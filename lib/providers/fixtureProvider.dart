@@ -10,6 +10,7 @@ class FixtureDetailsProvider with ChangeNotifier {
   bool isStanding;
   bool isLineup;
   int _id;
+  List<String> already = [];
 
   Map<String, String> _params = {};
 
@@ -43,7 +44,8 @@ class FixtureDetailsProvider with ChangeNotifier {
   }
 
   void call() async {
-    tabControllerLength = 2;
+    already = [];
+    tabControllerLength = 3;
     isStanding = false;
     isLineup = false;
     await fetchFixtureProvider();
@@ -58,14 +60,20 @@ class FixtureDetailsProvider with ChangeNotifier {
 
   Future<void> checkStanding() async {
     if (_standing.data.response.length > 0) {
-      tabControllerLength = tabControllerLength + 1;
+      if (!already.contains("standing")) {
+        already.add("standing");
+        tabControllerLength = tabControllerLength + 1;
+      }
       isStanding = true;
     }
   }
 
   Future<void> checkLineup() async {
     if (_fixture.data?.response[0].lineups.length > 0) {
-      tabControllerLength = tabControllerLength + 1;
+      if (!already.contains("lineup")) {
+        already.add("lineup");
+        tabControllerLength = tabControllerLength + 1;
+      }
       isLineup = true;
     }
   }

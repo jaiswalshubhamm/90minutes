@@ -6,7 +6,7 @@ import '../../providers/fixturesDetailsProvider.dart';
 import '../../providers/authProvider.dart';
 import '../../providers/notification.dart';
 import '../../widgets/drawer.dart';
-import 'widgets/leagues.dart';
+import 'widgets/league/leagues.dart';
 import 'widgets/fixtures.dart';
 import 'widgets/favorites.dart';
 
@@ -96,7 +96,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     activeTrackColor: Colors.lightGreenAccent,
                     activeColor: Palette.primary,
                   ),
-                  CustomText(text: 'Live', weight: FontWeight.w700, size: 20),
+                  CustomText(
+                    text: (isSwitched) ? 'Live' : 'All',
+                    weight: FontWeight.w700,
+                    size: 20,
+                  ),
                 ],
               ),
             if (_tcontroller.index == 1)

@@ -75,8 +75,6 @@ class NotificationProvider with ChangeNotifier {
       androidAllowWhileIdle: true,
       payload: '$fixtureID',
     );
-    // await _flutterLocalNotificationsPlugin
-    //     .show(fixtureID, 'title', 'body', platform, payload: '$fixtureID');
   }
 
   Future cancelNotification(int fixtureId) async {

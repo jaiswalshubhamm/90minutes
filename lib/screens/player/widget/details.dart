@@ -187,6 +187,7 @@ class Details extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
                     return Card(
+                      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 3),
                       child: ListTile(
                         leading: Image.network(
                           _transfer[0].transfers[i].teams.teamsIn.logo ??
